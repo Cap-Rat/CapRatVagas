@@ -14,6 +14,8 @@ public class UsuarioCurriculo {
 	private String expTrabUsuario;
 	private String faixaSalarialUsuario;
 	
+	public UsuarioCurriculo() {}
+	
 	public UsuarioCurriculo(int idCurriculo, int idUsuario, String nomeUsuario, String nascimentoUsuario,
 			String enderecoUsuario, String estadoCivilUsuario, String escolaridadeUsuario, String descricaoUsuario,
 			String contatoUsuario, String cursosUsuario, String expTrabUsuario, String faixaSalarialUsuario) {

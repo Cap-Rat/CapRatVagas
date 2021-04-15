@@ -28,7 +28,7 @@ public class DBConnection {
 	public DBConnection() {
 		this.setHost	("localhost");
 		this.setPort	("3306");
-		this.setSchema	("projeto_pwe");
+		this.setSchema	("db_caprat");
 		this.setUser	("root");
 		this.setPassword("");
 		this.doConnection();

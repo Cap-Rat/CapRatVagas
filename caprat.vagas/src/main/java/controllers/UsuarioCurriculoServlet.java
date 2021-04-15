@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.ArrayList;
 import models.UsuarioCurriculo;
 import services.UsuarioServices;
@@ -52,8 +53,21 @@ public class UsuarioCurriculoServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		
+		String reqBody = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
+		
+		Gson gson = new Gson();
+		
+		UsuarioCurriculo curriculo = (UsuarioCurriculo) gson.fromJson(reqBody, UsuarioCurriculo.class);
+		
+		String novo_curriculo = gson.toJson(curriculo);
+		
+		PrintWriter writer = response.getWriter();
+		response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
+		
+		writer.write(novo_curriculo);
+		writer.close();
 	}
 
 }
