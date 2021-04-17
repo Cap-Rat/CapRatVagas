@@ -6,6 +6,8 @@ public class UsuarioLogin {
 	private String senhaUsuario;
 	private int tipoUsuario;
 	
+	public UsuarioLogin() {}
+	
 	public UsuarioLogin(int idUsuario, String emailUsuario, String senhaUsuario, int tipoUsuario) {
 		super();
 		this.idUsuario = idUsuario;

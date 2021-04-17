@@ -4,6 +4,8 @@ public class UsuarioVagas {
 	private int idUsuario;
 	private int idVaga;
 	
+	public UsuarioVagas() {}
+	
 	public UsuarioVagas(int idUsuario, int idVaga) {
 		super();
 		this.idUsuario = idUsuario;

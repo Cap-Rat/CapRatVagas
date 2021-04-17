@@ -9,11 +9,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class UsuarioServices {
+	private DBQuery connection = new DBQuery("usuariocurriculo", new UsuarioCurriculo().getCamposString(),  "idCurriculo");
 	
 	public List<UsuarioCurriculo> getCurriculos(){
 		List<UsuarioCurriculo> curriculos = new ArrayList<>();
 		
-		DBQuery connection = new DBQuery("usuariocurriculo", "idCurriculo, idUsuario, nomeUsuario, nascimentoUsuario, enderecoUsuario, estadoCivilUsuario, escolaridadeUsuario, descricaoUsuario, contatoUsuario, cursosUsuario, expTrabUsuario, faixaSalarialUsuario",  "idCurriculo");
 		ResultSet curriculos_cadastrados = connection.select("");
 		
 		try {
@@ -25,6 +25,40 @@ public class UsuarioServices {
 		}
 		
 		return curriculos;
+	}
+	
+	public boolean saveCurriculo(UsuarioCurriculo dadosCurriculo){
+		int success = 0;
+		
+		if(dadosCurriculo.getIdCurriculo() == 0) {
+			success = connection.insert(this.toArray(dadosCurriculo));
+		}else {
+			success = connection.update(this.toArray(dadosCurriculo));
+		}
+		
+		if(success == 0)
+			return false;
+		else
+			return true;
+	}
+	
+	private String[] toArray(UsuarioCurriculo curriculo) {
+		return (
+				new String[] {
+						""+curriculo.getIdCurriculo(),
+						""+curriculo.getIdUsuario(),
+						""+curriculo.getNomeUsuario(),
+						""+curriculo.getNascimentoUsuario(),
+						""+curriculo.getEnderecoUsuario(),
+						""+curriculo.getEstadoCivilUsuario(),
+						""+curriculo.getEscolaridadeUsuario(),
+						""+curriculo.getDescricaoUsuario(),
+						""+curriculo.getContatoUsuario(),
+						""+curriculo.getCursosUsuario(),
+						""+curriculo.getExpTrabUsuario(),
+						""+curriculo.getFaixaSalarialUsuario()
+				}
+		); 
 	}
 	
 	private UsuarioCurriculo instanciarCurriculo(ResultSet dadosDoCurriculo) {

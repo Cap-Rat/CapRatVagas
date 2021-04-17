@@ -13,6 +13,7 @@ public class UsuarioCurriculo {
 	private String cursosUsuario;
 	private String expTrabUsuario;
 	private String faixaSalarialUsuario;
+	private String camposString = "idCurriculo, idUsuario, nomeUsuario, nascimentoUsuario, enderecoUsuario, estadoCivilUsuario, escolaridadeUsuario, descricaoUsuario, contatoUsuario, cursosUsuario, expTrabUsuario, faixaSalarialUsuario";
 	
 	public UsuarioCurriculo() {}
 	
@@ -128,6 +129,10 @@ public class UsuarioCurriculo {
 
 	public void setFaixaSalarialUsuario(String faixaSalarialUsuario) {
 		this.faixaSalarialUsuario = faixaSalarialUsuario;
+	}
+	
+	public String getCamposString() {
+		return camposString;
 	}
 	
 	

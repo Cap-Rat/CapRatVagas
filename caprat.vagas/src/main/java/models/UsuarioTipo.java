@@ -4,7 +4,9 @@ public class UsuarioTipo {
 	private int idTipo;
 	private String nomeTipo;
 	
-	UsuarioTipo(int idTipo, String nomeTipo){
+	public UsuarioTipo() {}
+	
+	public UsuarioTipo(int idTipo, String nomeTipo){
 		this.idTipo = idTipo;
 		this.nomeTipo = nomeTipo;
 	}

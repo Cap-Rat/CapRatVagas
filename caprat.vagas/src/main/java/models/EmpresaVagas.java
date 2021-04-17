@@ -9,6 +9,9 @@ public class EmpresaVagas {
 	private String localVaga;
 	private String salarioVaga;
 	private String nivelExpVaga;
+	private String camposString = "idVaga, idEmpresa, tituloVaga, requisitosVaga, descricaoVaga, localVaga, salarioVaga, nivelExpVaga";
+	
+	public EmpresaVagas() {}
 	
 	public EmpresaVagas(int idVaga, int idEmpresa, String tituloVaga, String requisitosVaga, String descricaoVaga,
 			String localVaga, String salarioVaga, String nivelExpVaga) {
@@ -87,6 +90,8 @@ public class EmpresaVagas {
 		this.nivelExpVaga = nivelExpVaga;
 	}
 	
-	
+	public String getCamposString() {
+		return camposString;
+	}
 	
 }

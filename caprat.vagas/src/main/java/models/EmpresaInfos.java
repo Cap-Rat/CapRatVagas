@@ -7,11 +7,12 @@ public class EmpresaInfos {
 	private String ramoEmpresa;
 	private String tamanhoEmpresa;
 	private String descricaoEmpresa;
-	public 
 	
-	EmpresaInfos(int idEmpresa, int idUsuario, String enderecoEmpresa, String ramoEmpresa, String tamanhoEmpresa,
+	public EmpresaInfos() {}
+	
+	public EmpresaInfos(int idEmpresa, int idUsuario, String enderecoEmpresa, String ramoEmpresa, String tamanhoEmpresa,
 			String descricaoEmpresa) {
-		super();
+		
 		this.idEmpresa = idEmpresa;
 		this.idUsuario = idUsuario;
 		this.enderecoEmpresa = enderecoEmpresa;
