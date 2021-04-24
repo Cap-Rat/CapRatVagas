@@ -16,6 +16,12 @@
   	<description></description>
   	<servlet-class>controllers.EmpresaVagasServlet</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>UsuarioVagasServlet</servlet-name>
+  	<display-name>UsuarioVagasServlet</display-name>
+  	<description></description>
+  	<servlet-class>controllers.UsuarioVagasServlet</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>UsuarioCurriculoServlet</servlet-name>
   	<url-pattern>/UsuarioCurriculoServlet</url-pattern>
@@ -23,5 +29,9 @@
   <servlet-mapping>
   	<servlet-name>EmpresaVagasServlet</servlet-name>
   	<url-pattern>/EmpresaVagasServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>UsuarioVagasServlet</servlet-name>
+  	<url-pattern>/UsuarioVagasServlet</url-pattern>
   </servlet-mapping>
 </web-app>

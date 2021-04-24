@@ -3,6 +3,7 @@ package models;
 public class UsuarioVagas {
 	private int idUsuario;
 	private int idVaga;
+	private String camposString = "idUsuario, idVaga";
 	
 	public UsuarioVagas() {}
 	
@@ -12,6 +13,9 @@ public class UsuarioVagas {
 		this.idVaga = idVaga;
 	}
 	
+	public String getCamposString() {
+		return camposString;
+	}
 	public int getIdUsuario() {
 		return idUsuario;
 	}
