@@ -12,10 +12,17 @@ public class EmpresaServices {
 	private DBQuery connection = new DBQuery("empresavagas", new EmpresaVagas().getCamposString(),  "idVaga");
 	
 	
-	public List<EmpresaVagas> getVagas(){
+	public List<EmpresaVagas> getVagas(String tituloFiltro, String localFiltro, String expFiltro){
 		List<EmpresaVagas> vagas = new ArrayList<>();
 		
-		ResultSet vagas_cadastradas = connection.select("");
+		if(tituloFiltro == null)
+			tituloFiltro = "";
+		if(localFiltro == null)
+			localFiltro = "";
+		if(expFiltro == null)
+			expFiltro = "";
+		
+		ResultSet vagas_cadastradas = connection.select("tituloVaga LIKE '%" + tituloFiltro + "%' && localVaga LIKE '%" + localFiltro + "%' && nivelExpVaga LIKE '%" + expFiltro + "%'");
 		
 		try {
 			while(vagas_cadastradas.next()) {

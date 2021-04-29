@@ -36,7 +36,11 @@ public class EmpresaVagasServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<EmpresaVagas> vagas = new ArrayList<>();
-		vagas = services.getVagas();
+		String filtroTitulo = request.getParameter("titulo");
+		String filtroLocal = request.getParameter("local");
+		String filtroExp = request.getParameter("experiencia");
+		
+		vagas = services.getVagas(filtroTitulo, filtroLocal, filtroExp);
 		
 		Gson gson = new Gson();
 		String vagasJSON = gson.toJson(vagas);
