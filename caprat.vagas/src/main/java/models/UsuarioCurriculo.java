@@ -6,6 +6,8 @@ public class UsuarioCurriculo {
 	private String nomeUsuario;
 	private String nascimentoUsuario;
 	private String enderecoUsuario;
+	private String cidadeUsuario;
+	private String estadoUsuario;
 	private String estadoCivilUsuario;
 	private String escolaridadeUsuario;
 	private String descricaoUsuario;
@@ -13,19 +15,22 @@ public class UsuarioCurriculo {
 	private String cursosUsuario;
 	private String expTrabUsuario;
 	private String faixaSalarialUsuario;
-	private String camposString = "idCurriculo, idUsuario, nomeUsuario, nascimentoUsuario, enderecoUsuario, estadoCivilUsuario, escolaridadeUsuario, descricaoUsuario, contatoUsuario, cursosUsuario, expTrabUsuario, faixaSalarialUsuario";
+	private String camposString = "idCurriculo, idUsuario, nomeUsuario, nascimentoUsuario, enderecoUsuario, cidadeUsuario, estadoUsuario, estadoCivilUsuario, escolaridadeUsuario, descricaoUsuario, contatoUsuario, cursosUsuario, expTrabUsuario, faixaSalarialUsuario";
 	
 	public UsuarioCurriculo() {}
 	
 	public UsuarioCurriculo(int idCurriculo, int idUsuario, String nomeUsuario, String nascimentoUsuario,
-			String enderecoUsuario, String estadoCivilUsuario, String escolaridadeUsuario, String descricaoUsuario,
-			String contatoUsuario, String cursosUsuario, String expTrabUsuario, String faixaSalarialUsuario) {
+			String enderecoUsuario, String cidadeUsuario, String estadoUsuario, String estadoCivilUsuario, 
+			String escolaridadeUsuario, String descricaoUsuario, String contatoUsuario, String cursosUsuario,
+			String expTrabUsuario, String faixaSalarialUsuario) {
 		
 		this.idCurriculo = idCurriculo;
 		this.idUsuario = idUsuario;
 		this.nomeUsuario = nomeUsuario;
 		this.nascimentoUsuario = nascimentoUsuario;
 		this.enderecoUsuario = enderecoUsuario;
+		this.cidadeUsuario = cidadeUsuario;
+		this.estadoUsuario = estadoUsuario;
 		this.estadoCivilUsuario = estadoCivilUsuario;
 		this.escolaridadeUsuario = escolaridadeUsuario;
 		this.descricaoUsuario = descricaoUsuario;
@@ -73,6 +78,22 @@ public class UsuarioCurriculo {
 
 	public void setEnderecoUsuario(String enderecoUsuario) {
 		this.enderecoUsuario = enderecoUsuario;
+	}
+	
+	public String getCidadeUsuario() {
+		return cidadeUsuario;
+	}
+	
+	public void setCidadeUsuario(String cidadeUsuario) {
+		this.cidadeUsuario = cidadeUsuario;
+	}
+	
+	public String getEstadoUsuario() {
+		return estadoUsuario;
+	}
+
+	public void setEstadoUsuario(String estadoUsuario) {
+		this.estadoUsuario = estadoUsuario;
 	}
 
 	public String getEstadoCivilUsuario() {
