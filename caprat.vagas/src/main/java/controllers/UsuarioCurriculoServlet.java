@@ -49,6 +49,10 @@ public class UsuarioCurriculoServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String reqBody = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
+		
+		System.out.println("\n\n"+reqBody+"\n\n");
+		
+		
 		Gson gson = new Gson();
 		
 		UsuarioCurriculo curriculo = (UsuarioCurriculo) gson.fromJson(reqBody, UsuarioCurriculo.class);

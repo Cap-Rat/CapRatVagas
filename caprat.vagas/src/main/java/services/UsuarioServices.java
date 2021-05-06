@@ -83,6 +83,8 @@ public class UsuarioServices {
 						""+curriculo.getNomeUsuario(),
 						""+curriculo.getNascimentoUsuario(),
 						""+curriculo.getEnderecoUsuario(),
+						""+curriculo.getCidadeUsuario(),
+						""+curriculo.getEstadoUsuario(),
 						""+curriculo.getEstadoCivilUsuario(),
 						""+curriculo.getEscolaridadeUsuario(),
 						""+curriculo.getDescricaoUsuario(),

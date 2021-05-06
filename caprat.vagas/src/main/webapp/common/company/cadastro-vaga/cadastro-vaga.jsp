@@ -1,38 +1,37 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<%@include file='../../../header/v1/header.jsp'%>
 <section>
 	<div class="content">
-		<div class="depoimento">
-        <h1>Depoimentos</h1>
-        <div class="card">
-            <div class="membro">
-                <div class="user_img">
-                    <img src="assets/team2.png" alt="user_image">
-                </div>
-                <h3>Empresa</h3>
-                <p class="cargo">Ramo</p>
-                <p class="depoimento">texto foda sobre como minha empresa conseguiu empregados fodas com esse site foda de vagas incrivelmente foda</p>
-            </div>
-            <div class="membro">
-                <div class="user_img">
-                    <img src="assets/team1.png" alt="user_image">
-                </div>
-                <h3>Empresa</h3>
-                <p class="cargo">Ramo</p>
-                <p class="depoimento">texto foda sobre como minha empresa conseguiu empregados fodas com esse site foda de vagas incrivelmente foda</p>
-            </div>
-            <div class="membro">
-                <div class="user_img">
-                    <img src="assets/team3.png" alt="user_image">
-                </div>
-                <h3>Empresa</h3>
-                <p class="cargo">Ramo</p>
-                <p class="depoimento">texto foda sobre como minha empresa conseguiu empregados fodas com esse site foda de vagas incrivelmente foda</p>
-            </div>
-        </div>
-    </div>
+			<div class="depoimento">
+	        <h1>Depoimentos</h1>
+	        <div class="card">
+	            <div class="membro">
+	                <div class="user_img">
+	                    <img src="../common/company/cadastro-vaga/assets/team2.png" alt="user_image">
+	                </div>
+	                <h3>Empresa</h3>
+	                <p class="cargo">Ramo</p>
+	                <p class="depoimento">texto foda sobre como minha empresa conseguiu empregados fodas com esse site foda de vagas incrivelmente foda</p>
+	            </div>
+	            <div class="membro">
+	                <div class="user_img">
+	                    <img src="../common/company/cadastro-vaga/assets/team1.png" alt="user_image">
+	                </div>
+	                <h3>Empresa</h3>
+	                <p class="cargo">Ramo</p>
+	                <p class="depoimento">texto foda sobre como minha empresa conseguiu empregados fodas com esse site foda de vagas incrivelmente foda</p>
+	            </div>
+	            <div class="membro">
+	                <div class="user_img">
+	                    <img src="../common/company/cadastro-vaga/assets/team3.png" alt="user_image">
+	                </div>
+	                <h3>Empresa</h3>
+	                <p class="cargo">Ramo</p>
+	                <p class="depoimento">texto foda sobre como minha empresa conseguiu empregados fodas com esse site foda de vagas incrivelmente foda</p>
+	            </div>
+	        </div>
+	    </div>
 	</div>
 	<div class="wave">
 		<div class="custom-shape-divider-top-1618457940">
@@ -108,7 +107,5 @@
 		        </form>
 		    </div>
 		</div>
-		
 	</div>
 </section>
-<%@include file='../../../footer/footer.jsp'%>
