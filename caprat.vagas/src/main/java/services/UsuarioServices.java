@@ -2,21 +2,22 @@ package services;
 
 
 import models.UsuarioCurriculo;
+import models.UsuarioLogin;
 import models.UsuarioVagas;
 import database.DBQuery;
+import util.toArrayUtil;
+
 import java.util.List;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class UsuarioServices {
-	private DBQuery connectionUsuarioCurriculo = new DBQuery("usuariocurriculo", new UsuarioCurriculo().getCamposString(),  "idCurriculo");
-	private DBQuery connectionUsuarioVagas = new DBQuery("usuariovagas", new UsuarioVagas().getCamposString(), "idUsuario, idVaga");
-	
 	public List<UsuarioCurriculo> getCurriculos(){
-		List<UsuarioCurriculo> curriculos = new ArrayList<>();
+		List<UsuarioCurriculo> curriculos = new ArrayList<UsuarioCurriculo>();
 		
-		ResultSet curriculos_cadastrados = connectionUsuarioCurriculo.select("");
+		ResultSet curriculos_cadastrados = this.iniciarConexao("usuariocurriculo", new UsuarioCurriculo().getCamposString(),  "idCurriculo").
+				select("");
 		
 		try {
 			while(curriculos_cadastrados.next()) {
@@ -32,7 +33,8 @@ public class UsuarioServices {
 	public List<UsuarioVagas> getVagasDoUsuario(){
 		List<UsuarioVagas> vagasDosUsuarios = new ArrayList<>();
 		
-		ResultSet vagas_do_usuario = connectionUsuarioVagas.select("");
+		ResultSet vagas_do_usuario = this.iniciarConexao("usuariovagas", new UsuarioVagas().getCamposString(), "idUsuario, idVaga").
+				select("");
 		
 		try {
 			while(vagas_do_usuario.next()) {
@@ -45,19 +47,51 @@ public class UsuarioServices {
 		return vagasDosUsuarios;
 	}
 	
+	public List<UsuarioLogin> getLoginUsuarios() {
+		List<UsuarioLogin> dadosLoginUsuarios = new ArrayList<>();
+		
+		ResultSet usuariosCadastrados = this.iniciarConexao("usuariologin", new UsuarioLogin().getCamposString(), "idUsuario").
+				select("");
+		
+		try {
+			
+			while(usuariosCadastrados.next()) {
+				dadosLoginUsuarios.add(this.instanciarLogin(usuariosCadastrados));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return dadosLoginUsuarios;
+	}
+	
+	public boolean saveLogin(UsuarioLogin dadosLogin) {
+		int success = 0;
+		
+		if(dadosLogin.getIdUsuario() == 0) {
+			success = this.iniciarConexao("usuariologin", new UsuarioLogin().getCamposString(), "idUsuario").
+					insert(new toArrayUtil().toArray(dadosLogin));
+		}else {
+			success = this.iniciarConexao("usuariologin", new UsuarioLogin().getCamposString(), "idUsuario").
+					update(new toArrayUtil().toArray(dadosLogin));
+		}
+		
+		return success != 0;
+	}
+	
 	public boolean saveCurriculo(UsuarioCurriculo dadosCurriculo){
 		int success = 0;
 		
 		if(dadosCurriculo.getIdCurriculo() == 0) {
-			success = connectionUsuarioCurriculo.insert(this.toArray(dadosCurriculo));
+			success = this.iniciarConexao("usuariocurriculo", new UsuarioCurriculo().getCamposString(),  "idCurriculo").
+					insert(new toArrayUtil().toArray(dadosCurriculo));
 		}else {
-			success = connectionUsuarioCurriculo.update(this.toArray(dadosCurriculo));
+			success = this.iniciarConexao("usuariocurriculo", new UsuarioCurriculo().getCamposString(),  "idCurriculo").
+					update(new toArrayUtil().toArray(dadosCurriculo));
 		}
 		
-		if(success == 0)
-			return false;
-		else
-			return true;
+		return success != 0;
 	}
 	
 	public boolean saveUsuarioVagas(UsuarioVagas dadosUsuarioVaga){
@@ -66,43 +100,11 @@ public class UsuarioServices {
 		if(dadosUsuarioVaga.getIdUsuario() == 0 || dadosUsuarioVaga.getIdVaga() == 0) {
 			return false;
 		}else {
-			success = connectionUsuarioVagas.insert(this.toArray(dadosUsuarioVaga));
+			success = this.iniciarConexao("usuariovagas", new UsuarioVagas().getCamposString(), "idUsuario, idVaga").
+					insert(new toArrayUtil().toArray(dadosUsuarioVaga));
 		}
 		
-		if(success == 0)
-			return false;
-		else
-			return true;
-	}
-	
-	private String[] toArray(UsuarioCurriculo curriculo) {
-		return (
-				new String[] {
-						""+curriculo.getIdCurriculo(),
-						""+curriculo.getIdUsuario(),
-						""+curriculo.getNomeUsuario(),
-						""+curriculo.getNascimentoUsuario(),
-						""+curriculo.getEnderecoUsuario(),
-						""+curriculo.getCidadeUsuario(),
-						""+curriculo.getEstadoUsuario(),
-						""+curriculo.getEstadoCivilUsuario(),
-						""+curriculo.getEscolaridadeUsuario(),
-						""+curriculo.getDescricaoUsuario(),
-						""+curriculo.getContatoUsuario(),
-						""+curriculo.getCursosUsuario(),
-						""+curriculo.getExpTrabUsuario(),
-						""+curriculo.getFaixaSalarialUsuario()
-				}
-		); 
-	}
-	
-	private String[] toArray(UsuarioVagas vagasDoUsuario) {
-		return (
-				new String[] {
-					""+vagasDoUsuario.getIdUsuario(),
-					""+vagasDoUsuario.getIdVaga()
-				}
- 			);
+		return success != 0;
 	}
 	
 	private UsuarioCurriculo instanciarCurriculo(ResultSet dadosDoCurriculo) {
@@ -139,5 +141,24 @@ public class UsuarioServices {
 		}
 		
 		return vagasDosUsuarios;
+	}
+	
+	private UsuarioLogin instanciarLogin(ResultSet dadosDoLoginDoUsuario) {
+		UsuarioLogin usuariosCadastrados = new UsuarioLogin();
+		
+		try {
+			usuariosCadastrados.setIdUsuario(dadosDoLoginDoUsuario.getInt("idUsuario"));
+			usuariosCadastrados.setEmailUsuario(dadosDoLoginDoUsuario.getString("emailUsuario"));
+			usuariosCadastrados.setSenhaUsuario(dadosDoLoginDoUsuario.getString("senhaUsuario"));
+			usuariosCadastrados.setTipoUsuario(dadosDoLoginDoUsuario.getInt("tipoUsuario"));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return usuariosCadastrados;
+	}
+	
+	private DBQuery iniciarConexao(String nomeTabela, String campos, String chavePrimaria) {
+		return new DBQuery(nomeTabela, campos,  chavePrimaria);
 	}
 }

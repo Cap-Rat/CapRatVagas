@@ -9,7 +9,6 @@ public class UsuarioLogin {
 	public UsuarioLogin() {}
 	
 	public UsuarioLogin(int idUsuario, String emailUsuario, String senhaUsuario, int tipoUsuario) {
-		super();
 		this.idUsuario = idUsuario;
 		this.emailUsuario = emailUsuario;
 		this.senhaUsuario = senhaUsuario;
@@ -40,6 +39,8 @@ public class UsuarioLogin {
 	public void setTipoUsuario(int tipoUsuario) {
 		this.tipoUsuario = tipoUsuario;
 	}
-	
+	public String getCamposString() {
+		return "idUsuario, emailUsuario, senhaUsuario, tipoUsuario";
+	}
 	
 }
