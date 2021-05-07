@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import util.toArrayUtil;
 import database.DBQuery;
 import models.EmpresaVagas;
 
@@ -39,30 +40,15 @@ public class EmpresaServices {
 		int success = 0;
 		
 		if(dadosVaga.getIdVaga() == 0) {
-			success = connection.insert(this.toArray(dadosVaga));
+			success = connection.insert(new toArrayUtil().toArray(dadosVaga));
 		}else {
-			success = connection.update(this.toArray(dadosVaga));
+			success = connection.update(new toArrayUtil().toArray(dadosVaga));
 		}
 		
 		if(success == 0)
 			return false;
 		else
 			return true;
-	}
-	
-	private String[] toArray(EmpresaVagas vaga) {
-		return(
-				new String [] {
-						""+vaga.getIdVaga(),
-						""+vaga.getIdEmpresa(),
-						""+vaga.getTituloVaga(),
-						""+vaga.getRequisitosVaga(),
-						""+vaga.getDescricaoVaga(),
-						""+vaga.getLocalVaga(),
-						""+vaga.getSalarioVaga(),
-						""+vaga.getNivelExpVaga()
-				}
-			);
 	}
 	
 	
