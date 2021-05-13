@@ -59,7 +59,9 @@ public class EmpresaServices {
 			vaga.setDescricaoVaga(dadosDaVaga.getString("descricaoVaga"));
 			vaga.setIdEmpresa(dadosDaVaga.getInt("idEmpresa"));
 			vaga.setIdVaga(dadosDaVaga.getInt("idVaga"));
-			vaga.setLocalVaga(dadosDaVaga.getString("localVaga"));
+			vaga.setEstadoVaga(dadosDaVaga.getString("estadoVaga"));
+			vaga.setCidadeVaga(dadosDaVaga.getString("cidadeVaga"));
+			vaga.setEnderecoVaga(dadosDaVaga.getString("enderecoVaga"));
 			vaga.setNivelExpVaga(dadosDaVaga.getString("nivelExpVaga"));
 			vaga.setRequisitosVaga(dadosDaVaga.getString("requisitosVaga"));
 			vaga.setSalarioVaga(dadosDaVaga.getString("salarioVaga"));

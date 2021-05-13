@@ -6,21 +6,25 @@ public class EmpresaVagas {
 	private String tituloVaga;
 	private String requisitosVaga;
 	private String descricaoVaga;
-	private String localVaga;
+	private String estadoVaga;
+	private String cidadeVaga;
+	private String enderecoVaga;
 	private String salarioVaga;
 	private String nivelExpVaga;
 	
 	public EmpresaVagas() {}
 	
 	public EmpresaVagas(int idVaga, int idEmpresa, String tituloVaga, String requisitosVaga, String descricaoVaga,
-			String localVaga, String salarioVaga, String nivelExpVaga) {
+			String estadoVaga, String cidadeVaga, String enderecoVaga, String salarioVaga, String nivelExpVaga) {
 		
 		this.idVaga = idVaga;
 		this.idEmpresa = idEmpresa;
 		this.tituloVaga = tituloVaga;
 		this.requisitosVaga = requisitosVaga;
 		this.descricaoVaga = descricaoVaga;
-		this.localVaga = localVaga;
+		this.estadoVaga = estadoVaga;
+		this.cidadeVaga = cidadeVaga;
+		this.enderecoVaga = enderecoVaga;
 		this.salarioVaga = salarioVaga;
 		this.nivelExpVaga = nivelExpVaga;
 	}
@@ -65,14 +69,30 @@ public class EmpresaVagas {
 		this.descricaoVaga = descricaoVaga;
 	}
 
-	public String getLocalVaga() {
-		return localVaga;
+	public String getEstadoVaga() {
+		return estadoVaga;
 	}
 
-	public void setLocalVaga(String localVaga) {
-		this.localVaga = localVaga;
+	public void setEstadoVaga(String estadoVaga) {
+		this.estadoVaga = estadoVaga;
+	}
+	
+	public String getCidadeVaga() {
+		return cidadeVaga;
 	}
 
+	public void setCidadeVaga(String cidadeVaga) {
+		this.cidadeVaga = cidadeVaga;
+	}
+	
+	public String getEnderecoVaga() {
+		return enderecoVaga;
+	}
+
+	public void setEnderecoVaga(String enderecoVaga) {
+		this.enderecoVaga = enderecoVaga;
+	}
+	
 	public String getSalarioVaga() {
 		return salarioVaga;
 	}
@@ -90,7 +110,7 @@ public class EmpresaVagas {
 	}
 	
 	public String getCamposString() {
-		return "idVaga, idEmpresa, tituloVaga, requisitosVaga, descricaoVaga, localVaga, salarioVaga, nivelExpVaga";
+		return "idVaga, idEmpresa, tituloVaga, requisitosVaga, descricaoVaga, estadoVaga, cidadeVaga, enderecoVaga, salarioVaga, nivelExpVaga";
 	}
 	
 }

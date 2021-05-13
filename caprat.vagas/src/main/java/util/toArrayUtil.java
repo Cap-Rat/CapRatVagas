@@ -36,7 +36,9 @@ public class toArrayUtil {
 						""+vaga.getTituloVaga(),
 						""+vaga.getRequisitosVaga(),
 						""+vaga.getDescricaoVaga(),
-						""+vaga.getLocalVaga(),
+						""+vaga.getEstadoVaga(),
+						""+vaga.getCidadeVaga(),
+						""+vaga.getEnderecoVaga(),
 						""+vaga.getSalarioVaga(),
 						""+vaga.getNivelExpVaga()
 				}
