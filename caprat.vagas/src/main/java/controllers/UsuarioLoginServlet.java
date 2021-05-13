@@ -15,6 +15,7 @@ import com.google.gson.Gson;
 import models.UsuarioLogin;
 import services.UsuarioServices;
 import util.ResponseUtil;
+import util.enviarEmailUtil;
 
 /**
  * Servlet implementation class UsuarioLoginServlet
@@ -52,8 +53,11 @@ public class UsuarioLoginServlet extends HttpServlet {
 		
 		Gson gson = new Gson();
 		
-		UsuarioLogin curriculo = (UsuarioLogin) gson.fromJson(reqBody, UsuarioLogin.class);
-		boolean success = services.saveLogin(curriculo);
+		UsuarioLogin dadosLogin = (UsuarioLogin) gson.fromJson(reqBody, UsuarioLogin.class);
+		boolean success = services.saveLogin(dadosLogin);
+		
+		if(success)
+			new enviarEmailUtil().enviarEmailCadastro(dadosLogin);
 		
 		new ResponseUtil().outputResponse(response, "{ \"success\": "+ success +" }", success?201:400);
 	}

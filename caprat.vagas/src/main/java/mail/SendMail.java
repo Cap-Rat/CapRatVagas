@@ -53,9 +53,9 @@ public class SendMail {
 			message.setFrom( new InternetAddress(mailFrom) );
 			message.setRecipients( Message.RecipientType.TO, InternetAddress.parse(mailTo) );
 			message.setSubject( mailSubject	);
-			message.setText(    mailBody	);
+			message.setContent( mailBody, "text/html");
 			Transport.send(     message		);
-			System.out.println("Email Enviado!");
+			System.out.println("\n\n Email Enviado! \n\n");
 		} catch (MessagingException e) {
 			throw new RuntimeException(e);
 		}
