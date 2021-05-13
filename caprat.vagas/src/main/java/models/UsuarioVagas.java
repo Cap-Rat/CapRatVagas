@@ -3,7 +3,6 @@ package models;
 public class UsuarioVagas {
 	private int idUsuario;
 	private int idVaga;
-	private String camposString = "idUsuario, idVaga";
 	
 	public UsuarioVagas() {}
 	
@@ -14,7 +13,7 @@ public class UsuarioVagas {
 	}
 	
 	public String getCamposString() {
-		return camposString;
+		return "idUsuario, idVaga";
 	}
 	public int getIdUsuario() {
 		return idUsuario;

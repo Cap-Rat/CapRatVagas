@@ -15,7 +15,6 @@ public class UsuarioCurriculo {
 	private String cursosUsuario;
 	private String expTrabUsuario;
 	private String faixaSalarialUsuario;
-	private String camposString = "idCurriculo, idUsuario, nomeUsuario, nascimentoUsuario, enderecoUsuario, cidadeUsuario, estadoUsuario, estadoCivilUsuario, escolaridadeUsuario, descricaoUsuario, contatoUsuario, cursosUsuario, expTrabUsuario, faixaSalarialUsuario";
 	
 	public UsuarioCurriculo() {}
 	
@@ -153,7 +152,9 @@ public class UsuarioCurriculo {
 	}
 	
 	public String getCamposString() {
-		return camposString;
+		return "idCurriculo, idUsuario, nomeUsuario, nascimentoUsuario, enderecoUsuario, cidadeUsuario, estadoUsuario,"
+				+ " estadoCivilUsuario, escolaridadeUsuario, descricaoUsuario, contatoUsuario, cursosUsuario, expTrabUsuario,"
+				+ " faixaSalarialUsuario";
 	}
 	
 	

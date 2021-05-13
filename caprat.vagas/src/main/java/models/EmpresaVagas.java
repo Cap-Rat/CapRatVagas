@@ -9,7 +9,6 @@ public class EmpresaVagas {
 	private String localVaga;
 	private String salarioVaga;
 	private String nivelExpVaga;
-	private String camposString = "idVaga, idEmpresa, tituloVaga, requisitosVaga, descricaoVaga, localVaga, salarioVaga, nivelExpVaga";
 	
 	public EmpresaVagas() {}
 	
@@ -91,7 +90,7 @@ public class EmpresaVagas {
 	}
 	
 	public String getCamposString() {
-		return camposString;
+		return "idVaga, idEmpresa, tituloVaga, requisitosVaga, descricaoVaga, localVaga, salarioVaga, nivelExpVaga";
 	}
 	
 }

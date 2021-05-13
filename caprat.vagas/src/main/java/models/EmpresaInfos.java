@@ -10,8 +10,7 @@ public class EmpresaInfos {
 	
 	public EmpresaInfos() {}
 	
-	public EmpresaInfos(int idEmpresa, int idUsuario, String enderecoEmpresa, String ramoEmpresa, String tamanhoEmpresa,
-			String descricaoEmpresa) {
+	public EmpresaInfos(int idEmpresa, int idUsuario, String enderecoEmpresa, String ramoEmpresa, String tamanhoEmpresa, String descricaoEmpresa) {
 		
 		this.idEmpresa = idEmpresa;
 		this.idUsuario = idUsuario;
@@ -56,6 +55,9 @@ public class EmpresaInfos {
 	}
 	public void setDescricaoEmpresa(String descricaoEmpresa) {
 		this.descricaoEmpresa = descricaoEmpresa;
+	}
+	public String getCamposString() {
+		return "idEmpresa, idUsuario, enderecoEmpresa, ramoEmpresa, tamanhoEmpresa, descricaoEmpresa";
 	}
 	
 	
