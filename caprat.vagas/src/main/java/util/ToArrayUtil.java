@@ -5,7 +5,7 @@ import models.UsuarioCurriculo;
 import models.UsuarioLogin;
 import models.UsuarioVagas;
 
-public class toArrayUtil {
+public class ToArrayUtil {
 	
 	public String[] toArray(UsuarioCurriculo curriculo) {
 		return (
@@ -49,6 +49,7 @@ public class toArrayUtil {
 		return (
 				new String[] {
 					""+dadosLoginUsuario.getIdUsuario(),
+					""+dadosLoginUsuario.getApelidoUsuario(),
 					""+dadosLoginUsuario.getEmailUsuario(),
 					""+dadosLoginUsuario.getSenhaUsuario(),
 					""+dadosLoginUsuario.getTipoUsuario()
