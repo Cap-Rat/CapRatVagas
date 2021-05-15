@@ -5,7 +5,7 @@ import models.UsuarioCurriculo;
 import models.UsuarioLogin;
 import models.UsuarioVagas;
 import database.DBQuery;
-import util.toArrayUtil;
+import util.ToArrayUtil;
 
 import java.util.List;
 import java.sql.ResultSet;
@@ -71,10 +71,10 @@ public class UsuarioServices {
 		
 		if(dadosLogin.getIdUsuario() == 0) {
 			success = this.iniciarConexao("usuariologin", new UsuarioLogin().getCamposString(), "idUsuario").
-					insert(new toArrayUtil().toArray(dadosLogin));
+					insert(new ToArrayUtil().toArray(dadosLogin));
 		}else {
 			success = this.iniciarConexao("usuariologin", new UsuarioLogin().getCamposString(), "idUsuario").
-					update(new toArrayUtil().toArray(dadosLogin));
+					update(new ToArrayUtil().toArray(dadosLogin));
 		}
 		
 		return success != 0;
@@ -85,10 +85,10 @@ public class UsuarioServices {
 		
 		if(dadosCurriculo.getIdCurriculo() == 0) {
 			success = this.iniciarConexao("usuariocurriculo", new UsuarioCurriculo().getCamposString(),  "idCurriculo").
-					insert(new toArrayUtil().toArray(dadosCurriculo));
+					insert(new ToArrayUtil().toArray(dadosCurriculo));
 		}else {
 			success = this.iniciarConexao("usuariocurriculo", new UsuarioCurriculo().getCamposString(),  "idCurriculo").
-					update(new toArrayUtil().toArray(dadosCurriculo));
+					update(new ToArrayUtil().toArray(dadosCurriculo));
 		}
 		
 		return success != 0;
@@ -101,7 +101,7 @@ public class UsuarioServices {
 			return false;
 		}else {
 			success = this.iniciarConexao("usuariovagas", new UsuarioVagas().getCamposString(), "idUsuario, idVaga").
-					insert(new toArrayUtil().toArray(dadosUsuarioVaga));
+					insert(new ToArrayUtil().toArray(dadosUsuarioVaga));
 		}
 		
 		return success != 0;
@@ -148,6 +148,7 @@ public class UsuarioServices {
 		
 		try {
 			usuariosCadastrados.setIdUsuario(dadosDoLoginDoUsuario.getInt("idUsuario"));
+			usuariosCadastrados.setApelidoUsuario(dadosDoLoginDoUsuario.getString("apelidoUsuario"));
 			usuariosCadastrados.setEmailUsuario(dadosDoLoginDoUsuario.getString("emailUsuario"));
 			usuariosCadastrados.setSenhaUsuario(dadosDoLoginDoUsuario.getString("senhaUsuario"));
 			usuariosCadastrados.setTipoUsuario(dadosDoLoginDoUsuario.getInt("tipoUsuario"));

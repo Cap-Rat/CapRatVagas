@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import util.toArrayUtil;
+import util.ToArrayUtil;
 import database.DBQuery;
 import models.EmpresaVagas;
 
@@ -40,9 +40,9 @@ public class EmpresaServices {
 		int success = 0;
 		
 		if(dadosVaga.getIdVaga() == 0) {
-			success = connection.insert(new toArrayUtil().toArray(dadosVaga));
+			success = connection.insert(new ToArrayUtil().toArray(dadosVaga));
 		}else {
-			success = connection.update(new toArrayUtil().toArray(dadosVaga));
+			success = connection.update(new ToArrayUtil().toArray(dadosVaga));
 		}
 		
 		if(success == 0)

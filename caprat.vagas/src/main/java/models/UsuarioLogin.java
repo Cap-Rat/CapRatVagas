@@ -2,6 +2,7 @@ package models;
 
 public class UsuarioLogin {
 	private int idUsuario;
+	private String apelidoUsuario;
 	private String emailUsuario;
 	private String senhaUsuario;
 	private int tipoUsuario;
@@ -39,8 +40,14 @@ public class UsuarioLogin {
 	public void setTipoUsuario(int tipoUsuario) {
 		this.tipoUsuario = tipoUsuario;
 	}
+	public String getApelidoUsuario() {
+		return apelidoUsuario;
+	}
+	public void setApelidoUsuario(String apelidoUsuario) {
+		this.apelidoUsuario = apelidoUsuario;
+	}
 	public String getCamposString() {
-		return "idUsuario, emailUsuario, senhaUsuario, tipoUsuario";
+		return "idUsuario, apelidoUsuario, emailUsuario, senhaUsuario, tipoUsuario";
 	}
 	
 }
