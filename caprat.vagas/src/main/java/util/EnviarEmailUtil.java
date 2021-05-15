@@ -40,6 +40,17 @@ public class EnviarEmailUtil {
 				"        -ms-text-size-adjust: 100%;\r\n" + 
 				"        -webkit-text-size-adjust: 100%;\r\n" + 
 				"      }\r\n" + 
+				"      .logo{\r\n" + 
+				"        position:relative;\r\n" + 
+				"        font-size: 1.5rem;\r\n" + 
+				"        color:#FEFFF7;\r\n" + 
+				"        text-decoration: none;\r\n" + 
+				"        font-weight: 400;\r\n" + 
+				"        font-family: 'Arial';\r\n" + 
+				"        }\r\n" + 
+				"      .logo span{\r\n" + 
+				"            font-weight: 600;\r\n" + 
+				"        }"+
 				"      div[style*=\"margin: 16px 0\"] {\r\n" + 
 				"        margin: 0 !important;\r\n" + 
 				"      }\r\n" + 
@@ -241,17 +252,14 @@ public class EnviarEmailUtil {
 				"        <!-- View Online: END-->\r\n" + 
 				"\r\n" + 
 				"        <!-- Logo Bar : BEGIN -->\r\n" + 
-				"        <table role=\"presentation\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" style=\"background-color: #363636; margin: 0 auto; max-width: 600px; padding: 10px;\">\r\n" + 
+				"		 <table role=\"presentation\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" style=\"background-color: #363636; margin: 0 auto; max-width: 600px; padding: 10px;\">\r\n" + 
 				"          <tbody>\r\n" + 
 				"            <tr>\r\n" + 
-				"              <td width=\"48%\" align=\"left\" valign=\"middle\" style=\" text-align: left; width: 48%; \">\r\n" + 
-				"              </td>\r\n" + 
-				"              <td width=\"45%\" valign=\"bottom\" align=\"right\" bgcolor=\"#363636\" style=\"font-family: Calibri, Geneva, sans-serif; font-size: 14px; color: #1c1c1c; padding:10px 10px 10px 0; letter-spacing: 1px; text-align: right; text-transform: uppercase;\" class=\"hide-mobile\">&nbsp;\r\n" + 
-				"                \r\n" + 
+				"              <td align=\"center\" width=\"100%\"valign=\"middle\" style=\" text-align: center; width: 100%; padding: 15px;\"><font class=\"logo\">CAP<span>RAT</span></font>\r\n" + 
 				"              </td>\r\n" + 
 				"            </tr>\r\n" + 
 				"          </tbody>\r\n" + 
-				"        </table>\r\n" + 
+				"        </table>"+
 				"\r\n" + 
 				"        <!-- Reverse Logo Bar : END -->\r\n" + 
 				"\r\n" + 
