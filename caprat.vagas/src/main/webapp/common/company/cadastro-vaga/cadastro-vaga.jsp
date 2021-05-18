@@ -128,34 +128,34 @@
 
 	<script>
 
-	$(function() {
-        $("#cadastrar-vaga").on('click', function(e) {
-          
-	        var cadastroData = {
-	        	idVaga: 0,
-	        	idEmpresa: 2,
-	       		tituloVaga: $("input[name='tituloVaga']").val(),
-	  			requisitosVaga: $("textarea[name='requisitosVaga']").val(),
-	  			descricaoVaga: $("textarea[name='descricaoVaga']").val(),
-	  			estadoVaga: $("input[name='estadoVaga']").val(),
-	  			cidadeVaga: $("input[name='cidadeVaga']").val(),
-	  			enderecoVaga: $("input[name='enderecoVaga']").val(),
-	  			salarioVaga: $("input[name='salarioVaga']").val(),
-	  			nivelExpVaga: $("input[name='nivelExpVaga']").val()
-	        };
-	            
-	        console.log(cadastroData);
-	         
-	        $.post("http://localhost:8080/EmpresaVagasServlet", JSON.stringify(cadastroData), function(data, status) {
-		   	    if(data.success) {
-				    console.log(data.success);
-					window.alert("Vaga cadastrada com sucesso!");
-					//window.location.replace("../index.jsp");
-				}
-		    }, "json");
-	      
-        });
-    });
+		$(function() {
+	        $("#cadastrar-vaga").on('click', function(e) {
+	          
+		        var cadastroData = {
+		        	idVaga: 0,
+		        	idEmpresa: 2,
+		       		tituloVaga: $("input[name='tituloVaga']").val(),
+		  			requisitosVaga: $("textarea[name='requisitosVaga']").val(),
+		  			descricaoVaga: $("textarea[name='descricaoVaga']").val(),
+		  			estadoVaga: $("input[name='estadoVaga']").val(),
+		  			cidadeVaga: $("input[name='cidadeVaga']").val(),
+		  			enderecoVaga: $("input[name='enderecoVaga']").val(),
+		  			salarioVaga: $("input[name='salarioVaga']").val(),
+		  			nivelExpVaga: $("input[name='nivelExpVaga']").val()
+		        };
+		            
+		        console.log(cadastroData);
+		         
+		        $.post("http://localhost:8080/EmpresaVagasServlet", JSON.stringify(cadastroData), function(data, status) {
+			   	    if(data.success) {
+					    console.log(data.success);
+						window.alert("Vaga cadastrada com sucesso!");
+						//window.location.replace("../index.jsp");
+					}
+			    }, "json");
+		      
+	        });
+	    });
 
 	</script>
 </section>
