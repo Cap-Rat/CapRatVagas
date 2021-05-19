@@ -47,11 +47,11 @@ public class UsuarioServices {
 		return vagasDosUsuarios;
 	}
 	
-	public List<UsuarioLogin> getLoginUsuarios() {
+	public List<UsuarioLogin> getLoginUsuarios(String emailUsuario, String senhaUsuario) {
 		List<UsuarioLogin> dadosLoginUsuarios = new ArrayList<>();
 		
 		ResultSet usuariosCadastrados = this.iniciarConexao("usuariologin", new UsuarioLogin().getCamposString(), "idUsuario").
-				select("");
+				select("emailUsuario = '" + emailUsuario +"' AND senhaUsuario = '" + senhaUsuario +"'" );
 		
 		try {
 			

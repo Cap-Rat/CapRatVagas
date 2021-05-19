@@ -38,12 +38,18 @@ public class UsuarioLoginServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<UsuarioLogin> logins = new ArrayList<>();
-		logins = services.getLoginUsuarios();
+		String emailUsuario = request.getParameter("emailUsuario");
+		String senhaUsuario = request.getParameter("senhaUsuario");
+		logins = services.getLoginUsuarios(emailUsuario, senhaUsuario);
 		
-		Gson gson = new Gson();
-		String curriculosJSON = gson.toJson(logins);
+		String loginJSON = "{ \"success\": \"false\" }";
+		if(!logins.isEmpty()) {
+			
+			loginJSON = "{ \"success\": \"true\" }";
+		}
 		
-		new ResponseUtil().outputResponse(response, curriculosJSON, 200);
+		System.out.println("\n\n\n"+loginJSON+"\n\n\n");
+		new ResponseUtil().outputResponse(response, loginJSON, 200);
 	}
 
 	/**

@@ -8,7 +8,7 @@
 	        <div class="card">
 	            <div class="membro">
 	                <div class="user_img">
-	                    <img src="../common/user/cadastro-curriculo/assets/team2.png" alt="user_image">
+	                    <img src="../../common/user/cadastro-curriculo/assets/team2.png" alt="user_image">
 	                </div>
 	                <h3>Juliana Ferreira</h3>
 	                <p class="cargo">Analista de Marketing</p>
@@ -16,7 +16,7 @@
 	            </div>
 	            <div class="membro">
 	                <div class="user_img">
-	                    <img src="../common/user/cadastro-curriculo/assets/team1.png" alt="user_image">
+	                    <img src="../../common/user/cadastro-curriculo/assets/team1.png" alt="user_image">
 	                </div>
 	                <h3>Henry Rodrigues</h3>
 	                <p class="cargo">Agente de tráfego</p>
@@ -24,7 +24,7 @@
 	            </div>
 	            <div class="membro">
 	                <div class="user_img">
-	                    <img src="../common/user/cadastro-curriculo/assets/team3.png" alt="user_image">
+	                    <img src="../../common/user/cadastro-curriculo/assets/team3.png" alt="user_image">
 	                </div>
 	                <h3>Thiago Marcondes</h3>
 	                <p class="cargo">Desenvolvedor Mobile</p>
