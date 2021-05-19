@@ -24,7 +24,7 @@
 						</div>
 					</div>
 					<h4><a id="forgot-pass" href="../pass-recover/pass-recover.jsp">Esqueceu sua senha?</a></h4>
-					<h4>Não possui uma conta? <a id="h4" href="../cadastro/cadastro.jsp">Cadastre-se</a></h4>
+					<h4>Não possui uma conta? <a id="h4" href="../cadastro_usuario/cadastro_usuario.jsp">Cadastre-se</a></h4>
 					<div class="input-group">
 						<div class="input-box">
 							<br>
@@ -48,11 +48,15 @@
 		        console.log(cadastroData);
 		         
 		        $.getJSON("http://localhost:8080/UsuarioLoginServlet", cadastroData, function(data, status) {
-			   	    console.log(data)
 		        	if(data.success=="true") {
-					    console.log(data.success);
 						window.alert("Usuário logado com sucesso!");
+						if(data.tipo == 3)
+							window.location.replace("../cadastro_curriculo/cadastro_curriculo.jsp");
+						if(data.tipo == 2)
+							window.location.replace("../cadastro_vaga/cadastro_vaga.jsp");
 						//window.location.replace("../index.jsp");
+					}else{
+						window.alert("Dados incorretos");
 					}
 			    });
 		      

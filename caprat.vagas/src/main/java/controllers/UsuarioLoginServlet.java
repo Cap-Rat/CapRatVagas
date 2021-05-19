@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 
@@ -44,8 +45,10 @@ public class UsuarioLoginServlet extends HttpServlet {
 		
 		String loginJSON = "{ \"success\": \"false\" }";
 		if(!logins.isEmpty()) {
+			HttpSession ses = request.getSession();
+			ses.setAttribute("userLogin", logins.get(0).getIdUsuario());
+			loginJSON = "{ \"success\": \"true\", \"tipo\": \"" + logins.get(0).getTipoUsuario() + "\" }";
 			
-			loginJSON = "{ \"success\": \"true\" }";
 		}
 		
 		System.out.println("\n\n\n"+loginJSON+"\n\n\n");
