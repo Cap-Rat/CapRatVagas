@@ -21,7 +21,7 @@
             <header>
                 <a href="#" class="logo">CAP<span>RAT</span></a>
                 <ul class="navigation">
-                    <li><a href="login/login.jsp">Login</a></li>
+                    <li><a href="../login/login.jsp">Login</a></li>
                     <li><a href="../cadastro_usuario/cadastro_usuario.jsp">Cadastro</a></li>
                 </ul>
             </header>

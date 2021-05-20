@@ -32,7 +32,22 @@
 	                </div>
 	                <ul class="user-navigation">
 	                    <li id="user-photo"><a href="#"><i class="fa fa-user-circle-o" aria-hidden="true"></i></a></li>
-	                    <li id="user-photo"><a href="#"><i class="fa fa-sign-out" aria-hidden="true"></i></a></li>
+	                    <li id="user-photo"><a href="#" id="logout"><i class="fa fa-sign-out" aria-hidden="true"></i></a></li>
 	                </ul>
 	            </header>
 	        </div>
+
+	        <script>
+		        $(function() {
+			        $("#logout").on('click', function(e) {
+			          
+				         
+				        $.getJSON("http://localhost:8080/UsuarioLogoutServlet", function(data) {
+					   	    if(data.success == "true") {
+								window.location.replace("../login/login.jsp");
+							}
+					    });
+				      
+			        });
+			    });
+	        </script>

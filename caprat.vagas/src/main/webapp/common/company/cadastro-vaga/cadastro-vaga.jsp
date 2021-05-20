@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+	
 <section>
 	<div class="content">
 		<div class="depoimento">
@@ -8,36 +8,33 @@
 			<div class="card">
 				<div class="membro">
 					<div class="user_img">
-						<img src="../common/company/cadastro-vaga/assets/team2.png"
+						<img src="../../common/company/cadastro-vaga/assets/team1.png"
 							alt="user_image">
 					</div>
 					<h3>Empresa</h3>
 					<p class="cargo">Ramo</p>
-					<p class="depoimento">texto foda sobre como minha empresa
-						conseguiu empregados fodas com esse site foda de vagas
-						incrivelmente foda</p>
+					<p class="depoimento">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. 
+					</p>
 				</div>
 				<div class="membro">
 					<div class="user_img">
-						<img src="../common/company/cadastro-vaga/assets/team1.png"
+						<img src="../../common/company/cadastro-vaga/assets/team1.png"
 							alt="user_image">
 					</div>
 					<h3>Empresa</h3>
 					<p class="cargo">Ramo</p>
-					<p class="depoimento">texto foda sobre como minha empresa
-						conseguiu empregados fodas com esse site foda de vagas
-						incrivelmente foda</p>
+					<p class="depoimento">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla.
+					</p>
 				</div>
 				<div class="membro">
 					<div class="user_img">
-						<img src="../common/company/cadastro-vaga/assets/team3.png"
+						<img src="../../common/company/cadastro-vaga/assets/team1.png"
 							alt="user_image">
 					</div>
 					<h3>Empresa</h3>
 					<p class="cargo">Ramo</p>
-					<p class="depoimento">texto foda sobre como minha empresa
-						conseguiu empregados fodas com esse site foda de vagas
-						incrivelmente foda</p>
+					<p class="depoimento">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. 
+					</p>
 				</div>
 			</div>
 		</div>
@@ -56,8 +53,8 @@
 		<div class="side-image"></div>
 		<div class="side-form">
 			<div class="cadastro">
-				<h2>Cadastro</h2>
-				<form>
+				<h2>Criar uma vaga</h2>
+				<form id="cadastrar-vaga-form">
 					<h4>Título</h4>
 					<div class="input-group">
 						<div class="input-box">
@@ -118,7 +115,7 @@
 					</div>
 					<div class="input-group">
 						<div class="input-box">
-							<button id="cadastrar-vaga">CADASTRAR VAGA</button>
+							<button type="button" id="cadastrar-vaga">CADASTRAR VAGA</button>
 						</div>
 					</div>
 				</form>
@@ -147,10 +144,10 @@
 		        console.log(cadastroData);
 		         
 		        $.post("http://localhost:8080/EmpresaVagasServlet", JSON.stringify(cadastroData), function(data, status) {
-			   	    if(data.success) {
+			   	    if(data.success == "true") {
 					    console.log(data.success);
 						window.alert("Vaga cadastrada com sucesso!");
-						//window.location.replace("../index.jsp");
+						location.reload();
 					}
 			    }, "json");
 		      

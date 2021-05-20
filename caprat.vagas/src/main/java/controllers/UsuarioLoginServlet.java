@@ -37,6 +37,8 @@ public class UsuarioLoginServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
+    
+    //Usuário efetuando login
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<UsuarioLogin> logins = new ArrayList<>();
 		HttpSession ses = request.getSession();
@@ -52,26 +54,32 @@ public class UsuarioLoginServlet extends HttpServlet {
 			
 		}
 		
-		System.out.println("\n\n\n"+loginJSON+"\n\n\n");
 		new ResponseUtil().outputResponse(response, loginJSON, 200);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+	
+	//Criação de um novo usuário
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String reqBody = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
 		
 		Gson gson = new Gson();
 		
-		UsuarioLogin dadosLogin = (UsuarioLogin) gson.fromJson(reqBody, UsuarioLogin.class);
-		dadosLogin.setSenhaUsuario(new RandomStringUtil().generate(18));
-		boolean success = services.saveLogin(dadosLogin);
+		UsuarioLogin dadosCadastro = (UsuarioLogin) gson.fromJson(reqBody, UsuarioLogin.class);
+		dadosCadastro.setSenhaUsuario(new RandomStringUtil().generate(18));
+		boolean success = services.saveLogin(dadosCadastro);
 		
-		if(success)
-			new EnviarEmailUtil().enviarEmailCadastro(dadosLogin);
+		if(success) {
+			if(dadosCadastro.getTipoUsuario() == 2)
+				new EnviarEmailUtil().enviarEmailCadastroEmpresa(dadosCadastro);
+				
+			if(dadosCadastro.getTipoUsuario() == 3)
+				new EnviarEmailUtil().enviarEmailCadastroCandidato(dadosCadastro);
+		}
 		
-		new ResponseUtil().outputResponse(response, "{ \"success\": "+ success +" }", success?201:400);
+		new ResponseUtil().outputResponse(response, "{ \"success\": \""+ success +"\" }", 200);
 	}
 
 }

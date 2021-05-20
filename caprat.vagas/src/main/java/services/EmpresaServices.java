@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import util.ConexaoBancoUtil;
+import database.DBQuery;
 import util.ToArrayUtil;
 import models.EmpresaVagas;
 import models.UsuarioVagas;
@@ -21,7 +21,7 @@ public class EmpresaServices {
 		if(expFiltro == null)
 			expFiltro = "";
 		
-		ResultSet vagas_cadastradas = new ConexaoBancoUtil().iniciarConexao("empresavagas", new EmpresaVagas().getCamposString(), "idVaga").
+		ResultSet vagas_cadastradas = this.iniciarConexao("empresavagas", new EmpresaVagas().getCamposString(), "idVaga").
 				select("tituloVaga LIKE '%" + tituloFiltro + "%' && nivelExpVaga LIKE '%" + expFiltro + "%'");
 		
 		try {
@@ -39,7 +39,7 @@ public class EmpresaServices {
 		List<EmpresaVagas> vagas = new ArrayList<>();
 		
 		for(UsuarioVagas uv : vagasDoUsuario) {
-			ResultSet vagas_do_usuario = new ConexaoBancoUtil().iniciarConexao("empresavagas", new EmpresaVagas().getCamposString(), "idVaga").
+			ResultSet vagas_do_usuario = this.iniciarConexao("empresavagas", new EmpresaVagas().getCamposString(), "idVaga").
 					select("idVaga = '" + uv.getIdVaga() + "'");
 			
 			try {
@@ -59,10 +59,10 @@ public class EmpresaServices {
 		int success = 0;
 		
 		if(dadosVaga.getIdVaga() == 0) {
-			success = new ConexaoBancoUtil().iniciarConexao("empresavagas", new EmpresaVagas().getCamposString(), "idVaga").
+			success = this.iniciarConexao("empresavagas", new EmpresaVagas().getCamposString(), "idVaga").
 					insert(new ToArrayUtil().toArray(dadosVaga));
 		}else {
-			success = new ConexaoBancoUtil().iniciarConexao("empresavagas", new EmpresaVagas().getCamposString(), "idVaga").
+			success = this.iniciarConexao("empresavagas", new EmpresaVagas().getCamposString(), "idVaga").
 					update(new ToArrayUtil().toArray(dadosVaga));
 		}
 		
@@ -92,5 +92,9 @@ public class EmpresaServices {
 		}
 		
 		return vaga;
+	}
+	
+	private DBQuery iniciarConexao(String nomeTabela, String campos, String chavePrimaria) {
+		return new DBQuery(nomeTabela, campos,  chavePrimaria);
 	}
 }

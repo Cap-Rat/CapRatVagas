@@ -45,7 +45,7 @@
 		</div>
 		<div class="side-form">
 			<div class="cadastro">
-		        <h2>Cadastro</h2>
+		        <h2>Cadastro de currículo</h2>
 		        <form id="cadastrar-curriculo-form">
 		            <h4>Nome</h4>
 		            <div class="input-group">
@@ -135,7 +135,7 @@
           
 	        var cadastroData = {
 	        	idCurriculo: 0,
-	        	idUsuario: 2,
+	        	idUsuario: <%=session.getAttribute("userLogin") %>,
 	       		cidadeUsuario: $("input[name='cidadeUsuario']").val(),
 	  			contatoUsuario: $("input[name='contatoUsuario']").val(),
 	  			cursosUsuario: "",
@@ -156,7 +156,7 @@
 		   	    if(data.success) {
 				    console.log(data.success);
 					window.alert("Curriculo cadastrado com sucesso!");
-					//window.location.replace("../index.jsp");
+					location.reload();
 				}
 		    }, "json");
 	      

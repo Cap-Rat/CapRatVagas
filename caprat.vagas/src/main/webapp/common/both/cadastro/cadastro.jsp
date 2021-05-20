@@ -49,16 +49,18 @@
 		       		apelidoUsuario: $("input[name='apelidoUsuario']").val(),
 		  			emailUsuario: $("input[name='emailUsuario']").val(),
 		  			senhaUsuario: "",
-		  			tipoUsuario: $("input[name='tipoUsuario']").val()
+		  			tipoUsuario: $("input[name='tipoUsuario']:checked").val()
 		        };
 		            
 		        console.log(cadastroData);
 		         
 		        $.post("http://localhost:8080/UsuarioLoginServlet", JSON.stringify(cadastroData), function(data, status) {
-			   	    if(data.success) {
-					    console.log(data.success);
+		        	console.log(data.success);
+			   	    if(data.success == "true") {
 						window.alert("Usuário cadastrado com sucesso!");
-						//window.location.replace("../index.jsp");
+						window.location.replace("../login/login.jsp");
+					}else{
+						window.alert("Suspeitamos que este e-mail já esteja cadastrado, verifique os dados inseridos!");
 					}
 			    }, "json");
 		      

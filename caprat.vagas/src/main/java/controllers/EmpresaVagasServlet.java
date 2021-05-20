@@ -58,7 +58,7 @@ public class EmpresaVagasServlet extends HttpServlet {
 		EmpresaVagas vaga = (EmpresaVagas) gson.fromJson(reqBody, EmpresaVagas.class);
 		boolean success = services.saveVaga(vaga);
 		
-		new ResponseUtil().outputResponse(response, "{ \"success\": "+ success +" }", success?201:400);
+		new ResponseUtil().outputResponse(response, "{ \"success\": \""+ success +"\" }", success?201:400);
 	}
 
 }

@@ -4,10 +4,12 @@ package services;
 import models.UsuarioCurriculo;
 import models.UsuarioLogin;
 import models.UsuarioVagas;
-import util.ConexaoBancoUtil;
 import util.ToArrayUtil;
 
 import java.util.List;
+
+import database.DBQuery;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -16,7 +18,7 @@ public class UsuarioServices {
 	public List<UsuarioCurriculo> getCurriculos(){
 		List<UsuarioCurriculo> curriculos = new ArrayList<UsuarioCurriculo>();
 		
-		ResultSet curriculos_cadastrados = new ConexaoBancoUtil().iniciarConexao("usuariocurriculo", new UsuarioCurriculo().getCamposString(),  "idCurriculo").
+		ResultSet curriculos_cadastrados = this.iniciarConexao("usuariocurriculo", new UsuarioCurriculo().getCamposString(),  "idCurriculo").
 				select("");
 		
 		try {
@@ -33,7 +35,7 @@ public class UsuarioServices {
 	public List<UsuarioVagas> getVagasDoUsuario(int userLogged){
 		List<UsuarioVagas> vagasDosUsuarios = new ArrayList<>();
 		
-		ResultSet vagas_do_usuario = new ConexaoBancoUtil().iniciarConexao("usuariovagas", new UsuarioVagas().getCamposString(), "idUsuario, idVaga").
+		ResultSet vagas_do_usuario = this.iniciarConexao("usuariovagas", new UsuarioVagas().getCamposString(), "idUsuario, idVaga").
 				select("idUsuario = '" + userLogged + "'");
 		
 		try {
@@ -50,7 +52,7 @@ public class UsuarioServices {
 	public List<UsuarioLogin> getLoginUsuarios(String emailUsuario, String senhaUsuario) {
 		List<UsuarioLogin> dadosLoginUsuarios = new ArrayList<>();
 		
-		ResultSet usuariosCadastrados = new ConexaoBancoUtil().iniciarConexao("usuariologin", new UsuarioLogin().getCamposString(), "idUsuario").
+		ResultSet usuariosCadastrados = this.iniciarConexao("usuariologin", new UsuarioLogin().getCamposString(), "idUsuario").
 				select("emailUsuario = '" + emailUsuario +"' AND senhaUsuario = '" + senhaUsuario +"'" );
 		
 		try {
@@ -66,14 +68,32 @@ public class UsuarioServices {
 		return dadosLoginUsuarios;
 	}
 	
+	public UsuarioLogin getUsuarioExistente(String emailUsuario, String apelidoUsuario) {
+		UsuarioLogin dadosUsuario = new UsuarioLogin();
+		
+		ResultSet buscandoUsuario = this.iniciarConexao("usuariologin", new UsuarioLogin().getCamposString(), "idUsuario").
+				select("emailUsuario = '" + emailUsuario + "' AND apelidoUsuario = '" + apelidoUsuario + "'");
+		
+		try {
+			if(buscandoUsuario.next()) {
+				dadosUsuario = this.instanciarLogin(buscandoUsuario);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return dadosUsuario;
+	}
+	
 	public boolean saveLogin(UsuarioLogin dadosLogin) {
 		int success = 0;
 		
 		if(dadosLogin.getIdUsuario() == 0) {
-			success = new ConexaoBancoUtil().iniciarConexao("usuariologin", new UsuarioLogin().getCamposString(), "idUsuario").
+			success = this.iniciarConexao("usuariologin", new UsuarioLogin().getCamposString(), "idUsuario").
 					insert(new ToArrayUtil().toArray(dadosLogin));
 		}else {
-			success = new ConexaoBancoUtil().iniciarConexao("usuariologin", new UsuarioLogin().getCamposString(), "idUsuario").
+			success = this.iniciarConexao("usuariologin", new UsuarioLogin().getCamposString(), "idUsuario").
 					update(new ToArrayUtil().toArray(dadosLogin));
 		}
 		
@@ -84,10 +104,10 @@ public class UsuarioServices {
 		int success = 0;
 		
 		if(dadosCurriculo.getIdCurriculo() == 0) {
-			success = new ConexaoBancoUtil().iniciarConexao("usuariocurriculo", new UsuarioCurriculo().getCamposString(),  "idCurriculo").
+			success = this.iniciarConexao("usuariocurriculo", new UsuarioCurriculo().getCamposString(),  "idCurriculo").
 					insert(new ToArrayUtil().toArray(dadosCurriculo));
 		}else {
-			success = new ConexaoBancoUtil().iniciarConexao("usuariocurriculo", new UsuarioCurriculo().getCamposString(),  "idCurriculo").
+			success = this.iniciarConexao("usuariocurriculo", new UsuarioCurriculo().getCamposString(),  "idCurriculo").
 					update(new ToArrayUtil().toArray(dadosCurriculo));
 		}
 		
@@ -100,7 +120,7 @@ public class UsuarioServices {
 		if(dadosUsuarioVaga.getIdUsuario() == 0 || dadosUsuarioVaga.getIdVaga() == 0) {
 			return false;
 		}else {
-			success = new ConexaoBancoUtil().iniciarConexao("usuariovagas", new UsuarioVagas().getCamposString(), "idUsuario, idVaga").
+			success = this.iniciarConexao("usuariovagas", new UsuarioVagas().getCamposString(), "idUsuario, idVaga").
 					insert(new ToArrayUtil().toArray(dadosUsuarioVaga));
 		}
 		
@@ -157,5 +177,9 @@ public class UsuarioServices {
 		}
 		
 		return usuariosCadastrados;
+	}
+	
+	private DBQuery iniciarConexao(String nomeTabela, String campos, String chavePrimaria) {
+		return new DBQuery(nomeTabela, campos,  chavePrimaria);
 	}
 }
