@@ -23,7 +23,7 @@
 							<i class="fa fa-lock icon"></i>
 						</div>
 					</div>
-					<h4><a id="forgot-pass" href="../pass-recover/pass-recover.jsp">Esqueceu sua senha?</a></h4>
+					<h4><a id="forgot-pass" href="../pass_recover/pass_recover.jsp">Esqueceu sua senha?</a></h4>
 					<h4>Não possui uma conta? <a id="h4" href="../cadastro_usuario/cadastro_usuario.jsp">Cadastre-se</a></h4>
 					<div class="input-group">
 						<div class="input-box">
