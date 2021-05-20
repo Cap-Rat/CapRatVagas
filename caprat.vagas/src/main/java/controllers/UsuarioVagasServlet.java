@@ -9,10 +9,13 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 
+import models.EmpresaVagas;
 import models.UsuarioVagas;
+import services.EmpresaServices;
 import services.UsuarioServices;
 import util.ResponseUtil;
 
@@ -21,7 +24,8 @@ import util.ResponseUtil;
  */
 public class UsuarioVagasServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private UsuarioServices services = new UsuarioServices();
+	private UsuarioServices Uservices = new UsuarioServices();
+	private EmpresaServices Eservices = new EmpresaServices();
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -36,13 +40,19 @@ public class UsuarioVagasServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		List<UsuarioVagas> vagasDosUsuarios = new ArrayList<>();
-		vagasDosUsuarios = services.getVagasDoUsuario();
+		List<UsuarioVagas> vagasDoUsuario = new ArrayList<>();
+		List<EmpresaVagas> dadosDasVagas = new ArrayList<>();
+		
+		HttpSession ses = request.getSession();
+		int userLogged = (int) ses.getAttribute("userLogin");
+		
+		vagasDoUsuario = Uservices.getVagasDoUsuario(userLogged);
+		dadosDasVagas = Eservices.getVagas(vagasDoUsuario);
 		
 		Gson gson = new Gson();
-		String vagasDosUsuariosJSON = gson.toJson(vagasDosUsuarios);
+		String vagasDoUsuarioJSON = gson.toJson(dadosDasVagas);
 		
-		new ResponseUtil().outputResponse(response, vagasDosUsuariosJSON, 200);
+		new ResponseUtil().outputResponse(response, vagasDoUsuarioJSON, 200);
 	}
 
 	/**
@@ -54,7 +64,7 @@ public class UsuarioVagasServlet extends HttpServlet {
 		Gson gson = new Gson();
 		
 		UsuarioVagas vagaDoUsuario = (UsuarioVagas) gson.fromJson(reqBody, UsuarioVagas.class);
-		boolean success = services.saveUsuarioVagas(vagaDoUsuario);
+		boolean success = Uservices.saveUsuarioVagas(vagaDoUsuario);
 		
 		new ResponseUtil().outputResponse(response, "{ \"success\": "+ success +" }", success?201:400);
 	}

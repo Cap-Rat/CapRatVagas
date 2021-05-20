@@ -4,7 +4,7 @@ package services;
 import models.UsuarioCurriculo;
 import models.UsuarioLogin;
 import models.UsuarioVagas;
-import database.DBQuery;
+import util.ConexaoBancoUtil;
 import util.ToArrayUtil;
 
 import java.util.List;
@@ -16,7 +16,7 @@ public class UsuarioServices {
 	public List<UsuarioCurriculo> getCurriculos(){
 		List<UsuarioCurriculo> curriculos = new ArrayList<UsuarioCurriculo>();
 		
-		ResultSet curriculos_cadastrados = this.iniciarConexao("usuariocurriculo", new UsuarioCurriculo().getCamposString(),  "idCurriculo").
+		ResultSet curriculos_cadastrados = new ConexaoBancoUtil().iniciarConexao("usuariocurriculo", new UsuarioCurriculo().getCamposString(),  "idCurriculo").
 				select("");
 		
 		try {
@@ -30,11 +30,11 @@ public class UsuarioServices {
 		return curriculos;
 	}
 	
-	public List<UsuarioVagas> getVagasDoUsuario(){
+	public List<UsuarioVagas> getVagasDoUsuario(int userLogged){
 		List<UsuarioVagas> vagasDosUsuarios = new ArrayList<>();
 		
-		ResultSet vagas_do_usuario = this.iniciarConexao("usuariovagas", new UsuarioVagas().getCamposString(), "idUsuario, idVaga").
-				select("");
+		ResultSet vagas_do_usuario = new ConexaoBancoUtil().iniciarConexao("usuariovagas", new UsuarioVagas().getCamposString(), "idUsuario, idVaga").
+				select("idUsuario = '" + userLogged + "'");
 		
 		try {
 			while(vagas_do_usuario.next()) {
@@ -50,7 +50,7 @@ public class UsuarioServices {
 	public List<UsuarioLogin> getLoginUsuarios(String emailUsuario, String senhaUsuario) {
 		List<UsuarioLogin> dadosLoginUsuarios = new ArrayList<>();
 		
-		ResultSet usuariosCadastrados = this.iniciarConexao("usuariologin", new UsuarioLogin().getCamposString(), "idUsuario").
+		ResultSet usuariosCadastrados = new ConexaoBancoUtil().iniciarConexao("usuariologin", new UsuarioLogin().getCamposString(), "idUsuario").
 				select("emailUsuario = '" + emailUsuario +"' AND senhaUsuario = '" + senhaUsuario +"'" );
 		
 		try {
@@ -70,10 +70,10 @@ public class UsuarioServices {
 		int success = 0;
 		
 		if(dadosLogin.getIdUsuario() == 0) {
-			success = this.iniciarConexao("usuariologin", new UsuarioLogin().getCamposString(), "idUsuario").
+			success = new ConexaoBancoUtil().iniciarConexao("usuariologin", new UsuarioLogin().getCamposString(), "idUsuario").
 					insert(new ToArrayUtil().toArray(dadosLogin));
 		}else {
-			success = this.iniciarConexao("usuariologin", new UsuarioLogin().getCamposString(), "idUsuario").
+			success = new ConexaoBancoUtil().iniciarConexao("usuariologin", new UsuarioLogin().getCamposString(), "idUsuario").
 					update(new ToArrayUtil().toArray(dadosLogin));
 		}
 		
@@ -84,10 +84,10 @@ public class UsuarioServices {
 		int success = 0;
 		
 		if(dadosCurriculo.getIdCurriculo() == 0) {
-			success = this.iniciarConexao("usuariocurriculo", new UsuarioCurriculo().getCamposString(),  "idCurriculo").
+			success = new ConexaoBancoUtil().iniciarConexao("usuariocurriculo", new UsuarioCurriculo().getCamposString(),  "idCurriculo").
 					insert(new ToArrayUtil().toArray(dadosCurriculo));
 		}else {
-			success = this.iniciarConexao("usuariocurriculo", new UsuarioCurriculo().getCamposString(),  "idCurriculo").
+			success = new ConexaoBancoUtil().iniciarConexao("usuariocurriculo", new UsuarioCurriculo().getCamposString(),  "idCurriculo").
 					update(new ToArrayUtil().toArray(dadosCurriculo));
 		}
 		
@@ -100,7 +100,7 @@ public class UsuarioServices {
 		if(dadosUsuarioVaga.getIdUsuario() == 0 || dadosUsuarioVaga.getIdVaga() == 0) {
 			return false;
 		}else {
-			success = this.iniciarConexao("usuariovagas", new UsuarioVagas().getCamposString(), "idUsuario, idVaga").
+			success = new ConexaoBancoUtil().iniciarConexao("usuariovagas", new UsuarioVagas().getCamposString(), "idUsuario, idVaga").
 					insert(new ToArrayUtil().toArray(dadosUsuarioVaga));
 		}
 		
@@ -157,9 +157,5 @@ public class UsuarioServices {
 		}
 		
 		return usuariosCadastrados;
-	}
-	
-	private DBQuery iniciarConexao(String nomeTabela, String campos, String chavePrimaria) {
-		return new DBQuery(nomeTabela, campos,  chavePrimaria);
 	}
 }

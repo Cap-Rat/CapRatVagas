@@ -5,12 +5,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import util.ConexaoBancoUtil;
 import util.ToArrayUtil;
-import database.DBQuery;
 import models.EmpresaVagas;
+import models.UsuarioVagas;
 
 public class EmpresaServices {
-	private DBQuery connection = new DBQuery("empresavagas", new EmpresaVagas().getCamposString(),  "idVaga");
 	
 	
 	public List<EmpresaVagas> getVagas(String tituloFiltro, String localFiltro, String expFiltro){
@@ -18,12 +18,11 @@ public class EmpresaServices {
 		
 		if(tituloFiltro == null)
 			tituloFiltro = "";
-		if(localFiltro == null)
-			localFiltro = "";
 		if(expFiltro == null)
 			expFiltro = "";
 		
-		ResultSet vagas_cadastradas = connection.select("tituloVaga LIKE '%" + tituloFiltro + "%' && localVaga LIKE '%" + localFiltro + "%' && nivelExpVaga LIKE '%" + expFiltro + "%'");
+		ResultSet vagas_cadastradas = new ConexaoBancoUtil().iniciarConexao("empresavagas", new EmpresaVagas().getCamposString(), "idVaga").
+				select("tituloVaga LIKE '%" + tituloFiltro + "%' && nivelExpVaga LIKE '%" + expFiltro + "%'");
 		
 		try {
 			while(vagas_cadastradas.next()) {
@@ -36,13 +35,35 @@ public class EmpresaServices {
 		return vagas;
 	}
 	
+	public List<EmpresaVagas> getVagas(List<UsuarioVagas> vagasDoUsuario){
+		List<EmpresaVagas> vagas = new ArrayList<>();
+		
+		for(UsuarioVagas uv : vagasDoUsuario) {
+			ResultSet vagas_do_usuario = new ConexaoBancoUtil().iniciarConexao("empresavagas", new EmpresaVagas().getCamposString(), "idVaga").
+					select("idVaga = '" + uv.getIdVaga() + "'");
+			
+			try {
+				if(vagas_do_usuario.next()) {
+					vagas.add(this.instanciarVaga(vagas_do_usuario));
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		return vagas;
+	}
+	
 	public boolean saveVaga(EmpresaVagas dadosVaga){
 		int success = 0;
 		
 		if(dadosVaga.getIdVaga() == 0) {
-			success = connection.insert(new ToArrayUtil().toArray(dadosVaga));
+			success = new ConexaoBancoUtil().iniciarConexao("empresavagas", new EmpresaVagas().getCamposString(), "idVaga").
+					insert(new ToArrayUtil().toArray(dadosVaga));
 		}else {
-			success = connection.update(new ToArrayUtil().toArray(dadosVaga));
+			success = new ConexaoBancoUtil().iniciarConexao("empresavagas", new EmpresaVagas().getCamposString(), "idVaga").
+					update(new ToArrayUtil().toArray(dadosVaga));
 		}
 		
 		if(success == 0)
