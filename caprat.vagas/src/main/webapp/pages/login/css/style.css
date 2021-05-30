@@ -5,6 +5,64 @@
     font-family: 'Montserrat';
 }
 
+@media only screen and (max-device-width: 500px) {
+	footer{ 
+		width:100%;
+		height:700px;
+	}
+	div.side-form{
+		width:100%;
+	}
+	div.form-content{
+		display: flex !important; 
+		margin-left:0;
+		margin-right:0;
+		width:100%;
+		padding-left:0 !important;
+		padding-right:0 !important;
+	}
+	div.container{
+		position:absolute;
+		display:grid;
+		width:75%;
+		height: 750px;
+		margin-left:12.5%;
+		margin-top:10px;
+	}
+	div.sec{
+		grid-column:1 / 5;
+	}
+	div.about-us{
+		height:250px;
+		margin-right:0;
+	}
+	div.know-more{
+		height:200px;
+		margin-right:0;
+	}
+	div.talk-to-us{
+		margin-bottom:50px;
+	}
+	div.cadastro{
+		display:block;
+		margin-top:-20%;
+		padding-bottom:35px;
+		margin-bottom: 7%;
+		width:80%;
+		margin-right: auto;
+		margin-left: auto;
+	}
+	div.copyright{
+		bottom:0;
+		position: relative;
+	}
+	li{
+		justify-content:center;
+	}
+}
+
+
+
 section{
 	background-color: #fefff7;
 }
@@ -36,7 +94,7 @@ div.form-content{
 .cadastro{
 	align-items: center;
     background-color: #FEFFF7;
-    width: 500px;
+    width: 150%;
     padding: 25px;
     margin-top: 50px;
     margin-bottom: 200px;

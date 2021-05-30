@@ -17,37 +17,39 @@
             <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 	    </head>
 	    <body>
-	        <div class="body-header">
-	            <header>
-	                <a href="#" class="logo">CAP<span>RAT</span></a>
-	                <ul class="navigation">
-	                    <li><a href="#">Início</a></li>
-	                    <li><a href="#">Vagas</a></li>
-	                    <li><a href="#">Sobre</a></li>
-	                    <li><a href="#">Perfil</a></li>
-	                </ul>
-	                <div class="search">
-	                    <input type="text" placeholder="Busque aqui">
-	                    <i class="fa fa-search" aria-hidden="true"></i>
-	                </div>
-	                <ul class="user-navigation">
-	                    <li id="user-photo"><a href="#"><i class="fa fa-user-circle-o" aria-hidden="true"></i></a></li>
-	                    <li id="user-photo"><a href="#" id="logout"><i class="fa fa-sign-out" aria-hidden="true"></i></a></li>
-	                </ul>
-	            </header>
-	        </div>
+    <header>
+        <div class="container">
+            <input type="checkbox" name="" id="check">
+            
+            <div class="logo-container">
+                <h3 class="logo"><span>CAP</span>RAT</h3>
+            </div>
 
-	        <script>
-		        $(function() {
-			        $("#logout").on('click', function(e) {
-			          
-				         
-				        $.getJSON("http://localhost:8080/UsuarioLogoutServlet", function(data) {
-					   	    if(data.success == "true") {
-								window.location.replace("../login/login.jsp");
-							}
-					    });
-				      
-			        });
-			    });
-	        </script>
+            <div class="nav-btn">
+                <div class="nav-links">
+                    <ul>
+                        <li class="nav-link" id="main-links" style="--i: .6s">
+                            <a href="#">Início</a>
+                        </li>
+                        <li class="nav-link" id="main-links" style="--i: .85s">
+                            <a href="#">Vagas</a>
+                        </li>
+                        <li class="nav-link" id="main-links" style="--i: 1.35s">
+                            <a href="#">Sobre</a>
+                        </li>
+                        <li class="nav-link" id="main-links" style="--i: 1.65s"><a href="#"><i id="abc"class="fa fa-user-circle" aria-hidden="true"></i></a></li>
+                        <li class="nav-link" id="main-links" style="--i: 1.85s"><a href="#"><i id="abc" class="fa fa-sign-out" aria-hidden="true"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="hamburger-menu-container">
+                <div class="hamburger-menu">
+                    <div></div>
+                </div>
+            </div>
+        </div>
+    </header>
+</body>
+
+</html>
