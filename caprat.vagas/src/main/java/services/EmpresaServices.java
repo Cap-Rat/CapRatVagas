@@ -7,11 +7,30 @@ import java.util.List;
 
 import database.DBQuery;
 import util.ToArrayUtil;
+import models.EmpresaInfos;
 import models.EmpresaVagas;
 import models.UsuarioVagas;
 
 public class EmpresaServices {
 	
+	
+	public EmpresaInfos getEmpresa(int idUsuarioLogado){
+		EmpresaInfos dadosDaEmpresa = new EmpresaInfos();
+		
+		ResultSet empresa_logada = this.iniciarConexao("empresainfos", new EmpresaInfos().getCamposString(), "idEmpresa").
+				select("idUsuario = '" + idUsuarioLogado + "'");
+		
+		try {
+			if(empresa_logada.next()) {
+				dadosDaEmpresa = this.instanciarEmpresa(empresa_logada);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return dadosDaEmpresa;
+	}
 	
 	public List<EmpresaVagas> getVagas(String tituloFiltro, String localFiltro, String expFiltro){
 		List<EmpresaVagas> vagas = new ArrayList<>();
@@ -29,6 +48,24 @@ public class EmpresaServices {
 				vagas.add(this.instanciarVaga(vagas_cadastradas));
 			}
 		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return vagas;
+	}
+	
+	public List<EmpresaVagas> getVagas(EmpresaInfos EmpresaLogada){
+		List<EmpresaVagas> vagas = new ArrayList<>();
+		
+		ResultSet vagas_da_empresa = this.iniciarConexao("empresavagas", new EmpresaVagas().getCamposString(), "idVaga").
+				select("idEmpresa = '" + EmpresaLogada.getIdEmpresa() + "'");
+		
+		try {
+			while(vagas_da_empresa.next()) {
+				vagas.add(this.instanciarVaga(vagas_da_empresa));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -92,6 +129,25 @@ public class EmpresaServices {
 		}
 		
 		return vaga;
+	}
+	
+	private EmpresaInfos instanciarEmpresa(ResultSet dadosEmpresa) {
+		EmpresaInfos empresa = new EmpresaInfos();
+		
+		try {
+			empresa.setIdEmpresa(dadosEmpresa.getInt("idEmpresa"));
+			empresa.setIdUsuario(dadosEmpresa.getInt("idUsuario"));
+			empresa.setEnderecoEmpresa(dadosEmpresa.getString("enderecoEmpresa"));
+			empresa.setCidadeEmpresa(dadosEmpresa.getString("cidadeEmpresa"));
+			empresa.setCepEmpresa(dadosEmpresa.getString("cepEmpresa"));
+			empresa.setRamoEmpresa(dadosEmpresa.getString("ramoEmpresa"));
+			empresa.setTamanhoEmpresa(dadosEmpresa.getString("tamanhoEmpresa"));
+			empresa.setDescricaoEmpresa(dadosEmpresa.getString("descricaoEmpresa"));
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return empresa;
 	}
 	
 	private DBQuery iniciarConexao(String nomeTabela, String campos, String chavePrimaria) {

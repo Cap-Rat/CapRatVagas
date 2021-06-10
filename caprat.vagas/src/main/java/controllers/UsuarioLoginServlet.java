@@ -40,17 +40,17 @@ public class UsuarioLoginServlet extends HttpServlet {
     
     //Usuário efetuando login
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<UsuarioLogin> logins = new ArrayList<>();
+		UsuarioLogin login = null;
 		HttpSession ses = request.getSession();
 		ses.setAttribute("userLogin", 0);
 		String emailUsuario = request.getParameter("emailUsuario");
 		String senhaUsuario = request.getParameter("senhaUsuario");
-		logins = services.getLoginUsuarios(emailUsuario, senhaUsuario);
+		login = services.getLoginUsuarios(emailUsuario, senhaUsuario);
 		
 		String loginJSON = "{ \"success\": \"false\" }";
-		if(!logins.isEmpty()) {
-			ses.setAttribute("userLogin", logins.get(0).getIdUsuario());
-			loginJSON = "{ \"success\": \"true\", \"tipo\": \"" + logins.get(0).getTipoUsuario() + "\" }";
+		if(login != null) {
+			ses.setAttribute("userLogin", login.getIdUsuario());
+			loginJSON = "{ \"success\": \"true\", \"tipo\": \"" + login.getTipoUsuario() + "\" }";
 			
 		}
 		

@@ -4,17 +4,21 @@ public class EmpresaInfos {
 	private int idEmpresa;
 	private int idUsuario;
 	private String enderecoEmpresa;
+	private String cidadeEmpresa;
+	private String cepEmpresa;
 	private String ramoEmpresa;
 	private String tamanhoEmpresa;
 	private String descricaoEmpresa;
 	
 	public EmpresaInfos() {}
 	
-	public EmpresaInfos(int idEmpresa, int idUsuario, String enderecoEmpresa, String ramoEmpresa, String tamanhoEmpresa, String descricaoEmpresa) {
+	public EmpresaInfos(int idEmpresa, int idUsuario, String enderecoEmpresa, String cidadeEmpresa, String cepEmpresa, String ramoEmpresa, String tamanhoEmpresa, String descricaoEmpresa) {
 		
 		this.idEmpresa = idEmpresa;
 		this.idUsuario = idUsuario;
 		this.enderecoEmpresa = enderecoEmpresa;
+		this.cidadeEmpresa = cidadeEmpresa;
+		this.cepEmpresa = cepEmpresa;
 		this.ramoEmpresa = ramoEmpresa;
 		this.tamanhoEmpresa = tamanhoEmpresa;
 		this.descricaoEmpresa = descricaoEmpresa;
@@ -38,6 +42,18 @@ public class EmpresaInfos {
 	public void setEnderecoEmpresa(String enderecoEmpresa) {
 		this.enderecoEmpresa = enderecoEmpresa;
 	}
+	public String getCidadeEmpresa() {
+		return cidadeEmpresa;
+	}
+	public void setCidadeEmpresa(String cidadeEmpresa) {
+		this.cidadeEmpresa = cidadeEmpresa;
+	}
+	public String getCepEmpresa() {
+		return cepEmpresa;
+	}
+	public void setCepEmpresa(String cepEmpresa) {
+		this.cepEmpresa = cepEmpresa;
+	}
 	public String getRamoEmpresa() {
 		return ramoEmpresa;
 	}
@@ -57,7 +73,7 @@ public class EmpresaInfos {
 		this.descricaoEmpresa = descricaoEmpresa;
 	}
 	public String getCamposString() {
-		return "idEmpresa, idUsuario, enderecoEmpresa, ramoEmpresa, tamanhoEmpresa, descricaoEmpresa";
+		return "idEmpresa, idUsuario, enderecoEmpresa, cidadeEmpresa, cepEmpresa, ramoEmpresa, tamanhoEmpresa, descricaoEmpresa";
 	}
 	
 	

@@ -49,16 +49,16 @@ public class UsuarioServices {
 		return vagasDosUsuarios;
 	}
 	
-	public List<UsuarioLogin> getLoginUsuarios(String emailUsuario, String senhaUsuario) {
-		List<UsuarioLogin> dadosLoginUsuarios = new ArrayList<>();
+	public UsuarioLogin getLoginUsuarios(String emailUsuario, String senhaUsuario) {
+		UsuarioLogin dadosLoginUsuarios = null;
 		
 		ResultSet usuariosCadastrados = this.iniciarConexao("usuariologin", new UsuarioLogin().getCamposString(), "idUsuario").
 				select("emailUsuario = '" + emailUsuario +"' AND senhaUsuario = '" + senhaUsuario +"'" );
 		
 		try {
 			
-			while(usuariosCadastrados.next()) {
-				dadosLoginUsuarios.add(this.instanciarLogin(usuariosCadastrados));
+			if(usuariosCadastrados.next()) {
+				dadosLoginUsuarios = this.instanciarLogin(usuariosCadastrados);
 			}
 			
 		} catch (SQLException e) {
