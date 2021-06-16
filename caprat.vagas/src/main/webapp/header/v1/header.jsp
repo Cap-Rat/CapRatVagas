@@ -25,7 +25,7 @@
                 <h3 class="logo"><span>CAP</span>RAT</h3>
             </div>
 
-            <div class="nav-btn">
+            <div class="nav-btn" id="navDeslogado">
                 <div class="nav-links">
                     <ul>
                         <li class="nav-link" id="main-links" style="--i: .6s">

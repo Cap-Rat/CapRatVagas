@@ -160,3 +160,10 @@ footer p{
     text-align: center;
     color: #FEFFF7;
 }
+
+@media only screen and (max-device-width: 500px) {
+	.container{
+		width: 100% !important;
+		margin-left:0 !important;
+	}
+}

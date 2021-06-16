@@ -7,9 +7,9 @@
     font-family: 'Montserrat';
 }
 
-body{
+/*body{
     overflow: hidden;
-}
+}*/
 
 ul{
     list-style: none;
@@ -17,6 +17,11 @@ ul{
 
 a{
     text-decoration: none;
+    width: 50%;
+}
+
+.hamburguer-menu-container{
+	padding-left:3%;
 }
 
 header{
@@ -26,7 +31,7 @@ header{
     width: 100%;
     display: flex;
     align-items: center;
-    height: 115px;
+    height: 110px;
     z-index: 10;
     background-color: #363636;
 }
@@ -39,6 +44,11 @@ header{
     padding: 0 2rem;
     margin: 0 auto;
     position: relative;
+    width:100%;
+}
+
+#containerHeader{
+	margin-left: 10%;
 }
 
 .logo-container{
@@ -49,6 +59,11 @@ header{
 .nav-btn{
     flex: 3;
     display: flex;
+    margin-left: 90%;
+}
+
+div#navDeslogado{
+	margin-left: 0 !important;
 }
 
 .nav-links{
@@ -268,6 +283,8 @@ header .search .fa-search{
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    right:8%;
+    position: fixed;
 }
 
 .hamburger-menu div{
@@ -346,7 +363,7 @@ header .search .fa-search{
 
     .nav-btn{
         position: fixed;
-        height: calc(100vh - 3rem);
+        height: 100%;
         top: 3rem;
         left: 0;
         width: 100%;
@@ -358,6 +375,7 @@ header .search .fa-search{
         overflow-y: auto;
         transform: translateX(100%);
         transition: .65s;
+        overflow: hidden;
     }
 
     #check:checked ~ .nav-btn{

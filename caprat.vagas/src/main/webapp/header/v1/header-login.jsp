@@ -17,12 +17,35 @@
             <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 	    </head>
 	    <body>
-        <div class="body-header">
             <header>
-                <a href="#" class="logo">CAP<span>RAT</span></a>
-                <ul class="navigation">
-                    <li><a href="../login/login.jsp">Login</a></li>
-                    <li><a href="../cadastro_usuario/cadastro_usuario.jsp">Cadastro</a></li>
-                </ul>
+            
+           	<div class="container" id="containerHeader">
+           		<!-- Se apagar o hamburguer não funciona, não sei o porque -->
+           		<input type="checkbox" name="" id="check">
+                <!-- <a href="#" class="logo">CAP<span>RAT</span></a>-->
+                <div class="logo-container">
+                	<h3 class="logo"><span>CAP</span>RAT</h3>
+            	</div>
+                
+                <div class="nav-btn">
+	                <div class="nav-links">
+		                <ul>
+		                    <li class="nav-link" id="main-links" style="--i: .6s">
+		                    	<a href="../login/login.jsp">Login</a>
+		                    </li>
+		                    <li class="nav-link" id="main-links" style="--i: .85s">
+		                    	<a href="../cadastro_usuario/cadastro_usuario.jsp">Cadastro</a>
+		                    </li>
+		                </ul>
+	                </div>
+                </div>
+                <div class="hamburger-menu-container">
+                <div class="hamburger-menu">
+                    <div></div>
+                </div>
+            	</div>
+              </div>
+              
             </header>
-        </div>
+         </body>
+         </html>
