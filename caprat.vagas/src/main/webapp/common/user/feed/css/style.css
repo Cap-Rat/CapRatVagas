@@ -1,0 +1,331 @@
+*{
+    margin: 0;
+    padding:0;
+    box-sizing: border-box;
+    font-family: 'Montserrat';
+}
+
+section{
+	background-color: #fefff7;
+}
+
+
+div.content{
+	background-image: url("../assets/bg43.jpg");
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	width:100%;
+	height: 100%;
+	padding-top: 100px;
+	padding-left: 100px;
+	padding-right: 100px;
+}
+
+.wrapper{
+  justify-content: center;
+  align-items: center;
+  margin-top: 2%;
+}
+
+.wrapper .search_box{
+  z-index:9999;
+  margin-left: 15%;
+  width: 1000px;
+  background: #363636;
+  border-radius: 5px;
+  height: 65px;
+  display: flex;
+  padding: 10px;
+  box-shadow: 0 8px 6px -10px gray;
+}
+
+.wrapper .search_box .dropdown1{
+  width: 250px;
+  border-right: 2px solid #ffffff;
+  color: #ffffff;
+  position: relative;
+  cursor: pointer;
+}
+
+.wrapper .search_box .dropdown2{
+  width: 250px;
+  border-right: 2px solid #ffffff;
+  color: #ffffff;
+  position: relative;
+  cursor: pointer;
+}
+
+.wrapper .search_box .dropdown3{
+  width: 250px;
+  border-right: 2px solid #ffffff;
+  color: #ffffff;
+  position: relative;
+  cursor: pointer;
+}
+
+.wrapper .search_box .dropdown1 .default_option1{
+  text-transform: uppercase;
+  padding: 13px 15px;
+  font-size: 14px;
+}
+
+.wrapper .search_box .dropdown2 .default_option2{
+  text-transform: uppercase;
+  padding: 13px 15px;
+  font-size: 14px;
+}
+
+.wrapper .search_box .dropdown3 .default_option3{
+  text-transform: uppercase;
+  padding: 13px 15px;
+  font-size: 14px;
+}
+
+.wrapper .search_box .dropdown1 ul{
+  position: absolute;
+  list-style:none;
+  top: 60px;
+  left: -10px;
+  background: #363636;
+  width: 225px;
+  border-radius: 5px;
+  padding: 20px;
+  display: none;
+  box-shadow: 8px 8px 6px -10px gray;
+}
+
+.wrapper .search_box .dropdown2 ul{
+  position: absolute;
+  list-style:none;
+  top: 60px;
+  left: 0px;
+  background: #363636;
+  width: 220px;
+  border-radius: 5px;
+  padding: 20px;
+  display: none;
+  box-shadow: 8px 8px 6px -10px gray;
+}
+
+.wrapper .search_box .dropdown3 ul{
+  position: absolute;
+  list-style:none;
+  top: 60px;
+  left: 5px;
+  background: #363636;
+  width: 210px;
+  border-radius: 5px;
+  padding: 20px;
+  display: none;
+  box-shadow: 8px 8px 6px -10px gray;
+}
+
+
+.wrapper .search_box .dropdown1 ul.active{
+	z-index: 3;
+  display: block;
+}
+
+.wrapper .search_box .dropdown2 ul.active{
+	z-index: 3;
+  display: block;
+}
+
+.wrapper .search_box .dropdown3 ul.active{
+	z-index: 3;
+  display: block;
+}
+
+.wrapper .search_box .dropdown1 ul li{
+  padding-bottom: 20px;
+}
+
+.wrapper .search_box .dropdown2 ul li{
+  padding-bottom: 20px;
+}
+
+.wrapper .search_box .dropdown3 ul li{
+  padding-bottom: 20px;
+}
+
+.wrapper .search_box .dropdown1 ul li:last-child{
+  padding-bottom: 0;
+}
+
+.wrapper .search_box .dropdown2 ul li:last-child{
+  padding-bottom: 0;
+}
+
+.wrapper .search_box .dropdown3 ul li:last-child{
+  padding-bottom: 0;
+}
+
+.wrapper .search_box .dropdown1 ul li:hover{
+  color: gray;
+}
+
+.wrapper .search_box .dropdown2 ul li:hover{
+  color: gray;
+}
+
+.wrapper .search_box .dropdown3 ul li:hover{
+  color: gray;
+}
+
+.wrapper .search_box .dropdown1:before{
+  content: "";
+  position: absolute;
+  top: 18px;
+  right: 20px;
+  border: 8px solid;
+  border-color: #ffffff transparent transparent transparent;
+}
+
+.wrapper .search_box .dropdown2:before{
+  content: "";
+  position: absolute;
+  top: 18px;
+  right: 20px;
+  border: 8px solid;
+  border-color: #ffffff transparent transparent transparent;
+}
+
+.wrapper .search_box .dropdown3:before{
+  content: "";
+  position: absolute;
+  top: 18px;
+  right: 20px;
+  border: 8px solid;
+  border-color: #ffffff transparent transparent transparent;
+}
+
+.wrapper .search_box .search_field{
+  width: 350px;
+  height: 100%;
+  position: relative;
+}
+
+.wrapper .search_box .search_field .input{
+  width: 100%;
+  height: 100%;
+  border: 0px;
+  font-size: 16px;
+  padding-left: 20px;
+  padding-right: 38px;
+  color: #363636;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+
+.wrapper .search_box .search_field .fa{
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 22px;
+  color: #363636;
+  cursor: pointer;
+}
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: #363636;
+}
+::-moz-placeholder { /* Firefox 19+ */
+ color: #363636;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: #363636;
+}
+
+
+.vaga-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.vagas{
+	z-index:1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    padding: 40px 0;
+}
+
+.vagas .card{
+	z-index:1;
+    position: relative;
+    width: 320px;
+    height: 440px;
+    box-shadow: inset 5px 5px 5px rgba(0,0,0,0.05),
+    inset -5px -5px 5px rgba(255,255,255,0.5),
+    5px 5px 5px rgba(0,0,0,0.05),
+    -5px -5px 5px rgba(255,255,255,0.5);
+    border-radius: 4px;
+    margin: 30px;
+}
+
+.vagas .card .box{
+    position: absolute;
+    border: 1px solid #363636;
+    top: 20px;
+    left: 20px;
+    right: 20px;
+    bottom: 20px;
+    background-color: #FEFFF7;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.5s;
+}
+
+.vagas .card:hover .box{
+    transform: translateY(-50px);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    background: #363636;
+    
+}
+
+.vagas .card .box .card-content{
+    padding: 20px;
+    text-align: center;
+}
+
+.vagas .card .box .card-content h3{
+    font-size: 1.8em;
+    color: #363636;
+    z-index: 1;
+    transition: 0.5s;
+    padding-bottom: 20px;
+}
+
+.vagas .card .box .card-content p{
+    font-size: 1em;
+    text-align: center;
+    color: #363636;
+    z-index: 1;
+    transition: 0.5s;
+}
+
+.vagas .card:hover .box .card-content h3,
+.vagas .card:hover .box .card-content p{
+    color: #FEFFF7;
+}
+
+.vagas .card .box .card-content a{
+    position: relative;
+    display: inline-block;
+    padding: 8px 30px;
+    background: #FEFFF7;
+    margin-top: 15px;
+    border-radius: 4px;
+    color: #363636;
+    text-decoration: none;
+    font-weight: 400;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    border: 1px solid #363636;
+}
