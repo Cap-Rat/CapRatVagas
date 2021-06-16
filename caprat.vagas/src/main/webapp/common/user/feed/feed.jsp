@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<%@include file='../../../header/v1/header-feed.jsp'%>
 <section>
 	<div class="content">
 		<div class="wrapper">
@@ -39,54 +38,34 @@
 		    </div>
 		</div>
 		<div class="vaga-container">
-	        <div class="vagas">
-	            <div class="card">
-	                <div class="box">
-	                    <div class="card-content">
-	                        <h3>Título da Vaga</h3>
-	                        <p>Lorem ipsum, dolor sit dolor dolor dolor  amet consectetur adipisicing elit. Eius eum nemo expedita magnam, quibusdam magni! Cumque, quod quam necessitatibus dignissimos qui deserunt quas maiores consequuntur atque magnam harum, recusandae enim?</p>
-	                        <a href="#">Saiba Mais</a>
-	                    </div>
-	                </div>
-	            </div>
-	            <div class="card">
-	                <div class="box">
-	                    <div class="card-content">
-	                        <h3>Título da Vaga</h3>
-	                        <p>Lorem ipsum, dolor sit dolor dolor dolor  amet consectetur adipisicing elit. Eius eum nemo expedita magnam, quibusdam magni! Cumque, quod quam necessitatibus dignissimos qui deserunt quas maiores consequuntur atque magnam harum, recusandae enim?</p>
-	                        <a href="#">Saiba Mais</a>
-	                    </div>
-	                </div>
-	            </div>
-	            <div class="card">
-	                <div class="box">
-	                    <div class="card-content">
-	                        <h3>Título da Vaga</h3>
-	                        <p>Lorem ipsum, dolor sit dolor dolor dolor  amet consectetur adipisicing elit. Eius eum nemo expedita magnam, quibusdam magni! Cumque, quod quam necessitatibus dignissimos qui deserunt quas maiores consequuntur atque magnam harum, recusandae enim?</p>
-	                        <a href="#">Saiba Mais</a>
-	                    </div>
-	                </div>
-	            </div>
-	            <div class="card">
-	                <div class="box">
-	                    <div class="card-content">
-	                        <h3>Título da Vaga</h3>
-	                        <p>Lorem ipsum, dolor sit dolor dolor dolor  amet consectetur adipisicing elit. Eius eum nemo expedita magnam, quibusdam magni! Cumque, quod quam necessitatibus dignissimos qui deserunt quas maiores consequuntur atque magnam harum, recusandae enim?</p>
-	                        <a href="#">Saiba Mais</a>
-	                    </div>
-	                </div>
-	            </div>
-	            <div class="card">
-	                <div class="box">
-	                    <div class="card-content">
-	                        <h3>Título da Vaga</h3>
-	                        <p>Lorem ipsum, dolor sit dolor dolor dolor  amet consectetur adipisicing elit. Eius eum nemo expedita magnam, quibusdam magni! Cumque, quod quam necessitatibus dignissimos qui deserunt quas maiores consequuntur atque magnam harum, recusandae enim?</p>
-	                        <a href="#">Saiba Mais</a>
-	                    </div>
-	                </div>
-	            </div>
+	        <div class="vagas" id="vagas_box">
+	            <!-- Aqui serao carregadas as vagas -->
 	        </div>
 	    </div>
 	</div>
 </section>
-<%@include file='../../../footer/footer.jsp'%>
+
+<script>
+
+	$(document).ready(function(){
+		$.getJSON("http://localhost:8080/EmpresaVagasServlet", function(data, status){
+			let qtdVagas = data.length;
+			let saida = "";
+			
+			for(let i = 0; i < qtdVagas; i++){
+				saida += "<div class=\"card\">";
+	            saida += "  <div class=\"box\">";
+	            saida += "    <div class=\"card-content\">";
+	            saida += "       <h3>"+ data[i].tituloVaga +"</h3>";
+	            saida += "       <p>"+ data[i].descricaoVaga +"</p>";
+	            saida += "       <a href=\"#\">Saiba Mais</a>";
+	            saida += "    </div>";
+	            saida += "  </div>";
+	            saida+=  "</div>";
+			}
+			
+			$("#vagas_box").html(saida);
+		});
+	});
+
+</script>
