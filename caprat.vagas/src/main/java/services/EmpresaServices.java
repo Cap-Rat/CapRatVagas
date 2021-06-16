@@ -14,6 +14,24 @@ import models.UsuarioVagas;
 public class EmpresaServices {
 	
 	
+	public List<EmpresaInfos> getEmpresas(){
+		List<EmpresaInfos> dadosDaEmpresa = new ArrayList<>();
+		
+		ResultSet empresa_logada = this.iniciarConexao("empresainfos", new EmpresaInfos().getCamposString(), "idEmpresa").
+				select("");
+		
+		try {
+			while(empresa_logada.next()) {
+				dadosDaEmpresa.add(this.instanciarEmpresa(empresa_logada));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return dadosDaEmpresa;
+	}
+	
 	public EmpresaInfos getEmpresa(int idUsuarioLogado){
 		EmpresaInfos dadosDaEmpresa = new EmpresaInfos();
 		
@@ -32,16 +50,18 @@ public class EmpresaServices {
 		return dadosDaEmpresa;
 	}
 	
-	public List<EmpresaVagas> getVagas(String tituloFiltro, String localFiltro, String expFiltro){
+	public List<EmpresaVagas> getVagas(String tituloFiltro, String regiaoFiltro, String expFiltro){
 		List<EmpresaVagas> vagas = new ArrayList<>();
 		
 		if(tituloFiltro == null)
 			tituloFiltro = "";
 		if(expFiltro == null)
 			expFiltro = "";
+		if(regiaoFiltro == null)
+			regiaoFiltro = "";
 		
 		ResultSet vagas_cadastradas = this.iniciarConexao("empresavagas", new EmpresaVagas().getCamposString(), "idVaga").
-				select("tituloVaga LIKE '%" + tituloFiltro + "%' && nivelExpVaga LIKE '%" + expFiltro + "%'");
+				select("tituloVaga LIKE '%" + tituloFiltro + "%' && nivelExpVaga LIKE '%" + expFiltro + "%' && cidadeVaga LIKE '%" + regiaoFiltro + "%' && estadoVaga LIKE '%" + regiaoFiltro + "%'");
 		
 		try {
 			while(vagas_cadastradas.next()) {
@@ -103,10 +123,21 @@ public class EmpresaServices {
 					update(new ToArrayUtil().toArray(dadosVaga));
 		}
 		
-		if(success == 0)
-			return false;
-		else
-			return true;
+		return success != 0;
+	}
+	
+	public boolean saveEmpresa(EmpresaInfos dadosEmpresa) {
+		int success = 0;
+		
+		if(dadosEmpresa.getIdEmpresa() == 0) {
+			success = this.iniciarConexao("empresainfos", new EmpresaInfos().getCamposString(), "idEmpresa").
+					insert(new ToArrayUtil().toArray(dadosEmpresa));
+		}else {
+			success = this.iniciarConexao("empresainfos", new EmpresaInfos().getCamposString(), "idEmpresa").
+					update(new ToArrayUtil().toArray(dadosEmpresa));
+		}
+		
+		return success != 0;
 	}
 	
 	
@@ -137,11 +168,12 @@ public class EmpresaServices {
 		try {
 			empresa.setIdEmpresa(dadosEmpresa.getInt("idEmpresa"));
 			empresa.setIdUsuario(dadosEmpresa.getInt("idUsuario"));
+			empresa.setNomeEmpresa(dadosEmpresa.getString("nomeEmpresa"));
 			empresa.setEnderecoEmpresa(dadosEmpresa.getString("enderecoEmpresa"));
 			empresa.setCidadeEmpresa(dadosEmpresa.getString("cidadeEmpresa"));
+			empresa.setEstadoEmpresa(dadosEmpresa.getString("estadoEmpresa"));
 			empresa.setCepEmpresa(dadosEmpresa.getString("cepEmpresa"));
 			empresa.setRamoEmpresa(dadosEmpresa.getString("ramoEmpresa"));
-			empresa.setTamanhoEmpresa(dadosEmpresa.getString("tamanhoEmpresa"));
 			empresa.setDescricaoEmpresa(dadosEmpresa.getString("descricaoEmpresa"));
 		}catch(SQLException e) {
 			e.printStackTrace();
