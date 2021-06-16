@@ -37,10 +37,10 @@ public class EmpresaVagasServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<EmpresaVagas> vagas = new ArrayList<>();
 		String filtroTitulo = request.getParameter("titulo");
-		String filtroLocal = request.getParameter("local");
+		String filtroRegiao = request.getParameter("regiao");
 		String filtroExp = request.getParameter("experiencia");
 		
-		vagas = services.getVagas(filtroTitulo, filtroLocal, filtroExp);
+		vagas = services.getVagas(filtroTitulo, filtroRegiao, filtroExp);
 		
 		Gson gson = new Gson();
 		String vagasJSON = gson.toJson(vagas);
@@ -54,8 +54,11 @@ public class EmpresaVagasServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String reqBody = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
 		Gson gson = new Gson();
+		int idUsuarioLogado = (int) request.getSession().getAttribute("userLogin");
 		
 		EmpresaVagas vaga = (EmpresaVagas) gson.fromJson(reqBody, EmpresaVagas.class);
+		vaga.setIdEmpresa(services.getEmpresa(idUsuarioLogado).getIdEmpresa());
+		
 		boolean success = services.saveVaga(vaga);
 		
 		new ResponseUtil().outputResponse(response, "{ \"success\": \""+ success +"\" }", success?201:400);

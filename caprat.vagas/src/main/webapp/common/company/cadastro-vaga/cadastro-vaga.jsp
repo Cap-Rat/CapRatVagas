@@ -130,7 +130,7 @@
 	          
 		        var cadastroData = {
 		        	idVaga: 0,
-		        	idEmpresa: 2,
+		        	idEmpresa: 0,
 		       		tituloVaga: $("input[name='tituloVaga']").val(),
 		  			requisitosVaga: $("textarea[name='requisitosVaga']").val(),
 		  			descricaoVaga: $("textarea[name='descricaoVaga']").val(),
