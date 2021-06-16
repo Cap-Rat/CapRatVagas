@@ -73,7 +73,7 @@
                             <a href="#">Sobre</a>
                         </li>
                         <li class="nav-link" id="main-links" style="--i: 1.65s"><a href="#"><i id="abc"class="fa fa-user-circle" aria-hidden="true"></i></a></li>
-                        <li class="nav-link" id="main-links" style="--i: 1.85s"><a href="#"><i id="abc" class="fa fa-sign-out" aria-hidden="true"></i></a></li>
+                        <li class="nav-link" id="main-links" style="--i: 1.85s"><a id="logout" href="#"><i id="abc" class="fa fa-sign-out" aria-hidden="true"></i></a></li>
                     </ul>
                 </div>
             </div>
@@ -87,4 +87,17 @@
     </header>
 </body>
 
-</html>
+<script>
+
+	$(function(){
+		$("#logout").on('click', function(e){
+			
+			$.getJSON("http://localhost:8080/UsuarioLogoutServlet", function(data, status) {
+	        	if(data.success == "true") {
+	        		window.location.replace("../../pages/login/login.jsp");
+				}
+		    });
+			
+		});
+	});
+</script>

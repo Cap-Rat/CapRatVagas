@@ -1,8 +1,6 @@
 package controllers;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.servlet.ServletException;
@@ -50,8 +48,8 @@ public class UsuarioLoginServlet extends HttpServlet {
 		String loginJSON = "{ \"success\": \"false\" }";
 		if(login != null) {
 			ses.setAttribute("userLogin", login.getIdUsuario());
-			loginJSON = "{ \"success\": \"true\", \"tipo\": \"" + login.getTipoUsuario() + "\" }";
-			
+			boolean isCadastrado = services.isUsuarioCadastrado(login.getIdUsuario(), login.getTipoUsuario());
+			loginJSON = "{ \"success\": \"true\", \"tipo\": \"" + login.getTipoUsuario() + "\", \"isCadastrado\": " + isCadastrado + " }";
 		}
 		
 		new ResponseUtil().outputResponse(response, loginJSON, 200);

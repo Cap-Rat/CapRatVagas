@@ -11,7 +11,7 @@
 	        <link rel="stylesheet" type="text/css" href="../../../footer/css/style.css">
 	        <link rel="stylesheet" type="text/css" href="css/style.css">
 	        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-	        <title></title>
+	        <title>CapRat: Vagas</title>
 	        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -38,7 +38,7 @@
                             <a href="#">Sobre</a>
                         </li>
                         <li class="nav-link" id="main-links" style="--i: 1.65s"><a href="#"><i id="abc"class="fa fa-user-circle" aria-hidden="true"></i></a></li>
-                        <li class="nav-link" id="main-links" style="--i: 1.85s"><a href="#"><i id="abc" class="fa fa-sign-out" aria-hidden="true"></i></a></li>
+                        <li class="nav-link" id="main-links" style="--i: 1.85s"><a href="#" id="logout"><i id="abc" class="fa fa-sign-out" aria-hidden="true"></i></a></li>
                     </ul>
                 </div>
             </div>
@@ -51,5 +51,17 @@
         </div>
     </header>
 </body>
+<script>
 
-</html>
+	$(function(){
+		$("#logout").on('click', function(e){
+			
+			$.getJSON("http://localhost:8080/UsuarioLogoutServlet", function(data, status) {
+	        	if(data.success == "true") {
+	        		window.location.replace("../../pages/login/login.jsp");
+				}
+		    });
+			
+		});
+	});
+</script>

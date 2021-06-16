@@ -44,19 +44,30 @@
 		  			emailUsuario: $("input[name='emailUsuario']").val(),
 		  			senhaUsuario: $("input[name='senhaUsuario']").val()
 		        };
-		            
-		        console.log(cadastroData);
 		         
 		        $.getJSON("http://localhost:8080/UsuarioLoginServlet", cadastroData, function(data, status) {
-		        	if(data.success=="true") {
+		        	if(data.success == "true") {
 						window.alert("Usuário logado com sucesso!");
-						if(data.tipo == 3)
-							window.location.replace("../cadastro_curriculo/cadastro_curriculo.jsp");
-						if(data.tipo == 2)
-							window.location.replace("../cadastro_vaga/cadastro_vaga.jsp");
-						//window.location.replace("../index.jsp");
+						
+						if(data.tipo == 3){
+							
+							if(data.isCadastrado)
+								window.location.replace("../feed/feed.jsp");
+							else
+								window.location.replace("../cadastro_curriculo/cadastro_curriculo.jsp");
+							
+						}
+						if(data.tipo == 2){
+							
+							if(data.isCadastrado)
+								window.location.replace("../cadastro_vaga/cadastro_vaga.jsp");
+							else
+								window.location.replace("../cadastro_empresa/cadastro_empresa.jsp");
+							
+						}
 					}else{
 						window.alert("Dados incorretos");
+						location.reload();
 					}
 			    });
 		      

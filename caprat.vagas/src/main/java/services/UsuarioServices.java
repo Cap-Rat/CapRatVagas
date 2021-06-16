@@ -4,12 +4,15 @@ package services;
 import models.UsuarioCurriculo;
 import models.UsuarioLogin;
 import models.UsuarioVagas;
+import models.EmpresaInfos;
 import util.ToArrayUtil;
 
 import java.util.List;
 
+import database.DBConnection;
 import database.DBQuery;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -51,18 +54,23 @@ public class UsuarioServices {
 	
 	public UsuarioLogin getLoginUsuarios(String emailUsuario, String senhaUsuario) {
 		UsuarioLogin dadosLoginUsuarios = null;
-		
-		ResultSet usuariosCadastrados = this.iniciarConexao("usuariologin", new UsuarioLogin().getCamposString(), "idUsuario").
-				select("emailUsuario = '" + emailUsuario +"' AND senhaUsuario = '" + senhaUsuario +"'" );
-		
+	
 		try {
+			DBConnection dbconnection = new DBConnection();
+
+			String loginQuery = "SELECT * FROM usuariologin WHERE emailUsuario = ? AND senhaUsuario = ?";
+			PreparedStatement prepStmt = dbconnection.getConnection().prepareStatement(loginQuery);
+			prepStmt.setString(1, emailUsuario);
+			prepStmt.setString(2, senhaUsuario);
+			
+			ResultSet usuariosCadastrados = prepStmt.executeQuery();
 			
 			if(usuariosCadastrados.next()) {
 				dadosLoginUsuarios = this.instanciarLogin(usuariosCadastrados);
 			}
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
 		
 		return dadosLoginUsuarios;
@@ -125,6 +133,20 @@ public class UsuarioServices {
 		}
 		
 		return success != 0;
+	}
+	
+	public boolean isUsuarioCadastrado(int idUsuario, int tipoUsuario) {
+		DBQuery conexao = tipoUsuario == 2 ? this.iniciarConexao("empresainfos", new EmpresaInfos().getCamposString(), "idEmpresa") : this.iniciarConexao("usuariocurriculo", new UsuarioCurriculo().getCamposString(), "idCurriculo");
+		
+		ResultSet rs = conexao.select("idUsuario = '" + idUsuario + "'");
+		
+		try {
+			return rs.next();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
 	}
 	
 	private UsuarioCurriculo instanciarCurriculo(ResultSet dadosDoCurriculo) {
