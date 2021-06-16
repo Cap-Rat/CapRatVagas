@@ -149,14 +149,11 @@
 	  			nascimentoUsuario: $("input[name='nascimentoUsuario']").val(),
 	  			nomeUsuario: $("input[name='nomeUsuario']").val()
 	        };
-	            
-	        console.log(cadastroData);
 	         
 	        $.post("http://localhost:8080/UsuarioCurriculoServlet", JSON.stringify(cadastroData), function(data, status) {
 		   	    if(data.success) {
-				    console.log(data.success);
 					window.alert("Curriculo cadastrado com sucesso!");
-					location.reload();
+					window.location.replace("../feed/feed.jsp");
 				}
 		    }, "json");
 	      

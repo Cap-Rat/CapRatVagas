@@ -29,7 +29,7 @@ public class UsuarioLogoutServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession ses = request.getSession();
-		ses.setAttribute("userLogin", 0);
+		ses.invalidate();
 		
 		new ResponseUtil().outputResponse(response, "{ \"success\": \"true\" }", 200);
 	}

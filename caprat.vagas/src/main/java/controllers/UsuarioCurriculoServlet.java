@@ -50,13 +50,12 @@ public class UsuarioCurriculoServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String reqBody = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
 		
-		
 		Gson gson = new Gson();
 		
 		UsuarioCurriculo curriculo = (UsuarioCurriculo) gson.fromJson(reqBody, UsuarioCurriculo.class);
 		boolean success = services.saveCurriculo(curriculo);
 		
-		new ResponseUtil().outputResponse(response, "{ \"success\": "+ success +" }", success?201:400);
+		new ResponseUtil().outputResponse(response, "{ \"success\": "+ success +" }", 201);
 	}
 
 }

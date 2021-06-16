@@ -46,6 +46,18 @@
   	<description></description>
   	<servlet-class>controllers.VagasDaEmpresaServlet</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>EmpresaInfosServlet</servlet-name>
+  	<display-name>EmpresaInfosServlet</display-name>
+  	<description></description>
+  	<servlet-class>controllers.EmpresaInfosServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>IsUsuarioCadastradoServlet</servlet-name>
+  	<display-name>IsUsuarioCadastradoServlet</display-name>
+  	<description></description>
+  	<servlet-class>controllers.IsUsuarioCadastradoServlet</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>UsuarioCurriculoServlet</servlet-name>
   	<url-pattern>/UsuarioCurriculoServlet</url-pattern>
@@ -73,5 +85,13 @@
   <servlet-mapping>
   	<servlet-name>VagasDaEmpresaServlet</servlet-name>
   	<url-pattern>/VagasDaEmpresaServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>EmpresaInfosServlet</servlet-name>
+  	<url-pattern>/EmpresaInfosServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>IsUsuarioCadastradoServlet</servlet-name>
+  	<url-pattern>/IsUsuarioCadastradoServlet</url-pattern>
   </servlet-mapping>
 </web-app>

@@ -1,5 +1,6 @@
 package util;
 
+import models.EmpresaInfos;
 import models.EmpresaVagas;
 import models.UsuarioCurriculo;
 import models.UsuarioLogin;
@@ -41,6 +42,22 @@ public class ToArrayUtil {
 						""+vaga.getEnderecoVaga(),
 						""+vaga.getSalarioVaga(),
 						""+vaga.getNivelExpVaga()
+				}
+			);
+	}
+	
+	public String[] toArray(EmpresaInfos empresa) {
+		return(
+				new String [] {
+						""+empresa.getIdEmpresa(),
+						""+empresa.getIdUsuario(),
+						""+empresa.getNomeEmpresa(),
+						""+empresa.getEnderecoEmpresa(),
+						""+empresa.getCidadeEmpresa(),
+						""+empresa.getEstadoEmpresa(),
+						""+empresa.getCepEmpresa(),
+						""+empresa.getRamoEmpresa(),
+						""+empresa.getDescricaoEmpresa()
 				}
 			);
 	}

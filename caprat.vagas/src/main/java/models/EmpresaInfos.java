@@ -3,24 +3,26 @@ package models;
 public class EmpresaInfos {
 	private int idEmpresa;
 	private int idUsuario;
+	private String nomeEmpresa;
 	private String enderecoEmpresa;
 	private String cidadeEmpresa;
+	private String estadoEmpresa;
 	private String cepEmpresa;
 	private String ramoEmpresa;
-	private String tamanhoEmpresa;
 	private String descricaoEmpresa;
 	
 	public EmpresaInfos() {}
 	
-	public EmpresaInfos(int idEmpresa, int idUsuario, String enderecoEmpresa, String cidadeEmpresa, String cepEmpresa, String ramoEmpresa, String tamanhoEmpresa, String descricaoEmpresa) {
+	public EmpresaInfos(int idEmpresa, int idUsuario, String nomeEmpresa, String enderecoEmpresa, String cidadeEmpresa, String estadoEmpresa, String cepEmpresa, String ramoEmpresa, String descricaoEmpresa) {
 		
 		this.idEmpresa = idEmpresa;
 		this.idUsuario = idUsuario;
+		this.nomeEmpresa = nomeEmpresa;
 		this.enderecoEmpresa = enderecoEmpresa;
 		this.cidadeEmpresa = cidadeEmpresa;
+		this.estadoEmpresa = estadoEmpresa;
 		this.cepEmpresa = cepEmpresa;
 		this.ramoEmpresa = ramoEmpresa;
-		this.tamanhoEmpresa = tamanhoEmpresa;
 		this.descricaoEmpresa = descricaoEmpresa;
 	}
 	
@@ -36,6 +38,12 @@ public class EmpresaInfos {
 	public void setIdUsuario(int idUsuario) {
 		this.idUsuario = idUsuario;
 	}
+	public String getNomeEmpresa() {
+		return nomeEmpresa;
+	}
+	public void setNomeEmpresa(String nomeEmpresa) {
+		this.nomeEmpresa = nomeEmpresa;
+	}
 	public String getEnderecoEmpresa() {
 		return enderecoEmpresa;
 	}
@@ -47,6 +55,12 @@ public class EmpresaInfos {
 	}
 	public void setCidadeEmpresa(String cidadeEmpresa) {
 		this.cidadeEmpresa = cidadeEmpresa;
+	}
+	public String getEstadoEmpresa() {
+		return estadoEmpresa;
+	}
+	public void setEstadoEmpresa(String estadoEmpresa) {
+		this.estadoEmpresa = estadoEmpresa;
 	}
 	public String getCepEmpresa() {
 		return cepEmpresa;
@@ -60,12 +74,6 @@ public class EmpresaInfos {
 	public void setRamoEmpresa(String ramoEmpresa) {
 		this.ramoEmpresa = ramoEmpresa;
 	}
-	public String getTamanhoEmpresa() {
-		return tamanhoEmpresa;
-	}
-	public void setTamanhoEmpresa(String tamanhoEmpresa) {
-		this.tamanhoEmpresa = tamanhoEmpresa;
-	}
 	public String getDescricaoEmpresa() {
 		return descricaoEmpresa;
 	}
@@ -73,7 +81,7 @@ public class EmpresaInfos {
 		this.descricaoEmpresa = descricaoEmpresa;
 	}
 	public String getCamposString() {
-		return "idEmpresa, idUsuario, enderecoEmpresa, cidadeEmpresa, cepEmpresa, ramoEmpresa, tamanhoEmpresa, descricaoEmpresa";
+		return "idEmpresa, idUsuario, nomeEmpresa, enderecoEmpresa, cidadeEmpresa, estadoEmpresa, cepEmpresa, ramoEmpresa, descricaoEmpresa";
 	}
 	
 	
