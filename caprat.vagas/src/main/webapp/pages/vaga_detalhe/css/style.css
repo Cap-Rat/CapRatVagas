@@ -1,0 +1,88 @@
+body {
+  background: url("../../../common/both/vaga-detalhe/assets/bg43.jpg");
+}
+
+.content-container {
+  margin: 200px 186px 50px 186px;
+  padding: 20px;
+
+  display: grid;
+  grid-template-rows: 1fr 2fr;
+  gap: 1rem;
+
+  border: 1px #FFF solid;
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+.vaga-header {
+  border-bottom: 1px solid #555555;
+  padding-bottom: 15px;
+}
+
+.header-right-column {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vaga-header #candidatar-button {
+  cursor: pointer;
+  text-align: center;
+  width: 50%;
+  font-weight: bold;
+  background: transparent;
+  border: none;
+  background-color: #363636;
+  color: #FEFFF7;
+  padding: 15px;
+  border-radius: 4px;
+  font-size: 16px;;
+  transition: all 0.5s ease;
+}
+
+.vaga-header #editar-button {
+  cursor: pointer;
+  text-align: center;
+  width: 45%;
+  font-weight: bold;
+  background: transparent;
+  border: none;
+  background-color: #363636;
+  color: #FEFFF7;
+  padding: 15px;
+  margin: 0 5px;
+  border-radius: 4px;
+  font-size: 16px;;
+  transition: all 0.5s ease;
+}
+
+.vaga-header #excluir-button {
+  cursor: pointer;
+  text-align: center;
+  width: 45%;
+  font-weight: bold;
+  background: transparent;
+  border: 1px solid #000;
+  background-color: transparent;
+  color: #000;
+  padding: 15px;
+  margin: 0 5px;
+  border-radius: 4px;
+  font-size: 16px;;
+  transition: all 0.5s ease;
+}
+
+.vaga-header, .vaga-body {
+  display: grid;
+  grid-template-columns: 2fr 1.5fr;
+  gap: 1rem;
+}
+
+.vaga-body .body-right-column p{
+  margin-bottom: 10px;
+}
+
+.hide {
+  display: none;
+}
