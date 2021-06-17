@@ -58,7 +58,7 @@
 	            saida += "    <div class=\"card-content\">";
 	            saida += "       <h3>"+ data[i].tituloVaga +"</h3>";
 	            saida += "       <p>"+ data[i].descricaoVaga +"</p>";
-	            saida += "       <a href=\"#\">Saiba Mais</a>";
+	            saida += "       <a href=\"http://localhost:8080/pages/vaga_detalhe/vaga_detalhe.jsp?id="+ data[i].idVaga +"\">Saiba Mais</a>";
 	            saida += "    </div>";
 	            saida += "  </div>";
 	            saida+=  "</div>";
