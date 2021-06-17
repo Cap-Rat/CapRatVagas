@@ -50,6 +50,24 @@ public class EmpresaServices {
 		return dadosDaEmpresa;
 	}
 	
+	public List<EmpresaVagas> getVagas(String idVaga){
+		List<EmpresaVagas> vagas = new ArrayList<>();
+		
+		
+		ResultSet vagas_cadastradas = this.iniciarConexao("empresavagas", new EmpresaVagas().getCamposString(), "idVaga").
+				select("idVaga = '" + idVaga + "'");
+		
+		try {
+			while(vagas_cadastradas.next()) {
+				vagas.add(this.instanciarVaga(vagas_cadastradas));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return vagas;
+	}
+	
 	public List<EmpresaVagas> getVagas(String tituloFiltro, String regiaoFiltro, String expFiltro){
 		List<EmpresaVagas> vagas = new ArrayList<>();
 		

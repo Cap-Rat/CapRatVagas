@@ -1,50 +1,67 @@
-<section class="content-container">
-  <div class="vaga-header">
-    <div class="header-left-column">
-      <h1>Nome da Vaga</h1>
-      <p>Empresa</p>
-      <p>Nivel de Experiência</p>
-    </div>
-    <div class="header-right-column">
-      <a href="" id="candidatar-button" class="hide">Candidatar</a>
-      <a href="" id="editar-button" class="">Editar</a>
-      <a href="" id="excluir-button" class="">Excluir</a>
-    </div>
-  </div>
-  <div class="vaga-body">
-    <div class="body-left-column">
-      <h3>Descrição</h3>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa,
-        explicabo. Et enim, illum commodi sunt unde vero quam assumenda eum
-        molestiae facilis neque? Eligendi illum assumenda nesciunt deleniti,
-        natus nihil.
-      </p>
-    </div>
-    <div class="body-right-column">
-      <div>
-        <h3>Requisitos</h3>
-        <p>Tem que ser pica, tlg?</p>
-      </div>
-      <div>
-        <h3>Salário</h3>
-        <p>R$ 100,00</p>
-      </div>
-      <div>
-        <h3>Local</h3>
-        <p>Av. Tamanduá Roxo, 603, Biriti-SP</p>
-      </div>
-    </div>
-  </div>
+<section class="content-container" id="vaga_box">
+  <!-- Aqui serão carregados os dados da vaga -->
 </section>
 
 <script>
 	$(document).ready(function () {
 		
-		$("#excluir-button").click(function () {
-          res = window.confirm("Quer mesmo excluir esse cara?");
-          console.log(res)
+		const idUsuario = <%=session.getAttribute("userLogin") %>;
+		const idVaga = <%=request.getParameter("id") %>;
+		
+		$("#vaga_box").on("click", "a#candidatar-button", function () {
+		  let candidaturaString = {idUsuario: idUsuario, idVaga: idVaga};
+		  
+          $.post("http://localhost:8080/UsuarioVagasServlet", JSON.stringify(candidaturaString), function(data, status){
+        	  if(data.success){
+	        	  window.alert("Candidatura feita com sucesso! Fique esperto para futuros contatos da empresa.");
+	        	  window.location.replace("../feed/feed.jsp");
+        	  }else{
+        		  window.alert("Você já se candidatou para esta vaga!");
+	        	  window.location.replace("../feed/feed.jsp");
+        	  }
+          });
         });
+		
+		$.getJSON("http://localhost:8080/EmpresaVagasServlet", {id: idVaga}, function(data, status){
+			let saida = "";
+			
+			saida += "<div class=\"vaga-header\">";
+		    saida += "<div class=\"header-left-column\">";
+		    saida += "  <h1>"+data[0].tituloVaga+"</h1>";
+		    saida += "  <p>Empresa</p>";
+		    saida += "  <p>Nível de Experiência: "+data[0].nivelExpVaga+"</p>";
+		    saida += "</div>";
+		    saida += "<div class=\"header-right-column\">";
+		    saida += "  <a href=\"#\" id=\"candidatar-button\" class=\"\">Candidatar</a>";
+		    saida += "  <a href=\"#\" id=\"editar-button\" class=\"hide\">Editar</a>";
+		    saida += "  <a href=\"#\" id=\"excluir-button\" class=\"hide\">Excluir</a>";
+		    saida += "</div>";
+		    saida += "</div>";
+		    saida += "<div class=\"vaga-body\">";
+		    saida += "<div class=\"body-left-column\">";
+		    saida += "  <h3>Descrição</h3>";
+		    saida += "  <p>";
+		    saida += data[0].descricaoVaga;
+		    saida += "  </p>";
+		    saida += "</div>";
+		    saida += "<div class=\"body-right-column\">";
+		    saida += "  <div>";
+		    saida += "    <h3>Requisitos</h3>";
+		    saida += "    <p>"+data[0].requisitosVaga+"</p>";
+		    saida += "  </div>";
+		    saida += "  <div>";
+		    saida += "    <h3>Salário</h3>";
+		    saida += "    <p>"+data[0].salarioVaga+"</p>";
+		    saida += "  </div>";
+		    saida += "  <div>";
+		    saida += "    <h3>Local</h3>";
+		    saida += "    <p>"+data[0].enderecoVaga+"</p>";
+		    saida += "  </div>";
+		    saida += "</div>";
+		    saida += "</div>";
+		    
+		    $("#vaga_box").html(saida);
+		});
 		
 	})
 </script>

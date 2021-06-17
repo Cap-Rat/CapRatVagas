@@ -66,7 +66,7 @@ public class UsuarioVagasServlet extends HttpServlet {
 		UsuarioVagas vagaDoUsuario = (UsuarioVagas) gson.fromJson(reqBody, UsuarioVagas.class);
 		boolean success = Uservices.saveUsuarioVagas(vagaDoUsuario);
 		
-		new ResponseUtil().outputResponse(response, "{ \"success\": "+ success +" }", success?201:400);
+		new ResponseUtil().outputResponse(response, "{ \"success\": "+ success +" }", 201);
 	}
 
 }
