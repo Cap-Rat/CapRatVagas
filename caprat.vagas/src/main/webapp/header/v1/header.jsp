@@ -32,7 +32,7 @@
                             <a href="#">Início</a>
                         </li>
                         <li class="nav-link" id="main-links" style="--i: .85s">
-                            <a href="#">Vagas</a>
+                            <a href="http://localhost:8080/pages/feed/feed.jsp">Vagas</a>
                         </li>
                         <li class="nav-link" id="main-links" style="--i: 1.35s">
                             <a href="#">Sobre</a>
