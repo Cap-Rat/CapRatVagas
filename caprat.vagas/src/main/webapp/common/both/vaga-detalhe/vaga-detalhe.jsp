@@ -41,7 +41,7 @@
 		    saida += "<div class=\"body-left-column\">";
 		    saida += "  <h3>Descrição</h3>";
 		    saida += "  <p>";
-		    saida += data[0].descricaoVaga;
+		    saida +=      data[0].descricaoVaga;
 		    saida += "  </p>";
 		    saida += "</div>";
 		    saida += "<div class=\"body-right-column\">";
@@ -51,11 +51,11 @@
 		    saida += "  </div>";
 		    saida += "  <div>";
 		    saida += "    <h3>Salário</h3>";
-		    saida += "    <p>"+data[0].salarioVaga+"</p>";
+		    saida += "    <p>"+parseFloat(data[0].salarioVaga).toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })+"</p>";
 		    saida += "  </div>";
 		    saida += "  <div>";
 		    saida += "    <h3>Local</h3>";
-		    saida += "    <p>"+data[0].enderecoVaga+"</p>";
+		    saida += "    <p>"+data[0].enderecoVaga+", "+data[0].cidadeVaga+", "+data[0].estadoVaga+"</p>";
 		    saida += "  </div>";
 		    saida += "</div>";
 		    saida += "</div>";
