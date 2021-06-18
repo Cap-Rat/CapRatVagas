@@ -68,18 +68,25 @@ public class EmpresaServices {
 		return vagas;
 	}
 	
-	public List<EmpresaVagas> getVagas(String tituloFiltro, String regiaoFiltro, String expFiltro){
+	public List<EmpresaVagas> getVagas(String nivelExpFiltro, String regiaoFiltro, String faixaFiltro, String buscaFiltro){
 		List<EmpresaVagas> vagas = new ArrayList<>();
+		String sql = "";
 		
-		if(tituloFiltro == null)
-			tituloFiltro = "";
-		if(expFiltro == null)
-			expFiltro = "";
-		if(regiaoFiltro == null)
-			regiaoFiltro = "";
+		if(nivelExpFiltro != null)
+			sql += "nivelExpVaga = '" + nivelExpFiltro + "' && ";
 		
+		if(faixaFiltro != null) 
+			sql += "salarioVaga " + faixaFiltro + " && ";
+		
+		if(regiaoFiltro != null)
+			sql += "(estadoVaga = '" + regiaoFiltro + "' || cidadeVaga = '" + regiaoFiltro + "') && ";
+		
+		if(buscaFiltro != null)
+			sql += "(tituloVaga LIKE '%" + buscaFiltro + "%' || descricaoVaga LIKE '%" + buscaFiltro + "%' || requisitosVaga LIKE '%" + buscaFiltro + "%') && ";
+			
+		sql += "1 = 1";
 		ResultSet vagas_cadastradas = this.iniciarConexao("empresavagas", new EmpresaVagas().getCamposString(), "idVaga").
-				select("tituloVaga LIKE '%" + tituloFiltro + "%' && nivelExpVaga LIKE '%" + expFiltro + "%' && cidadeVaga LIKE '%" + regiaoFiltro + "%' && estadoVaga LIKE '%" + regiaoFiltro + "%'");
+				select(sql);
 		
 		try {
 			while(vagas_cadastradas.next()) {

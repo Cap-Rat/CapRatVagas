@@ -37,12 +37,14 @@ public class EmpresaVagasServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<EmpresaVagas> vagas = new ArrayList<>();
 		String idVaga = request.getParameter("id");
-		String filtroTitulo = request.getParameter("titulo");
+		
+		String filtroExperiencia = request.getParameter("experiencia");
 		String filtroRegiao = request.getParameter("regiao");
-		String filtroExp = request.getParameter("experiencia");
+		String filtroFaixaSalarial = request.getParameter("faixa");
+		String filtroBusca = request.getParameter("busca");
 		
 		if(idVaga == null)
-			vagas = services.getVagas(filtroTitulo, filtroRegiao, filtroExp);
+			vagas = services.getVagas(filtroExperiencia, filtroRegiao, filtroFaixaSalarial, filtroBusca);
 		else
 			vagas = services.getVagas(idVaga);
 		
