@@ -9,6 +9,26 @@ section{
 	background-color: #fefff7;
 }
 
+@media only screen and (max-device-width: 500px) {
+	
+	div.cadastro{
+		width:100% !important;
+	}
+	div.form-content{
+		width:100% !important;
+		padding-left: 0 !important;
+		padding-right: 0 !important;
+		display:flex !important;
+	}
+	div.side-form{
+		width:100% !important;
+	}
+	div.side-image{
+		width: 0%;
+		height: 0%;
+	}
+	
+}
 
 div.form-content{
 	background-image: url("../../../common/user/cadastro-curriculo/assets/bg.jpg");
@@ -271,5 +291,6 @@ textarea {
     border: solid 1px #363636;
     border-radius: 4px;
   }
+
 
 
