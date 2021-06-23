@@ -17,40 +17,39 @@
             <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 	    </head>
 	    <body>
-    <header>
-        <div class="container">
-            <input type="checkbox" name="" id="check">
-            
-            <div class="logo-container">
-                <h3 class="logo"><span>CAP</span>RAT</h3>
-            </div>
-
-            <div class="nav-btn" id="navDeslogado">
-                <div class="nav-links">
-                    <ul>
-                        <li class="nav-link" id="main-links" style="--i: .6s">
-                            <a href="#">Início</a>
-                        </li>
-                        <li class="nav-link" id="main-links" style="--i: .85s">
-                            <a href="http://localhost:8080/pages/feed/feed.jsp">Vagas</a>
-                        </li>
-                        <li class="nav-link" id="main-links" style="--i: 1.35s">
-                            <a href="#">Sobre</a>
-                        </li>
-                        <li class="nav-link" id="main-links" style="--i: 1.65s"><a href="#"><i id="abc"class="fa fa-user-circle" aria-hidden="true"></i></a></li>
-                        <li class="nav-link" id="main-links" style="--i: 1.85s"><a href="#" id="logout"><i id="abc" class="fa fa-sign-out" aria-hidden="true"></i></a></li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="hamburger-menu-container">
-                <div class="hamburger-menu">
-                    <div></div>
-                </div>
-            </div>
-        </div>
-    </header>
-</body>
+		    <header>
+		        <div class="container">
+		            <input type="checkbox" name="" id="check">
+		            
+		            <div class="logo-container">
+		                <h3 class="logo"><span>CAP</span>RAT</h3>
+		            </div>
+		
+		            <div class="nav-btn" id="navDeslogado">
+		                <div class="nav-links">
+		                    <ul>
+		                        <li class="nav-link" id="main-links" style="--i: .6s">
+		                            <a href="#">Início</a>
+		                        </li>
+		                        <li class="nav-link" id="main-links" style="--i: .85s">
+		                            <a href="http://localhost:8080/pages/feed/feed.jsp">Vagas</a>
+		                        </li>
+		                        <li class="nav-link" id="main-links" style="--i: 1.35s">
+		                            <a href="#">Sobre</a>
+		                        </li>
+		                        <li class="nav-link" id="main-links" style="--i: 1.65s"><a href="../user_profile/user_profile.jsp"><i id="abc"class="fa fa-user-circle" aria-hidden="true"></i></a></li>
+		                        <li class="nav-link" id="main-links" style="--i: 1.85s"><a href="#" id="logout"><i id="abc" class="fa fa-sign-out" aria-hidden="true"></i></a></li>
+		                    </ul>
+		                </div>
+		            </div>
+		
+		            <div class="hamburger-menu-container">
+		                <div class="hamburger-menu">
+		                    <div></div>
+		                </div>
+		            </div>
+		        </div>
+		    </header>
 <script>
 
 	$(function(){
