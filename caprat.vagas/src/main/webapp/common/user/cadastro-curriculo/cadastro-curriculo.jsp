@@ -139,10 +139,8 @@
 	       		cidadeUsuario: $("input[name='cidadeUsuario']").val(),
 	  			contatoUsuario: $("input[name='contatoUsuario']").val(),
 	  			cursosUsuario: "",
-	  			descricaoUsuario: "",
 	  			enderecoUsuario: $("input[name='enderecoUsuario']").val(),
 	  			escolaridadeUsuario: $("input[name='escolaridadeUsuario']").val(),
-	  			estadoCivilUsuario: "",
 	  			estadoUsuario: $("input[name='estadoUsuario']").val(),
 	  			expTrabUsuario: "",
 	  			faixaSalarialUsuario: $("input[name='faixaSalarialUsuario']").val(),
@@ -150,7 +148,7 @@
 	  			nomeUsuario: $("input[name='nomeUsuario']").val()
 	        };
 	         
-	        $.post("http://localhost:8080/UsuarioCurriculoServlet", JSON.stringify(cadastroData), function(data, status) {
+	        $.post("http://localhost:8080/UsuarioCurriculoServlet", {curriculo: JSON.stringify(cadastroData)}, function(data, status) {
 		   	    if(data.success) {
 					window.alert("Curriculo cadastrado com sucesso!");
 					window.location.replace("../feed/feed.jsp");
