@@ -48,6 +48,7 @@ public class UsuarioLoginServlet extends HttpServlet {
 		String loginJSON = "{ \"success\": \"false\" }";
 		if(login != null) {
 			ses.setAttribute("userLogin", login.getIdUsuario());
+			ses.setAttribute("userTipo", login.getTipoUsuario());
 			boolean isCadastrado = services.isUsuarioCadastrado(login.getIdUsuario(), login.getTipoUsuario());
 			loginJSON = "{ \"success\": \"true\", \"tipo\": \"" + login.getTipoUsuario() + "\", \"isCadastrado\": " + isCadastrado + " }";
 		}
