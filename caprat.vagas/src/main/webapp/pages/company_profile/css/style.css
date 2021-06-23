@@ -1,0 +1,176 @@
+.content-container{
+    padding-top: 100px;
+	padding-left: 100px;
+	padding-right: 100px;
+	background-image: url("../assets/bg44.jpg");
+	background-attachment: fixed;
+}
+
+h5{
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.main{
+    padding: 15px;
+    font-family: Montserrat;
+}
+
+.sidebar{
+    background-color: #363636;
+    color: white;
+    height: 100%;
+    align-items: center;
+}
+
+.sidebar a{
+    margin-left: 10px;
+    color: white;
+    padding-bottom: 10px;
+    font-size: 18px;
+    text-decoration: none;
+}
+
+.card{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    border-radius: 4px;
+}
+
+.content{
+    background-color: white;
+
+}
+
+input{
+    width: 400px;
+    border: solid 1px #363636;
+    border-radius: 4px;
+}
+
+textarea {
+    width: 400px;
+    height: 140px;
+    border: solid 1px #363636;
+    border-radius: 4px;
+  }
+
+  button{
+    width: 125px;
+    font-weight: bold;
+    background: transparent;
+    border: none;
+    background-color: #363636;
+    color: #FEFFF7;
+    padding: 15px;
+    border-radius: 4px;
+    font-size: 16px;;
+    transition: all 0.5s ease;
+}
+
+.course{
+    background: #fff;
+    border-radius: 4px;
+    display: flex;
+    max-width: 100%;
+    width: 1000px;
+    border: solid 1px #363636;
+}
+
+.course h6{
+    opacity: .6;
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.course h2{
+    font-size: 18px;
+    letter-spacing: 1px;
+    margin: 10px 0;
+}
+
+.preview{
+    background: #363636;
+    color: #fff;
+    padding: 30px;
+    width: 250px;
+    position: relative;
+}
+
+.preview a{
+    color: #fff;
+    font-size: 12px;
+    opacity: .6;
+    margin-top: 30px;
+    text-decoration: none;
+}
+
+.preview a:hover{
+    opacity: 1;
+}
+
+.info{
+    padding: 30px;
+    position: relative;
+    width: 100%;
+}
+
+
+.info p{
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.info span{
+    font-size: 13px;
+}
+
+.botao{
+    background: #363636;
+    border: 1px solid transparent;
+    color: #fff;
+    font-size: 16px;
+    padding: 10px 20px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 20px;
+}
+
+@media(max-width: 768px){
+    .course{
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .preview{
+        width: 100%;
+    }
+
+    .preview h2{
+        margin:  10px 0 0;
+    }
+
+    .preview a{
+        margin-top: 10px;
+    }    
+
+    .info h2{
+        margin-top: 20px;
+    }
+
+    .info p{
+        margin-bottom: 50px;
+    }
+
+    .info span{
+        margin-bottom: 50px;
+    }
+
+    .botao{
+        padding: 10px 15px;
+        font-size: 14px;
+    }
+}
