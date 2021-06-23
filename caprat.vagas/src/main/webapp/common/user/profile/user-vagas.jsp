@@ -79,6 +79,10 @@
 					
 				}
 				
+				if(dadosVagas.length == 0){
+					saida += "<h3 class=\"m-3 pt-3\"> Você ainda não se candidatou para nenhuma vaga em nosso site </h3>";
+				}
+				
 				saida += "</div>";
 				
 				$("#vagas_box").html(saida);
