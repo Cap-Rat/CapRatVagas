@@ -50,6 +50,7 @@ public class ToArrayUtil {
 						""+empresa.getIdEmpresa(),
 						""+empresa.getIdUsuario(),
 						""+empresa.getNomeEmpresa(),
+						""+empresa.getContatoEmpresa(),
 						""+empresa.getEnderecoEmpresa(),
 						""+empresa.getCidadeEmpresa(),
 						""+empresa.getEstadoEmpresa(),
