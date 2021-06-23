@@ -64,8 +64,8 @@
 				saida += "</div>";
 				saida += "<div class=\"col-md-8 mt-1\">";
 				saida += "<form id=\"userDataForm\">";
-				saida += "<input type=\"hidden\" name=\"idCurriculo\" value=\""+dadosUsuario.idCurriculo+"\">";
-				saida += "<input type=\"hidden\" name=\"nascimentoUsuario\" value=\""+dadosUsuario.nascimentoUsuario+"\">";
+				saida += "	<input type=\"hidden\" name=\"idCurriculo\" value=\""+dadosUsuario.idCurriculo+"\">";
+				saida += "	<input type=\"hidden\" name=\"nascimentoUsuario\" value=\""+dadosUsuario.nascimentoUsuario+"\">";
 				saida += "    <div class=\"card mb-3 content\">";
 				saida += "        <h1 class=\"m-3 pt-3\">Informações Gerais</h1>";
 				saida += "       <div class=\"card-body\">";

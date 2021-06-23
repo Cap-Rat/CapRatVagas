@@ -58,6 +58,7 @@ public class UsuarioCurriculoServlet extends HttpServlet {
 		String curriculoDados = request.getParameter("curriculo");
 		String email = request.getParameter("email");
 		String senha = request.getParameter("senha");
+		
 		UsuarioLogin loginDados = new UsuarioLogin();
 		HttpSession ses = request.getSession();
 		int userLogged = (int) ses.getAttribute("userLogin");

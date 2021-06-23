@@ -16,7 +16,6 @@
 			$(document).ready(function(){
 				
 				$.getJSON("http://localhost:8080/UsuarioCurriculoServlet", function(data, status){
-					console.log(data[0]);
 					const dadosUsuario = data[0];
 					const dataUsuarioArr = dadosUsuario.nascimentoUsuario.split("-");
 					const nomeUsuarioArr = dadosUsuario.nomeUsuario.split(" ");

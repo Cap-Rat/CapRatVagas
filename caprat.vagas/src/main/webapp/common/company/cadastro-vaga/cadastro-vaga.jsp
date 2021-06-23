@@ -100,7 +100,7 @@
 					<h4>Salário</h4>
 					<div class="input-group">
 						<div class="input-box">
-							<input name="salarioVaga" type="text"
+							<input name="salarioVaga" type="number"
 								placeholder="Ex: R$1.500,00 " required class="name"> <i
 								class="fa fa-money icon" aria-hidden="true"></i>
 						</div>

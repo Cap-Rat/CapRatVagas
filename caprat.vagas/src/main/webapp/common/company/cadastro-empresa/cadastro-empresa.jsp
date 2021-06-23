@@ -81,7 +81,7 @@
 				descricaoEmpresa: $("textarea[name='descricaoEmpresa']").val()
 			};
 			
-			$.post("http://localhost:8080/EmpresaInfosServlet", JSON.stringify(cadastroData), function(data, status) {
+			$.post("http://localhost:8080/EmpresaInfosServlet", {empresa: JSON.stringify(cadastroData)}, function(data, status) {
 		   	    if(data.success) {
 					window.alert("Dados cadastrados com sucesso!");
 
