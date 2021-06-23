@@ -1,5 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%
+    	int tipoUsuario = 0;
+    	String perfilUrl = "";
+    	String vagasUrl = "";
+    	if(session.getAttribute("userTipo") != null){
+    		tipoUsuario = (int) session.getAttribute("userTipo");
+    		perfilUrl = tipoUsuario == 2 ? "../company_profile/company_profile.jsp" : "../user_profile/user_profile.jsp";
+    		vagasUrl = tipoUsuario == 2 ? "../cadastro_vaga/cadastro_vaga.jsp" : "../feed/feed.jsp";
+    	}
+    %>
 <!DOCTYPE html>
 	<html>
 	    <head>
@@ -32,12 +42,12 @@
 		                            <a href="#">Início</a>
 		                        </li>
 		                        <li class="nav-link" id="main-links" style="--i: .85s">
-		                            <a href="http://localhost:8080/pages/feed/feed.jsp">Vagas</a>
+		                            <a href="<%=vagasUrl %>">Vagas</a>
 		                        </li>
 		                        <li class="nav-link" id="main-links" style="--i: 1.35s">
 		                            <a href="#">Sobre</a>
 		                        </li>
-		                        <li class="nav-link" id="main-links" style="--i: 1.65s"><a href="../user_profile/user_profile.jsp"><i id="abc"class="fa fa-user-circle" aria-hidden="true"></i></a></li>
+		                        <li class="nav-link" id="main-links" style="--i: 1.65s"><a href="<%=perfilUrl %>"><i id="abc"class="fa fa-user-circle" aria-hidden="true"></i></a></li>
 		                        <li class="nav-link" id="main-links" style="--i: 1.85s"><a href="#" id="logout"><i id="abc" class="fa fa-sign-out" aria-hidden="true"></i></a></li>
 		                    </ul>
 		                </div>

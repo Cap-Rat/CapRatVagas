@@ -1,5 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+     <%
+    	int tipoUsuario = 0;
+    	String perfilUrl = "";
+    	if(session.getAttribute("userTipo") != null){
+    		tipoUsuario = (int) session.getAttribute("userTipo");
+    		perfilUrl = tipoUsuario == 2 ? "../company_profile/company_profile.jsp" : "../user_profile/user_profile.jsp";
+    	}
+    %>
 <!DOCTYPE html>
 	<html>
 	    <head>
@@ -72,7 +80,7 @@
                         <li class="nav-link" id="main-links" style="--i: 1.35s">
                             <a href="#">Sobre</a>
                         </li>
-                        <li class="nav-link" id="main-links" style="--i: 1.65s"><a href="../user_profile/user_profile.jsp"><i id="abc"class="fa fa-user-circle" aria-hidden="true"></i></a></li>
+                        <li class="nav-link" id="main-links" style="--i: 1.65s"><a href="<%=perfilUrl %>"><i id="abc"class="fa fa-user-circle" aria-hidden="true"></i></a></li>
                         <li class="nav-link" id="main-links" style="--i: 1.85s"><a id="logout" href="#"><i id="abc" class="fa fa-sign-out" aria-hidden="true"></i></a></li>
                     </ul>
                 </div>
