@@ -1,9 +1,9 @@
 body {
-  background: url("../../../common/both/vaga-detalhe/assets/bg43.jpg");
+  background: url("../assets/bg43.jpg");
 }
 
 .content-container {
-  margin: 200px 186px 50px 186px;
+  margin: 300px 186px 50px 186px;
   padding: 20px;
 
   display: grid;

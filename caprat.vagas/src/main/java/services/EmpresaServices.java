@@ -11,6 +11,7 @@ import models.EmpresaInfos;
 import models.EmpresaVagas;
 import models.UsuarioCurriculo;
 import models.UsuarioVagas;
+import models.views.EmpresaInfosVagasView;
 import models.views.EmpresaLoginInfosView;
 
 public class EmpresaServices {
@@ -52,22 +53,40 @@ public class EmpresaServices {
 		return dadosDaEmpresa;
 	}
 	
-	public List<EmpresaVagas> getVagas(String idVaga){
-		List<EmpresaVagas> vagas = new ArrayList<>();
+	public EmpresaInfosVagasView getVagasInfos(String idVaga){
+		EmpresaInfosVagasView vagas = new EmpresaInfosVagasView();
 		
 		
-		ResultSet vagas_cadastradas = this.iniciarConexao("empresavagas", new EmpresaVagas().getCamposString(), "idVaga").
-				select("idVaga = '" + idVaga + "'");
+		ResultSet vaga_da_empresa = this.iniciarConexao("empresavagas", new EmpresaVagas().getCamposString(),  "idVaga").
+				selectJoin("SELECT "+ new EmpresaVagas().getCamposString() +", nomeEmpresa FROM empresavagas INNER JOIN empresainfos ON empresainfos.idEmpresa = empresavagas.idEmpresa WHERE empresavagas.idVaga = '" + idVaga + "'");
 		
 		try {
-			while(vagas_cadastradas.next()) {
-				vagas.add(this.instanciarVaga(vagas_cadastradas));
+			if(vaga_da_empresa.next()) {
+				vagas = this.instanciarVagaInfos(vaga_da_empresa);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
 		return vagas;
+	}
+	
+	public EmpresaVagas getVagas(String idVaga) {
+		EmpresaVagas vaga = new EmpresaVagas();
+		
+		ResultSet dados_da_vaga = this.iniciarConexao("empresavagas", new EmpresaVagas().getCamposString(), "idVaga").
+				select("idVaga = '" + idVaga + "'");
+		
+		try {
+			if(dados_da_vaga.next()) {
+				vaga = this.instanciarVaga(dados_da_vaga);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return vaga;
 	}
 	
 	public List<EmpresaVagas> getVagas(String nivelExpFiltro, String regiaoFiltro, String faixaFiltro, String buscaFiltro){
@@ -153,6 +172,17 @@ public class EmpresaServices {
 		return success != 0;
 	}
 	
+	public boolean deleteVaga(EmpresaVagas vagaApagada, EmpresaInfos empresaLogada) {
+		int success = 0;
+		
+		if(vagaApagada.getIdEmpresa() == empresaLogada.getIdEmpresa()) {
+			success = this.iniciarConexao("empresavagas", new EmpresaVagas().getCamposString(), "idVaga").
+				delete(new ToArrayUtil().toArray(vagaApagada));
+		}
+		
+		return success != 0;
+	}
+	
 	public boolean saveEmpresa(EmpresaInfos dadosEmpresa) {
 		int success = 0;
 		
@@ -182,6 +212,28 @@ public class EmpresaServices {
 			vaga.setRequisitosVaga(dadosDaVaga.getString("requisitosVaga"));
 			vaga.setSalarioVaga(dadosDaVaga.getString("salarioVaga"));
 			vaga.setTituloVaga(dadosDaVaga.getString("tituloVaga"));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return vaga;
+	}
+	
+	private EmpresaInfosVagasView instanciarVagaInfos(ResultSet dadosDaVaga) {
+		EmpresaInfosVagasView vaga = new EmpresaInfosVagasView();
+		
+		try {
+			vaga.setDescricaoVaga(dadosDaVaga.getString("descricaoVaga"));
+			vaga.setIdEmpresa(dadosDaVaga.getInt("idEmpresa"));
+			vaga.setIdVaga(dadosDaVaga.getInt("idVaga"));
+			vaga.setEstadoVaga(dadosDaVaga.getString("estadoVaga"));
+			vaga.setCidadeVaga(dadosDaVaga.getString("cidadeVaga"));
+			vaga.setEnderecoVaga(dadosDaVaga.getString("enderecoVaga"));
+			vaga.setNivelExpVaga(dadosDaVaga.getString("nivelExpVaga"));
+			vaga.setRequisitosVaga(dadosDaVaga.getString("requisitosVaga"));
+			vaga.setSalarioVaga(dadosDaVaga.getString("salarioVaga"));
+			vaga.setTituloVaga(dadosDaVaga.getString("tituloVaga"));
+			vaga.setNomeEmpresa(dadosDaVaga.getString("nomeEmpresa"));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

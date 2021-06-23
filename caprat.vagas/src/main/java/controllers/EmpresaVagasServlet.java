@@ -9,10 +9,13 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 
+import models.EmpresaInfos;
 import models.EmpresaVagas;
+import models.views.EmpresaInfosVagasView;
 import services.EmpresaServices;
 import util.ResponseUtil;
 
@@ -36,6 +39,7 @@ public class EmpresaVagasServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<EmpresaVagas> vagas = new ArrayList<>();
+		EmpresaInfosVagasView vaga = new EmpresaInfosVagasView();
 		String idVaga = request.getParameter("id");
 		
 		String filtroExperiencia = request.getParameter("experiencia");
@@ -43,13 +47,17 @@ public class EmpresaVagasServlet extends HttpServlet {
 		String filtroFaixaSalarial = request.getParameter("faixa");
 		String filtroBusca = request.getParameter("busca");
 		
-		if(idVaga == null)
-			vagas = services.getVagas(filtroExperiencia, filtroRegiao, filtroFaixaSalarial, filtroBusca);
-		else
-			vagas = services.getVagas(idVaga);
-		
+		String vagasJSON = "";
 		Gson gson = new Gson();
-		String vagasJSON = gson.toJson(vagas);
+		
+		if(idVaga == null) {
+			vagas = services.getVagas(filtroExperiencia, filtroRegiao, filtroFaixaSalarial, filtroBusca);
+			vagasJSON = gson.toJson(vagas);
+		}
+		else {
+			vaga = services.getVagasInfos(idVaga);
+			vagasJSON = gson.toJson(vaga);
+		}
 		
 		new ResponseUtil().outputResponse(response, vagasJSON, 200);
 	}
@@ -60,14 +68,40 @@ public class EmpresaVagasServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String reqBody = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
 		Gson gson = new Gson();
-		int idUsuarioLogado = (int) request.getSession().getAttribute("userLogin");
+		HttpSession ses = request.getSession();
+		int userLogged = (int) ses.getAttribute("userLogin");
+		boolean success = false;
 		
 		EmpresaVagas vaga = (EmpresaVagas) gson.fromJson(reqBody, EmpresaVagas.class);
-		vaga.setIdEmpresa(services.getEmpresa(idUsuarioLogado).getIdEmpresa());
+		if(vaga.getIdEmpresa() == 0) {
+			vaga.setIdEmpresa(services.getEmpresa(userLogged).getIdEmpresa());
+			success = services.saveVaga(vaga);
+		}
+		else {
+			int empresaLogadaID = services.getEmpresa(userLogged).getIdEmpresa();
+			if(empresaLogadaID == vaga.getIdEmpresa()) {
+				success = services.saveVaga(vaga);
+			}
+		}
 		
-		boolean success = services.saveVaga(vaga);
+		new ResponseUtil().outputResponse(response, "{ \"success\": \""+ success +"\" }", 201);
+	}
+	
+	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		EmpresaInfos empresaLogada = new EmpresaInfos();
+		EmpresaVagas vagaApagada = new EmpresaVagas();
+		String reqBody = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
+		String idVaga = reqBody.split("=")[1];
 		
-		new ResponseUtil().outputResponse(response, "{ \"success\": \""+ success +"\" }", success?201:400);
+		HttpSession ses = request.getSession();
+		int userLogged = (int) ses.getAttribute("userLogin");
+		
+		empresaLogada = services.getEmpresa(userLogged);
+		vagaApagada = services.getVagas(idVaga);
+		
+		boolean success = services.deleteVaga(vagaApagada, empresaLogada);
+		
+		new ResponseUtil().outputResponse(response, "{ \"success\": "+ success +" }", 201);
 	}
 
 }
