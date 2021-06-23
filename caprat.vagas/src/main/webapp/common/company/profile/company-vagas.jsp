@@ -19,7 +19,7 @@
 
 	$(document).ready(function(){
 		
-		$.getJSON("http://localhost:8080/EmpresaInfosServlet", function(data, status){
+		$.getJSON("http://localhost:8080/EmpresaInfosServlet", {id: ""}, function(data, status){
 			const dadosEmpresa = data[0];
 			let saida = "";
 			
@@ -41,21 +41,23 @@
 		
 		$.getJSON("http://localhost:8080/VagasDaEmpresaServlet", function(data, status){
 			const dadosVagas = data;
+			
 			let saida = "";
 			
 			saida += "<div class=\"card mb-3 content\">";
 			saida += "	<h1 class=\"m-3 pt-3\">Minhas vagas</h1>";
 			
 			for(let i = 0; i < dadosVagas.length; i++){
+				let dadosCandidatos = data[i].usuariosData;
 				saida += "	<div class=\"card-body\">";
 				saida += "		<div class=\"course\">";
 				saida += "      	<div class=\"preview\">";
 				saida += "          	<h2>Cadidatos:</h2>";
-				saida += "          	<a href=\"#\">Rodrigo Geraldes</a><br>";
-				saida += "          	<a href=\"#\">Lucas Vasconcelos</a><br>";
-				saida += "         		<a href=\"#\">Lucas Vinicius</a><br>";
-				saida += "          	<a href=\"#\">Wesley Ferreira</a><br>";
-	            saida += "      		<a href=\"#\">Augusto Araujo</a><br>";
+				for(let j = 0; j < dadosCandidatos.length; j++){
+					let nomeUsuarioArr = dadosCandidatos[j].nomeUsuario.split(" ");
+					let nomeAbreviado = nomeUsuarioArr.length >= 2 ? nomeUsuarioArr[0] + " " + nomeUsuarioArr[1] : nomeUsuarioArr[0];
+					saida += "      	<a href=\"../user_profile/user_profile.jsp?id="+dadosCandidatos[j].idUsuario+"\">"+nomeAbreviado+"</a><br>";
+				}
 	            saida += "      	</div>";
 	            saida += "      	<div class=\"info\">";
 	            saida += "          	<h6>Vaga</h6>";

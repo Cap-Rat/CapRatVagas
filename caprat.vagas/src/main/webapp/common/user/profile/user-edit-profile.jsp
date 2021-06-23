@@ -41,7 +41,7 @@
 				
 			});
 			
-			$.getJSON("http://localhost:8080/UsuarioCurriculoServlet", function(data, status){
+			$.getJSON("http://localhost:8080/UsuarioCurriculoServlet", {id: ""}, function(data, status){
 				const dadosUsuario = data[0];
 				const nomeUsuarioArr = dadosUsuario.nomeUsuario.split(" ");
 				const nomeAbreviado = nomeUsuarioArr[0] + " " + nomeUsuarioArr[1];

@@ -36,7 +36,7 @@
 		    }, "json");
 		});
 		
-		$.getJSON("http://localhost:8080/EmpresaInfosServlet", function(data, status){
+		$.getJSON("http://localhost:8080/EmpresaInfosServlet", {id: ""}, function(data, status){
 			const dadosEmpresa = data[0];
 			let saida = "";
 			

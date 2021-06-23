@@ -39,9 +39,15 @@ public class UsuarioCurriculoServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<UsuarioLoginCurriculoView> curriculos = new ArrayList<>();
+		String idUsuario= request.getParameter("id");
+		int userLogged = 0;
 		
-		HttpSession ses = request.getSession();
-		int userLogged = (int) ses.getAttribute("userLogin");
+		if(idUsuario.equals("")) {
+			HttpSession ses = request.getSession();
+			userLogged = (int) ses.getAttribute("userLogin");
+		}else {
+			userLogged = Integer.parseInt(idUsuario);
+		}
 		
 		curriculos = services.getCurriculos(userLogged);
 		

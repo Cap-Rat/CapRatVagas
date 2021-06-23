@@ -14,7 +14,9 @@
 
 	$(document).ready(function(){
 		
-		$.getJSON("http://localhost:8080/EmpresaInfosServlet", function(data, status){
+		const idEmpresa = <%=request.getParameter("id") %>;
+		
+		$.getJSON("http://localhost:8080/EmpresaInfosServlet", {id: idEmpresa}, function(data, status){
 			const dadosEmpresa = data[0];
 			let saida = "";
 			
@@ -25,9 +27,11 @@
 			saida += "        	<div class=\"mt-3\">";
 			saida += "            	<h3>"+dadosEmpresa.nomeEmpresa+"</h3>";
 			saida += "            	<br><br>";
-			saida += "            	<a href=\"company_profile.jsp\">Meu perfil</a><br>";
-			saida += "            	<a href=\"company_edit_profile.jsp\">Editar meu perfil</a><br>";
-			saida += "  			<a href=\"company_vagas.jsp\">Minhas vagas</a><br>";
+			if(idEmpresa == null){
+				saida += "            	<a href=\"company_profile.jsp\">Meu perfil</a><br>";
+				saida += "            	<a href=\"company_edit_profile.jsp\">Editar meu perfil</a><br>";
+				saida += "  			<a href=\"company_vagas.jsp\">Minhas vagas</a><br>";
+			}
 			saida += "			</div>";
 			saida += "		</div>";
 			saida += "	</div>";

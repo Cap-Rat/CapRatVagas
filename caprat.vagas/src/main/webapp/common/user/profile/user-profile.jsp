@@ -15,11 +15,14 @@
 		
 			$(document).ready(function(){
 				
-				$.getJSON("http://localhost:8080/UsuarioCurriculoServlet", function(data, status){
+				const idUsuario = <%=request.getParameter("id") %>;
+				
+				$.getJSON("http://localhost:8080/UsuarioCurriculoServlet", {id: idUsuario}, function(data, status){
 					const dadosUsuario = data[0];
+					console.log(dadosUsuario);
 					const dataUsuarioArr = dadosUsuario.nascimentoUsuario.split("-");
 					const nomeUsuarioArr = dadosUsuario.nomeUsuario.split(" ");
-					const nomeAbreviado = nomeUsuarioArr[0] + " " + nomeUsuarioArr[1];
+					let nomeAbreviado = nomeUsuarioArr.length >= 2 ? nomeUsuarioArr[0] + " " + nomeUsuarioArr[1] : nomeUsuarioArr[0];
 					const nascimentoUsuario = dataUsuarioArr[2] + "/" + dataUsuarioArr[1] + "/" + dataUsuarioArr[0];
 					
 					let saida = "";
@@ -31,9 +34,11 @@
 					saida += "        <div class=\"mt-3\">";
 					saida += "            <h3>"+ nomeAbreviado +"</h3>";
 					saida += "            <br><br>";
-					saida += "            <a href=\"user_profile.jsp\">Meu perfil</a><br>";
-					saida += "            <a href=\"user_edit_profile.jsp\">Editar meu perfil</a><br>";
-					saida += "            <a href=\"user_vagas.jsp\">Minhas vagas</a>";
+					if(idUsuario == null){
+						saida += "            <a href=\"user_profile.jsp\">Meu perfil</a><br>";
+						saida += "            <a href=\"user_edit_profile.jsp\">Editar meu perfil</a><br>";
+						saida += "            <a href=\"user_vagas.jsp\">Minhas vagas</a>";
+					}
 					saida += "        </div>";
 					saida += "    </div>";
 					saida += "</div>";

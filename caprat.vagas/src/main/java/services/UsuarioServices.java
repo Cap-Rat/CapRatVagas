@@ -5,6 +5,7 @@ import models.UsuarioCurriculo;
 import models.UsuarioLogin;
 import models.UsuarioVagas;
 import models.views.UsuarioLoginCurriculoView;
+import models.views.UsuarioNomeIdView;
 import models.EmpresaInfos;
 import util.ToArrayUtil;
 
@@ -111,6 +112,24 @@ public class UsuarioServices {
 		}
 		
 		return dadosUsuario;
+	}
+	
+	public List<UsuarioNomeIdView> getCandidatos(int idVaga){
+		List<UsuarioNomeIdView> candidatosList = new ArrayList<>();
+		
+		ResultSet dados_candidatos = this.iniciarConexao("usuariovagas", new UsuarioVagas().getCamposString(), "idUsuario").
+				selectJoin("SELECT usuariocurriculo.idUsuario, nomeUsuario from usuariovagas INNER JOIN usuariocurriculo ON usuariocurriculo.idUsuario = usuariovagas.idUsuario where idVaga = '" + idVaga + "'");
+		
+		try {
+			while(dados_candidatos.next()) {
+				candidatosList.add(this.instanciarCandidatos(dados_candidatos));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return candidatosList;
 	}
 	
 	public boolean saveLogin(UsuarioLogin dadosLogin) {
@@ -220,6 +239,19 @@ public class UsuarioServices {
 		}
 		
 		return usuariosCadastrados;
+	}
+	
+	private UsuarioNomeIdView instanciarCandidatos(ResultSet dadosDosCandidatos) {
+		UsuarioNomeIdView candidatosDaVaga = new UsuarioNomeIdView();
+		
+		try {
+			candidatosDaVaga.setIdUsuario(dadosDosCandidatos.getInt("idUsuario"));
+			candidatosDaVaga.setNomeUsuario(dadosDosCandidatos.getString("nomeUsuario"));
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return candidatosDaVaga;
 	}
 	
 	private DBQuery iniciarConexao(String nomeTabela, String campos, String chavePrimaria) {

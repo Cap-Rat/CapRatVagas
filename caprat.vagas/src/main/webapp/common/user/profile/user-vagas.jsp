@@ -23,7 +23,7 @@
     
 	    $(document).ready(function(){
 			
-			$.getJSON("http://localhost:8080/UsuarioCurriculoServlet", function(data, status){
+			$.getJSON("http://localhost:8080/UsuarioCurriculoServlet", {id: ""}, function(data, status){
 				const dadosUsuario = data[0];
 				const nomeUsuarioArr = dadosUsuario.nomeUsuario.split(" ");
 				const nomeAbreviado = nomeUsuarioArr[0] + " " + nomeUsuarioArr[1];
@@ -48,18 +48,18 @@
 			
 			$.getJSON("http://localhost:8080/UsuarioVagasServlet", function(data, status){
 				const dadosVagas = data;
+				
 				let saida = "";
 				saida += "<div class=\"card mb-3 content\">";
 				saida += "	<h1 class=\"m-3 pt-3\">Vagas aplicadas</h1>";
 				
 				for(let i = 0; i < dadosVagas.length; i++){
-					
 					saida += "	<div class=\"card-body\">";
 					saida += "    <div class=\"course\">";
 					saida += "        <div class=\"preview\">";
 					saida += "            <h6>Empresa</h6>";
-					saida += "            <h2>Bind Informática</h2>";
-					saida += "            <a href=\"#\">Perfil da empresa</a>";
+					saida += "            <h2>"+dadosVagas[i].nomeEmpresa+"</h2>";
+					saida += "            <a href=\"../company_profile/company_profile.jsp?id="+dadosVagas[i].idEmpresa+"\">Perfil da empresa</a>";
 					saida += "       </div>";
 					saida += "        <div class=\"info\">";
 					saida += "            <h6>Vaga</h6>";
