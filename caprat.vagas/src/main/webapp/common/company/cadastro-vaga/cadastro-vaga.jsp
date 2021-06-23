@@ -53,8 +53,10 @@
 		<div class="side-image"></div>
 		<div class="side-form">
 			<div class="cadastro">
-				<h2>Criar uma vaga</h2>
+				<h2 id="titulo">Criar uma vaga</h2>
 				<form id="cadastrar-vaga-form">
+					<input type="hidden" name="idVaga" value="0">
+					<input type="hidden" name="idEmpresa" value="0">
 					<h4>Título</h4>
 					<div class="input-group">
 						<div class="input-box">
@@ -126,11 +128,29 @@
 	<script>
 
 		$(function() {
+			const idVaga = <%=request.getParameter("id") %>;
+			
+			if(idVaga != null){
+				$.getJSON("http://localhost:8080/EmpresaVagasServlet", {id: idVaga}, function(data, status){
+					$("#titulo").html("ATUALIZANDO VAGA");
+					$("input[name='tituloVaga']").val(data.tituloVaga);
+					$("textarea[name='requisitosVaga']").val(data.requisitosVaga);
+		  			$("textarea[name='descricaoVaga']").val(data.descricaoVaga);
+		  			$("input[name='estadoVaga']").val(data.estadoVaga);
+		  			$("input[name='cidadeVaga']").val(data.cidadeVaga);
+		  			$("input[name='enderecoVaga']").val(data.enderecoVaga);
+		  			$("input[name='salarioVaga']").val(data.salarioVaga);
+		  			$("input[name='nivelExpVaga']").val(data.nivelExpVaga);
+		  			$("input[name='idVaga']").val(data.idVaga);
+		        	$("input[name='idEmpresa']").val(data.idEmpresa);
+				});
+			}
+			
 	        $("#cadastrar-vaga").on('click', function(e) {
 	          
 		        var cadastroData = {
-		        	idVaga: 0,
-		        	idEmpresa: 0,
+		        	idVaga: $("input[name='idVaga']").val(),
+		        	idEmpresa: $("input[name='idEmpresa']").val(),
 		       		tituloVaga: $("input[name='tituloVaga']").val(),
 		  			requisitosVaga: $("textarea[name='requisitosVaga']").val(),
 		  			descricaoVaga: $("textarea[name='descricaoVaga']").val(),
@@ -141,14 +161,17 @@
 		  			nivelExpVaga: $("input[name='nivelExpVaga']").val()
 		        };
 		            
-		        console.log(cadastroData);
 		         
 		        $.post("http://localhost:8080/EmpresaVagasServlet", JSON.stringify(cadastroData), function(data, status) {
-			   	    if(data.success == "true") {
-					    console.log(data.success);
-						window.alert("Vaga cadastrada com sucesso!");
-						location.reload();
+			   	    if(data.success == "true"){ 
+			   	    	if(idVaga != null)
+			   	    		window.alert("Vaga alterada com sucesso!");
+			   	    	else
+							window.alert("Vaga cadastrada com sucesso!");
+					}else{
+						window.alert("Esta vaga não pertence à sua empresa!");
 					}
+			   	 	window.location.replace("../company_profile/company_profile.jsp");
 			    }, "json");
 		      
 	        });
