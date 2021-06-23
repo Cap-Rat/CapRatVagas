@@ -41,11 +41,16 @@ public class EmpresaInfosServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<EmpresaLoginInfosView> empresas = new ArrayList<>();
+		String idEmpresa = request.getParameter("id");
 		
-		HttpSession ses = request.getSession();
-		int userLogged = (int) ses.getAttribute("userLogin");
-		
-		empresas = servicesE.getEmpresas(userLogged);
+		if(idEmpresa.equals("")) {
+			HttpSession ses = request.getSession();
+			int userLogged = (int) ses.getAttribute("userLogin");
+			
+			empresas = servicesE.getEmpresas(userLogged);
+		}else {
+			empresas = servicesE.getEmpresas(idEmpresa);
+		}
 		
 		Gson gson = new Gson();
 		String curriculosJSON = gson.toJson(empresas);

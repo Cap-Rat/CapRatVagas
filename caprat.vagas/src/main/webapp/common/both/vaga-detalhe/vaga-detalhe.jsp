@@ -47,7 +47,7 @@
 			saida += "<div class=\"vaga-header\">";
 		    saida += "<div class=\"header-left-column\">";
 		    saida += "  <h1>"+data.tituloVaga+"</h1>";
-		    saida += "  <p>"+data.nomeEmpresa+"</p>";
+		    saida += "  <a href=\"../company_profile/company_profile.jsp?id="+data.idEmpresa+"\">"+data.nomeEmpresa+"</a>";
 		    saida += "  <p>Nível de Experiência: "+data.nivelExpVaga+"</p>";
 		    saida += "</div>";
 		    saida += "<div class=\"header-right-column\">";

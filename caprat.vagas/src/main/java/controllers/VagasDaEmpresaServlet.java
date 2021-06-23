@@ -14,7 +14,9 @@ import com.google.gson.Gson;
 
 import models.EmpresaInfos;
 import models.EmpresaVagas;
+import models.views.UsuarioVagasCurriculoView;
 import services.EmpresaServices;
+import services.UsuarioServices;
 import util.ResponseUtil;
 
 /**
@@ -22,7 +24,8 @@ import util.ResponseUtil;
  */
 public class VagasDaEmpresaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    private EmpresaServices services = new EmpresaServices();   
+    private EmpresaServices servicesE = new EmpresaServices();
+    private UsuarioServices servicesU = new UsuarioServices();
 	
     /**
      * @see HttpServlet#HttpServlet()
@@ -37,16 +40,38 @@ public class VagasDaEmpresaServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<EmpresaVagas> vagasList = new ArrayList<>();
+		List<UsuarioVagasCurriculoView> usuariosCandidatosList = new ArrayList<>();
 		HttpSession ses = request.getSession();
 		int userLogged = (int) ses.getAttribute("userLogin");
 		
-		EmpresaInfos dadosDaEmpresaLogada = services.getEmpresa(userLogged);
-		vagasList = services.getVagas(dadosDaEmpresaLogada);
+		EmpresaInfos dadosDaEmpresaLogada = servicesE.getEmpresa(userLogged);
+		vagasList = servicesE.getVagas(dadosDaEmpresaLogada);
+		
+		if(!vagasList.isEmpty()) {
+			for(EmpresaVagas vg : vagasList) {
+				usuariosCandidatosList.add(new UsuarioVagasCurriculoView(
+						vg.getIdVaga(),
+						vg.getIdEmpresa(),
+						vg.getTituloVaga(),
+						vg.getRequisitosVaga(),
+						vg.getDescricaoVaga(),
+						vg.getEstadoVaga(),
+						vg.getCidadeVaga(),
+						vg.getEnderecoVaga(),
+						vg.getSalarioVaga(),
+						vg.getNivelExpVaga()
+				));
+			}
+			
+			for(UsuarioVagasCurriculoView uv : usuariosCandidatosList) {
+				uv.setUsuariosData(servicesU.getCandidatos(uv.getIdVaga()));
+			}
+		}
 		
 		Gson gson = new Gson();
-		String vagasJSON = gson.toJson(vagasList);
+		String candidatosJSON = gson.toJson(usuariosCandidatosList);
 		
-		new ResponseUtil().outputResponse(response, vagasJSON, 200);
+		new ResponseUtil().outputResponse(response, candidatosJSON, 200);
 	}
 
 	/**

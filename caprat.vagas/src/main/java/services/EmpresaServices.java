@@ -35,6 +35,24 @@ public class EmpresaServices {
 		return dadosDaEmpresa;
 	}
 	
+	public List<EmpresaLoginInfosView> getEmpresas(String idEmpresa){
+		List<EmpresaLoginInfosView> dadosDaEmpresa = new ArrayList<>();
+		
+		ResultSet dados_empresa = this.iniciarConexao("empresainfos", new EmpresaInfos().getCamposString(),  "idEmpresa").
+				selectJoin("SELECT "+ new EmpresaInfos().getCamposString() +", emailUsuario, senhaUsuario FROM empresainfos INNER JOIN usuariologin ON empresainfos.idUsuario = usuariologin.idUsuario WHERE empresainfos.idEmpresa = '" + idEmpresa + "'");
+		
+		try {
+			while(dados_empresa.next()) {
+				dadosDaEmpresa.add(this.instanciarEmpresaLogin(dados_empresa));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return dadosDaEmpresa;
+	}
+	
 	public EmpresaInfos getEmpresa(int idUsuarioLogado){
 		EmpresaInfos dadosDaEmpresa = new EmpresaInfos();
 		
@@ -138,16 +156,16 @@ public class EmpresaServices {
 		return vagas;
 	}
 	
-	public List<EmpresaVagas> getVagas(List<UsuarioVagas> vagasDoUsuario){
-		List<EmpresaVagas> vagas = new ArrayList<>();
+	public List<EmpresaInfosVagasView> getVagas(List<UsuarioVagas> vagasDoUsuario){
+		List<EmpresaInfosVagasView> vagas = new ArrayList<>();
 		
 		for(UsuarioVagas uv : vagasDoUsuario) {
-			ResultSet vagas_do_usuario = this.iniciarConexao("empresavagas", new EmpresaVagas().getCamposString(), "idVaga").
-					select("idVaga = '" + uv.getIdVaga() + "'");
+			ResultSet vagas_do_usuario = this.iniciarConexao("empresavagas", new EmpresaVagas().getCamposString(),  "idVaga").
+					selectJoin("SELECT "+ new EmpresaVagas().getCamposString() +", nomeEmpresa FROM empresavagas INNER JOIN empresainfos ON empresainfos.idEmpresa = empresavagas.idEmpresa WHERE empresavagas.idVaga = '" + uv.getIdVaga() + "'");
 			
 			try {
 				if(vagas_do_usuario.next()) {
-					vagas.add(this.instanciarVaga(vagas_do_usuario));
+					vagas.add(this.instanciarVagaInfos(vagas_do_usuario));
 				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block

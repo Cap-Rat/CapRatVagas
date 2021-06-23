@@ -15,6 +15,7 @@ import com.google.gson.Gson;
 
 import models.EmpresaVagas;
 import models.UsuarioVagas;
+import models.views.EmpresaInfosVagasView;
 import services.EmpresaServices;
 import services.UsuarioServices;
 import util.ResponseUtil;
@@ -41,7 +42,7 @@ public class UsuarioVagasServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		List<UsuarioVagas> vagasDoUsuario = new ArrayList<>();
-		List<EmpresaVagas> dadosDasVagas = new ArrayList<>();
+		List<EmpresaInfosVagasView> dadosDasVagas = new ArrayList<>();
 		
 		HttpSession ses = request.getSession();
 		int userLogged = (int) ses.getAttribute("userLogin");
