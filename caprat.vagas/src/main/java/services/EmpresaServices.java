@@ -9,20 +9,22 @@ import database.DBQuery;
 import util.ToArrayUtil;
 import models.EmpresaInfos;
 import models.EmpresaVagas;
+import models.UsuarioCurriculo;
 import models.UsuarioVagas;
+import models.views.EmpresaLoginInfosView;
 
 public class EmpresaServices {
 	
 	
-	public List<EmpresaInfos> getEmpresas(){
-		List<EmpresaInfos> dadosDaEmpresa = new ArrayList<>();
+	public List<EmpresaLoginInfosView> getEmpresas(int userLogged){
+		List<EmpresaLoginInfosView> dadosDaEmpresa = new ArrayList<>();
 		
-		ResultSet empresa_logada = this.iniciarConexao("empresainfos", new EmpresaInfos().getCamposString(), "idEmpresa").
-				select("");
+		ResultSet dados_empresa = this.iniciarConexao("empresainfos", new EmpresaInfos().getCamposString(),  "idEmpresa").
+				selectJoin("SELECT "+ new EmpresaInfos().getCamposString() +", emailUsuario, senhaUsuario FROM empresainfos INNER JOIN usuariologin ON empresainfos.idUsuario = usuariologin.idUsuario WHERE empresainfos.idUsuario = '" + userLogged + "'");
 		
 		try {
-			while(empresa_logada.next()) {
-				dadosDaEmpresa.add(this.instanciarEmpresa(empresa_logada));
+			while(dados_empresa.next()) {
+				dadosDaEmpresa.add(this.instanciarEmpresaLogin(dados_empresa));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -194,12 +196,36 @@ public class EmpresaServices {
 			empresa.setIdEmpresa(dadosEmpresa.getInt("idEmpresa"));
 			empresa.setIdUsuario(dadosEmpresa.getInt("idUsuario"));
 			empresa.setNomeEmpresa(dadosEmpresa.getString("nomeEmpresa"));
+			empresa.setContatoEmpresa(dadosEmpresa.getString("contatoEmpresa"));
 			empresa.setEnderecoEmpresa(dadosEmpresa.getString("enderecoEmpresa"));
 			empresa.setCidadeEmpresa(dadosEmpresa.getString("cidadeEmpresa"));
 			empresa.setEstadoEmpresa(dadosEmpresa.getString("estadoEmpresa"));
 			empresa.setCepEmpresa(dadosEmpresa.getString("cepEmpresa"));
 			empresa.setRamoEmpresa(dadosEmpresa.getString("ramoEmpresa"));
 			empresa.setDescricaoEmpresa(dadosEmpresa.getString("descricaoEmpresa"));
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return empresa;
+	}
+	
+	private EmpresaLoginInfosView instanciarEmpresaLogin(ResultSet dadosEmpresa) {
+		EmpresaLoginInfosView empresa = new EmpresaLoginInfosView();
+		
+		try {
+			empresa.setIdEmpresa(dadosEmpresa.getInt("idEmpresa"));
+			empresa.setIdUsuario(dadosEmpresa.getInt("idUsuario"));
+			empresa.setNomeEmpresa(dadosEmpresa.getString("nomeEmpresa"));
+			empresa.setContatoEmpresa(dadosEmpresa.getString("contatoEmpresa"));
+			empresa.setEnderecoEmpresa(dadosEmpresa.getString("enderecoEmpresa"));
+			empresa.setCidadeEmpresa(dadosEmpresa.getString("cidadeEmpresa"));
+			empresa.setEstadoEmpresa(dadosEmpresa.getString("estadoEmpresa"));
+			empresa.setCepEmpresa(dadosEmpresa.getString("cepEmpresa"));
+			empresa.setRamoEmpresa(dadosEmpresa.getString("ramoEmpresa"));
+			empresa.setDescricaoEmpresa(dadosEmpresa.getString("descricaoEmpresa"));
+			empresa.setEmailUsuario(dadosEmpresa.getString("emailUsuario"));
+			empresa.setSenhaUsuario(dadosEmpresa.getString("senhaUsuario"));
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
