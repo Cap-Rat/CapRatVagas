@@ -6,6 +6,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 
@@ -13,6 +14,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.ArrayList;
 import models.UsuarioCurriculo;
+import models.UsuarioLogin;
+import models.views.UsuarioLoginCurriculoView;
 import services.UsuarioServices;
 import util.ResponseUtil;
 
@@ -35,8 +38,12 @@ public class UsuarioCurriculoServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<UsuarioCurriculo> curriculos = new ArrayList<>();
-		curriculos = services.getCurriculos();
+		List<UsuarioLoginCurriculoView> curriculos = new ArrayList<>();
+		
+		HttpSession ses = request.getSession();
+		int userLogged = (int) ses.getAttribute("userLogin");
+		
+		curriculos = services.getCurriculos(userLogged);
 		
 		Gson gson = new Gson();
 		String curriculosJSON = gson.toJson(curriculos);
@@ -48,12 +55,24 @@ public class UsuarioCurriculoServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String reqBody = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
+		String curriculoDados = request.getParameter("curriculo");
+		String email = request.getParameter("email");
+		String senha = request.getParameter("senha");
+		UsuarioLogin loginDados = new UsuarioLogin();
+		HttpSession ses = request.getSession();
+		int userLogged = (int) ses.getAttribute("userLogin");
 		
 		Gson gson = new Gson();
 		
-		UsuarioCurriculo curriculo = (UsuarioCurriculo) gson.fromJson(reqBody, UsuarioCurriculo.class);
+		UsuarioCurriculo curriculo = (UsuarioCurriculo) gson.fromJson(curriculoDados, UsuarioCurriculo.class);
 		boolean success = services.saveCurriculo(curriculo);
+		
+		if(email != null && senha != null) {
+			loginDados = services.getLoginUsuarios(userLogged);
+			loginDados.setEmailUsuario(email);
+			loginDados.setSenhaUsuario(senha);
+			success = services.saveLogin(loginDados);
+		}
 		
 		new ResponseUtil().outputResponse(response, "{ \"success\": "+ success +" }", 201);
 	}

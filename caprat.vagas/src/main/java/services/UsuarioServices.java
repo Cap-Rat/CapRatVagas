@@ -4,6 +4,7 @@ package services;
 import models.UsuarioCurriculo;
 import models.UsuarioLogin;
 import models.UsuarioVagas;
+import models.views.UsuarioLoginCurriculoView;
 import models.EmpresaInfos;
 import util.ToArrayUtil;
 
@@ -18,15 +19,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class UsuarioServices {
-	public List<UsuarioCurriculo> getCurriculos(){
-		List<UsuarioCurriculo> curriculos = new ArrayList<UsuarioCurriculo>();
+	public List<UsuarioLoginCurriculoView> getCurriculos(int userLogged){
+		List<UsuarioLoginCurriculoView> curriculos = new ArrayList<>();
 		
-		ResultSet curriculos_cadastrados = this.iniciarConexao("usuariocurriculo", new UsuarioCurriculo().getCamposString(),  "idCurriculo").
-				select("");
+		ResultSet curriculo_usuario = this.iniciarConexao("usuariocurriculo", new UsuarioCurriculo().getCamposString(),  "idCurriculo").
+				selectJoin("SELECT "+ new UsuarioCurriculo().getCamposString() +", emailUsuario, senhaUsuario FROM usuariocurriculo INNER JOIN usuariologin ON usuariocurriculo.idUsuario = usuariologin.idUsuario WHERE	usuariocurriculo.idUsuario = '" + userLogged + "'");
 		
 		try {
-			while(curriculos_cadastrados.next()) {
-				curriculos.add(this.instanciarCurriculo(curriculos_cadastrados));
+			while(curriculo_usuario.next()) {
+				curriculos.add(this.instanciarCurriculo(curriculo_usuario));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -50,6 +51,24 @@ public class UsuarioServices {
 		}
 		
 		return vagasDosUsuarios;
+	}
+	
+	public UsuarioLogin getLoginUsuarios(int id) {
+		UsuarioLogin dadosLoginUsuarios = null;
+		
+		ResultSet dados_do_usuario = this.iniciarConexao("usuariologin", new UsuarioLogin().getCamposString(), "idUsuario").
+				select("idUsuario = '" + id + "'");
+		
+		try {
+			if(dados_do_usuario.next()) {
+				dadosLoginUsuarios = this.instanciarLogin(dados_do_usuario);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return dadosLoginUsuarios;
 	}
 	
 	public UsuarioLogin getLoginUsuarios(String emailUsuario, String senhaUsuario) {
@@ -149,16 +168,18 @@ public class UsuarioServices {
 		}
 	}
 	
-	private UsuarioCurriculo instanciarCurriculo(ResultSet dadosDoCurriculo) {
-		UsuarioCurriculo curriculo = new UsuarioCurriculo();
+	private UsuarioLoginCurriculoView instanciarCurriculo(ResultSet dadosDoCurriculo) {
+		UsuarioLoginCurriculoView curriculo = new UsuarioLoginCurriculoView();
 		
 		try {
 			curriculo.setContatoUsuario(dadosDoCurriculo.getString("contatoUsuario"));
 			curriculo.setCursosUsuario(dadosDoCurriculo.getString("cursosUsuario"));
-			curriculo.setDescricaoUsuario(dadosDoCurriculo.getString("descricaoUsuario"));
+			curriculo.setEmailUsuario(dadosDoCurriculo.getString("emailUsuario"));
+			curriculo.setSenhaUsuario(dadosDoCurriculo.getString("senhaUsuario"));
 			curriculo.setEnderecoUsuario(dadosDoCurriculo.getString("enderecoUsuario"));
+			curriculo.setEstadoUsuario(dadosDoCurriculo.getString("estadoUsuario"));
+			curriculo.setCidadeUsuario(dadosDoCurriculo.getString("cidadeUsuario"));
 			curriculo.setEscolaridadeUsuario(dadosDoCurriculo.getString("escolaridadeUsuario"));
-			curriculo.setEstadoCivilUsuario(dadosDoCurriculo.getString("estadoCivilUsuario"));
 			curriculo.setExpTrabUsuario(dadosDoCurriculo.getString("expTrabUsuario"));
 			curriculo.setFaixaSalarialUsuario(dadosDoCurriculo.getString("faixaSalarialUsuario"));
 			curriculo.setIdCurriculo(dadosDoCurriculo.getInt("idCurriculo"));

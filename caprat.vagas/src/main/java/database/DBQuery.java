@@ -79,10 +79,8 @@ public class DBQuery {
 		return 0;
 	}
 	
-	public ResultSet selectJoin(String campos, String innerJoin, String where) {
-		String sql = "SELECT "+  campos + " FROM " + this.tableName;
-		sql += (( innerJoin!="") ? innerJoin : "" );
-		sql += (( where!="") ? " WHERE "+ where : "" );
+	public ResultSet selectJoin(String join) {
+		String sql = join != null ? join : "";
 		System.out.print(sql);
 		return this.query(sql);
 	}
