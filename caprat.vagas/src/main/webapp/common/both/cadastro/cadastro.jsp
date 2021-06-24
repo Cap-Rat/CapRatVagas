@@ -31,7 +31,7 @@
 						</div>
 					</div>
 					<div class="input-group">
-						<div class="input-box">
+						<div class="input-box" id="botao_box">
 							<br>
 							<button id="cadastrar-usuario" type="button">CADASTRAR</button>
 						</div>
@@ -41,6 +41,13 @@
 	    </div>
 	</div>
 	<script>
+		function isEmail(email) {
+			
+		  var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+		  return regex.test(email);
+		  
+		}
+		
 		$(function() {
 	        $("#cadastrar-usuario").on('click', function(e) {
 	          
@@ -52,17 +59,22 @@
 		  			tipoUsuario: $("input[name='tipoUsuario']:checked").val()
 		        };
 		            
-		        console.log(cadastroData);
-		         
-		        $.post("http://localhost:8080/UsuarioLoginServlet", JSON.stringify(cadastroData), function(data, status) {
-		        	console.log(data.success);
-			   	    if(data.success == "true") {
-						window.alert("Usuário cadastrado com sucesso!");
-						window.location.replace("../login/login.jsp");
-					}else{
-						window.alert("Suspeitamos que este e-mail já esteja cadastrado, verifique os dados inseridos!");
-					}
-			    }, "json");
+		        
+		        if(isEmail($("input[name='emailUsuario']").val())){
+			        window.alert("Estamos preparando o seu cadastro!"); 
+			        $("#botao_box").html("<br> <h3> Carregando... </h3>");
+			        $.post("http://localhost:8080/UsuarioLoginServlet", JSON.stringify(cadastroData), function(data, status) {
+			        	
+				   	    if(data.success == "true") {
+							window.alert("Usuário cadastrado com sucesso! Cheque o e-mail cadastrado");
+							window.location.replace("../login/login.jsp");
+						}else{
+							window.alert("Suspeitamos que este e-mail já esteja cadastrado, verifique os dados inseridos!");
+						}
+				    }, "json");
+		        }else{
+		        	window.alert("Por favor, insira um email válido");
+		        }
 		      
 	        });
 	    });

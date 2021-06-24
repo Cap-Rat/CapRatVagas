@@ -24,7 +24,7 @@
 						</div>
 					</div>
 					<div class="input-group">
-						<div class="input-box">
+						<div class="input-box" id="botao_box">
 							<br>
 							<button type="button" id="recuperar" >RECUPERAR</button>
 						</div>
@@ -36,26 +36,38 @@
 </section>
 
 <script>
+
+	function isEmail(email) {
+		
+	  var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+	  return regex.test(email);
+	  
+	}
+	
 		$(function() {
 	        $("#recuperar").on('click', function(e) {
-	          
+	        	
 		        var cadastroData = {
 		  			emailUsuario: $("input[name='emailUsuario']").val(),
 		  			apelidoUsuario: $("input[name='nomeUsuario']").val()
 		        };
-		            
-		        console.log(cadastroData); 
-		        $.getJSON("http://localhost:8080/PassRecoverServlet", cadastroData, function(data, status) {
-		        	if(data.success=="true") {
-						window.alert("Senha recuperada com sucesso!");
-						
-						window.location.replace("../login/login.jsp");
-						
-					}else{
-						window.alert("Dados incorretos");
-					}
-			    });
-		      
+		        
+		        if(isEmail($("input[name='emailUsuario']").val())){
+			        window.alert("Estamos preparando a sua nova senha!"); 
+			       	$("#botao_box").html("<br> <h3> Carregando... </h3>");
+			        $.getJSON("http://localhost:8080/PassRecoverServlet", cadastroData, function(data, status) {
+			        	if(data.success=="true") {
+							window.alert("Senha recuperada com sucesso! Cheque o e-mail cadastrado");
+							
+							window.location.replace("../login/login.jsp");
+							
+						}else{
+							window.alert("Dados incorretos");
+						}
+				    });
+		      	}else{
+		      		window.alert("Por favor, insira um email válido");
+		      	}
 	        });
 	    });
 	</script>
