@@ -10,21 +10,21 @@
 		const idVaga = <%=request.getParameter("id") %>;
 		
 		$("#vaga_box").on("click", "a#excluir-button", function () {
-			
-			$.ajax({
-			    url: "http://localhost:8080/EmpresaVagasServlet",
-			    data: {id: idVaga},
-			    dataType: "json",
-			    type: 'DELETE',
-			    success: function(data, status) {
-			    	if(data.success)
-			    		window.alert("Vaga apagada com sucesso!");
-			    	else
-			    		window.alert("Esta vaga não pertence a sua empresa!");
-			    	window.location.replace("../company_profile/company_profile.jsp");	
-			    }
-			});
-			
+			if(window.confirm("Tem certeza que deseja excluir a vaga?")){
+				$.ajax({
+				    url: "http://localhost:8080/EmpresaVagasServlet",
+				    data: {id: idVaga},
+				    dataType: "json",
+				    type: 'DELETE',
+				    success: function(data, status) {
+				    	if(data.success)
+				    		window.alert("Vaga apagada com sucesso!");
+				    	else
+				    		window.alert("Esta vaga não pertence a sua empresa!");
+				    	window.location.replace("../company_profile/company_profile.jsp");	
+				    }
+				});
+			}
 		});
 		
 		$("#vaga_box").on("click", "a#candidatar-button", function () {
