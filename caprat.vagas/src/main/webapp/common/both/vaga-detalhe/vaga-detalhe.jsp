@@ -45,12 +45,12 @@
 			let saida = "";
 			
 			saida += "<div class=\"vaga-header\">";
-		    saida += "<div class=\"header-left-column\">";
-		    saida += "  <h1>"+data.tituloVaga+"</h1>";
-		    saida += "  <a href=\"../company_profile/company_profile.jsp?id="+data.idEmpresa+"\">"+data.nomeEmpresa+"</a>";
-		    saida += "  <p>Nível de Experiência: "+data.nivelExpVaga+"</p>";
-		    saida += "</div>";
-		    saida += "<div class=\"header-right-column\">";
+		    saida += "	<div class=\"header-left-column\">";
+		    saida += "  	<h1>"+data.tituloVaga+"</h1>";
+		    saida += "  	<a href=\"../company_profile/company_profile.jsp?id="+data.idEmpresa+"\">"+data.nomeEmpresa+"</a>";
+		    saida += "  	<p>Nível de Experiência: "+data.nivelExpVaga+"</p>";
+		    saida += "	</div>";
+		    saida += "	<div class=\"header-right-column\">";
 		    
 		    if(tipoUsuario == 2){
 		    	saida += "  <a href=\"#\" id=\"candidatar-button\" class=\"hide\">Candidatar</a>";
@@ -62,29 +62,29 @@
 			    saida += "  <a href=\"#\" id=\"excluir-button\" class=\"hide\">Excluir</a>";
 		    }
 		    
-		    saida += "</div>";
+		    saida += "	</div>";
 		    saida += "</div>";
 		    saida += "<div class=\"vaga-body\">";
-		    saida += "<div class=\"body-left-column\">";
-		    saida += "  <h3>Descrição</h3>";
-		    saida += "  <p>";
-		    saida +=      data.descricaoVaga;
-		    saida += "  </p>";
-		    saida += "</div>";
-		    saida += "<div class=\"body-right-column\">";
-		    saida += "  <div>";
-		    saida += "    <h3>Requisitos</h3>";
-		    saida += "    <p>"+data.requisitosVaga+"</p>";
-		    saida += "  </div>";
-		    saida += "  <div>";
-		    saida += "    <h3>Salário</h3>";
-		    saida += "    <p>"+parseFloat(data.salarioVaga).toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })+"</p>";
-		    saida += "  </div>";
-		    saida += "  <div>";
-		    saida += "    <h3>Local</h3>";
-		    saida += "    <p>"+data.enderecoVaga+", "+data.cidadeVaga+", "+data.estadoVaga+"</p>";
-		    saida += "  </div>";
-		    saida += "</div>";
+		    saida += "	<div class=\"body-left-column\">";
+		    saida += "  	<h3>Descrição</h3>";
+		    saida += "  	<p>";
+		    saida +=      		data.descricaoVaga;
+		    saida += "  	</p>";
+		    saida += "	</div>";
+		    saida += "	<div class=\"body-right-column\">";
+		    saida += "  	<div>";
+		    saida += "    		<h3>Requisitos</h3>";
+		    saida += "    		<p>"+data.requisitosVaga+"</p>";
+		    saida += "  	</div>";
+		    saida += "  	<div>";
+		    saida += "    		<h3>Salário</h3>";
+		    saida += "    		<p>"+parseFloat(data.salarioVaga).toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })+"</p>";
+		    saida += "  	</div>";
+		    saida += "  	<div>";
+		    saida += "    		<h3>Local</h3>";
+		    saida += "    		<p>"+data.enderecoVaga+", "+data.cidadeVaga+", "+data.estadoVaga+"</p>";
+		    saida += "  	</div>";
+		    saida += "	</div>";
 		    saida += "</div>";
 		    
 		    $("#vaga_box").html(saida);
