@@ -14,6 +14,11 @@
 
 	$(document).ready(function(){
 		
+		$("#company_content_box").on("focus", "input", function(){
+			$("input[name='contatoEmpresa']").mask('(00) 90000-0000');
+			$("input[name='cepEmpresa']").mask("99.999-999");
+		});
+		
 		$("#company_content_box").on("click", "button#atualizarEmpresa", function(){
 			var atualizarData = {
 					idEmpresa:  $("input[name='idEmpresa']").val(),

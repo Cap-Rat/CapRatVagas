@@ -22,6 +22,7 @@
 		              <li class="regiao">São Paulo</li>
 		              <li class="regiao">Rio de Janeiro</li>
 		              <li class="regiao">Guarulhos</li>
+		              <li class="regiao">Bangu</li>
 		            </ul>
 		        </div>
 				<div class="dropdown3">
@@ -86,7 +87,7 @@
             saida += "       <br><br>";
             saida += "       <p> <b>Estado:</b> "+ dadosVagas[i].estadoVaga +"</p>";
             saida += "       <p> <b>Cidade:</b> "+ dadosVagas[i].cidadeVaga +"</p>"; 
-            saida += "       <br><br>";
+            saida += "       <br>";
             saida += "       <p> <b>Salário:</b> "+ parseFloat(dadosVagas[i].salarioVaga).toLocaleString('pt-br', { style: 'currency', currency: 'BRL' }) +"</p>";
             saida += "       <a href=\"http://localhost:8080/pages/vaga_detalhe/vaga_detalhe.jsp?id="+ dadosVagas[i].idVaga +"\">Saiba Mais</a>";
             saida += "    </div>";

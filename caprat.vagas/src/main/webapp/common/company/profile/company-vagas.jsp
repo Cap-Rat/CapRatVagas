@@ -52,7 +52,7 @@
 				saida += "	<div class=\"card-body\">";
 				saida += "		<div class=\"course\">";
 				saida += "      	<div class=\"preview\">";
-				saida += "          	<h2>Cadidatos:</h2>";
+				saida += "          	<h2>Candidatos:</h2>";
 				for(let j = 0; j < dadosCandidatos.length; j++){
 					let nomeUsuarioArr = dadosCandidatos[j].nomeUsuario.split(" ");
 					let nomeAbreviado = nomeUsuarioArr.length >= 2 ? nomeUsuarioArr[0] + " " + nomeUsuarioArr[1] : nomeUsuarioArr[0];
