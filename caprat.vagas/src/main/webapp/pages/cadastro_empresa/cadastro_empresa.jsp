@@ -11,6 +11,6 @@
 	    response.sendRedirect(redirectURL);
 	}
 %>
-<%@include file='../../../header/v1/header.jsp'%>
+
 <%@include file='../../../common/company/cadastro-empresa/cadastro-empresa.jsp'%>
 <%@include file='../../../footer/footer.jsp'%>
