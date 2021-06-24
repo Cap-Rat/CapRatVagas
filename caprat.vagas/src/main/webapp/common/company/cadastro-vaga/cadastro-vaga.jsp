@@ -3,41 +3,6 @@
 	
 <section>
 	<div class="content">
-		<div class="depoimento">
-			<h1>Depoimentos</h1>
-			<div class="card">
-				<div class="membro">
-					<div class="user_img">
-						<img src="../../common/company/cadastro-vaga/assets/team1.png"
-							alt="user_image">
-					</div>
-					<h3>Empresa</h3>
-					<p class="cargo">Ramo</p>
-					<p class="depoimento">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. 
-					</p>
-				</div>
-				<div class="membro">
-					<div class="user_img">
-						<img src="../../common/company/cadastro-vaga/assets/team1.png"
-							alt="user_image">
-					</div>
-					<h3>Empresa</h3>
-					<p class="cargo">Ramo</p>
-					<p class="depoimento">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla.
-					</p>
-				</div>
-				<div class="membro">
-					<div class="user_img">
-						<img src="../../common/company/cadastro-vaga/assets/team1.png"
-							alt="user_image">
-					</div>
-					<h3>Empresa</h3>
-					<p class="cargo">Ramo</p>
-					<p class="depoimento">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. 
-					</p>
-				</div>
-			</div>
-		</div>
 	</div>
 	<div class="wave">
 		<div class="custom-shape-divider-top-1618457940">
@@ -110,8 +75,14 @@
 					<h4>Nível de experiência</h4>
 					<div class="input-group">
 						<div class="input-box">
-							<input name="nivelExpVaga" type="text"
-								placeholder="Ex: Desenvolvedor Pleno" required class="name">
+							<select name="nivelExpVaga" class="name" required>
+								<option value="" disabled="disabled" selected="selected"> Escolha </option>
+								<option value="Experiência"> Experiência </option>
+								<option value="Estagiário"> Estagiário </option>
+								<option value="Júnior/Treinee"> Júnior/Treinee </option>
+								<option value="Pleno"> Pleno </option>
+								<option value="Sênior"> Sênior </option>
+							</select>
 							<i class="fa fa-plus icon" aria-hidden="true"></i>
 						</div>
 					</div>
@@ -140,14 +111,14 @@
 		  			$("input[name='cidadeVaga']").val(data.cidadeVaga);
 		  			$("input[name='enderecoVaga']").val(data.enderecoVaga);
 		  			$("input[name='salarioVaga']").val(data.salarioVaga);
-		  			$("input[name='nivelExpVaga']").val(data.nivelExpVaga);
+		  			$("select[name='nivelExpVaga']").val(data.nivelExpVaga);
 		  			$("input[name='idVaga']").val(data.idVaga);
 		        	$("input[name='idEmpresa']").val(data.idEmpresa);
 				});
 			}
 			
 	        $("#cadastrar-vaga").on('click', function(e) {
-	          
+	         
 		        var cadastroData = {
 		        	idVaga: $("input[name='idVaga']").val(),
 		        	idEmpresa: $("input[name='idEmpresa']").val(),
@@ -158,10 +129,10 @@
 		  			cidadeVaga: $("input[name='cidadeVaga']").val(),
 		  			enderecoVaga: $("input[name='enderecoVaga']").val(),
 		  			salarioVaga: $("input[name='salarioVaga']").val(),
-		  			nivelExpVaga: $("input[name='nivelExpVaga']").val()
+		  			nivelExpVaga: $("select[name='nivelExpVaga']").val()
 		        };
-		            
-		         
+		        
+		       
 		        $.post("http://localhost:8080/EmpresaVagasServlet", JSON.stringify(cadastroData), function(data, status) {
 			   	    if(data.success == "true"){ 
 			   	    	if(idVaga != null)
@@ -173,7 +144,7 @@
 					}
 			   	 	window.location.replace("../company_profile/company_profile.jsp");
 			    }, "json");
-		      
+		      	
 	        });
 	    });
 

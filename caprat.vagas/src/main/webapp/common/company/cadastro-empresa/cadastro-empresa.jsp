@@ -16,6 +16,13 @@
 		                    <i class="fa fa-user icon"></i>
 		                </div>
 		            </div>
+		            <h4>Contato</h4>
+		            <div class="input-group">
+		                <div class="input-box">
+		                    <input name="contatoEmpresa" type="text" placeholder="Ex: (11) 99276-1231" required class="name">
+		                    <i class="fa fa-phone icon" aria-hidden="true"></i>
+		                </div>
+		            </div>
 		            <h4>Endereço</h4>
 		            <div class="input-group">
 		                <div class="input-box">
@@ -66,6 +73,9 @@
 
 <script>
 
+	$("input[name='contatoEmpresa']").mask('(00) 90000-0000');
+	$("input[name='cepEmpresa']").mask("99.999-999");
+
 	$(function(){
 		$("#cadastrar-empresa").on('click', function(e){
 			
@@ -75,6 +85,7 @@
 				nomeEmpresa: $("input[name='nomeEmpresa']").val(),
 				estadoEmpresa: $("input[name='estadoEmpresa']").val(),
 				cidadeEmpresa: $("input[name='cidadeEmpresa']").val(),
+				contatoEmpresa: $("input[name='contatoEmpresa']").val(),
 				enderecoEmpresa: $("input[name='enderecoEmpresa']").val(),
 				cepEmpresa: $("input[name='cepEmpresa']").val(),
 				ramoEmpresa: $("input[name='ramoEmpresa']").val(),

@@ -12,8 +12,6 @@
 	}
 %>    
 
-<%@include file='../../header/v1/header.jsp'%>
-
 <%@include file='../../common/user/cadastro-curriculo/cadastro-curriculo.jsp'%>
 
 <%@include file='../../footer/footer.jsp'%>
