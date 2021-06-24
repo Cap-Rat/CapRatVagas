@@ -104,6 +104,7 @@
 			if(idVaga != null){
 				$.getJSON("http://localhost:8080/EmpresaVagasServlet", {id: idVaga}, function(data, status){
 					$("#titulo").html("ATUALIZANDO VAGA");
+					$("#cadastrar-vaga").html("ATUALIZAR VAGA");
 					$("input[name='tituloVaga']").val(data.tituloVaga);
 					$("textarea[name='requisitosVaga']").val(data.requisitosVaga);
 		  			$("textarea[name='descricaoVaga']").val(data.descricaoVaga);
