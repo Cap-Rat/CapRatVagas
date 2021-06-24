@@ -15,6 +15,10 @@
 		
 		$(document).ready(function(){
 			
+			$("#user_content_box").on("focus", "input", function(){
+				$("input[name='contatoUsuario']").mask('(00) 90000-0000');
+			});
+			
 			$("#user_content_box").on("click", "button#atualizarUsuario", function(){
 				
 				var atualizarData = {
