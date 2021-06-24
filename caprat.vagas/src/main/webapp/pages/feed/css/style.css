@@ -329,3 +329,43 @@ div.content{
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
     border: 1px solid #363636;
 }
+
+@media only screen and (max-device-width: 500px) {
+	div.content{
+		padding-left:0;
+		padding-right:0;
+	}
+	
+	div.search_box{
+		margin-left: 0 !important;
+		width: 100% !important;
+		display: grid !important;
+		grid-template-columns: 1fr;
+		height: 250px !important;
+	}
+	
+	div.wrapper{
+		margin-top: 20px;
+		width: 100% !important;
+	}
+	
+	div.dropdown1{
+		width:100% !important;
+	}
+	
+	div.dropdown2{
+		width:100% !important;
+	}
+	
+	div.dropdown3{
+		width:100% !important;
+	}
+	
+	ul.active{
+		width: 100% !important;
+	}
+	
+	.wrapper .search_box .dropdown1 ul{
+		left: 0;
+	}
+}

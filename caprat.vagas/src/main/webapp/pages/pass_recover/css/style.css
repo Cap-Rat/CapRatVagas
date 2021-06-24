@@ -52,7 +52,7 @@ div.form-content{
     font-size: 24px;
     padding: 10px;
     margin-bottom: 20px;
-    text-align: center;;
+    text-align: center;
     border: 1px dotted #363636;
 }
 
@@ -272,4 +272,59 @@ textarea {
     border-radius: 4px;
   }
 
-
+@media only screen and (max-device-width: 500px) {
+	
+	div.form-content{
+		padding-left:0;
+		padding-right:0;
+		display: flex;
+	}
+	
+	div.cadastro{
+		width: 100%;
+		margin-bottom: 30px;
+	}
+	
+	.cadastro h2{
+    	font-size: 20px;
+	}
+	
+	div.side-image{
+		width:0;
+		margin: 0;
+		height: 0;
+	}
+	
+	div.search_box{
+		margin-left: 0 !important;
+		width: 100% !important;
+		display: grid !important;
+		grid-template-columns: 1fr;
+		height: 250px !important;
+	}
+	
+	div.wrapper{
+		margin-top: 20px;
+		width: 100% !important;
+	}
+	
+	div.dropdown1{
+		width:100% !important;
+	}
+	
+	div.dropdown2{
+		width:100% !important;
+	}
+	
+	div.dropdown3{
+		width:100% !important;
+	}
+	
+	ul.active{
+		width: 100% !important;
+	}
+	
+	.wrapper .search_box .dropdown1 ul{
+		left: 0;
+	}
+}

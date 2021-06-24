@@ -208,7 +208,7 @@ h4{
     border: 1px solid #363636;
     cursor: pointer;
     transition: all 0.2s ease;
-    margin-left: 45px;
+    margin-left: 50px;
 }
 
 .input-box select:first-of-type{
@@ -309,4 +309,59 @@ textarea {
     border-radius: 4px;
   }
 
+@media only screen and (max-device-width: 500px) {
+	
+	div.form-content{
+		padding-left:0;
+		padding-right:0;
+		display: flex;
+	}
+	
+	div.content{
+		padding-left:0;
+		padding-right:0;
+		display: flex;
+	}
+	
+	div.cadastro{
+		width: 100%;
+		margin-bottom: 30px;
+	}
+	
+	div.side-image{
+		width:0;
+		margin: 0;
+		height: 0;
+	}
+	
+	div.card{
+		display: block;
+	}
+	
+	div.depoimento{
+		width: 90%;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	
+	.card .membro{
+		width: 100%;
+		margin-left:0;
+	}
+	
+	div.content{
+		padding-left: 0;
+		padding-right: 0;
+		padding-bottom: 18px;
+	}
+	
+	.depoimento h1{
+    	margin-bottom: 80px;
+	}
+	
+	div.side-form{
+		width: 85%;
+	}
+	
+}
 

@@ -47,10 +47,6 @@ header{
     width:100%;
 }
 
-#containerHeader{
-	margin-left: 10%;
-}
-
 .logo-container{
     display: flex;
     align-items: center;
@@ -284,7 +280,7 @@ header .search .fa-search{
     align-items: center;
     justify-content: flex-end;
     right:8%;
-    position: fixed;
+    position: absolute;
 }
 
 .hamburger-menu div{
@@ -357,6 +353,10 @@ header .search .fa-search{
         display: flex;
     }
 
+	#containerHeader{
+		height: 110px;
+	}
+		
     #check{
         display: block;
     }
@@ -380,6 +380,9 @@ header .search .fa-search{
 
     #check:checked ~ .nav-btn{
         transform: translateX(0);
+        margin-left: 0;
+        top: 0;
+        padding-top:25px;
     }
 
     #check:checked ~ .nav-btn .nav-link,
