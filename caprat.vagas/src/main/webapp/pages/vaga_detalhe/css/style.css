@@ -3,7 +3,7 @@ body {
 }
 
 .content-container {
-  margin: 300px 186px 50px 186px;
+  margin: 200px 186px 50px 186px;
   padding: 20px;
 
   display: grid;
@@ -12,7 +12,7 @@ body {
 
   border: 1px #FFF solid;
   border-radius: 5px;
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255);
 }
 
 .vaga-header {
@@ -85,4 +85,47 @@ body {
 
 .hide {
   display: none;
+}
+
+div.copyright{
+	position: fixed;
+	bottom: 0;
+}
+
+footer{
+	position: fixed;
+	bottom: 35px;
+}
+
+@media only screen and (max-device-width: 500px) {
+	
+	section.content-container{
+		margin-left:0;
+		margin-right:0;
+		display: flex;
+		width:100%;
+		display: grid !important;
+	}
+	
+	.vaga-header #candidatar-button{
+		width: 100%;
+	}
+	
+	.vaga-body{
+		display: grid;
+		grid-template-columns: auto;
+	}
+	
+	.content-container{
+		background-color: rgba(255, 255, 255);
+	}
+	
+	footer{
+        position: relative;
+        bottom: 0px;
+    }
+
+    div.copyright{
+        position: relative !important;
+    }
 }

@@ -111,19 +111,19 @@ button{
     text-decoration: none;
 }
 
-.info{
+div.info{
     padding: 30px;
     position: relative;
     width: 100%;
 }
 
 
-.info p{
+div.info p{
     font-size: 13px;
     font-weight: bold;
 }
 
-.info span{
+div.info span{
     font-size: 13px;
 }
 
@@ -139,7 +139,28 @@ button{
     border-radius: 20px;
 }
 
-@media(max-width: 768px){
+@media(max-width: 500px){
+	input{
+	   width: 100%;
+	}
+
+	textarea {
+      width: 100%;
+    }
+	
+	footer{
+		height: 785px !important;
+	}
+	
+	div.know-more{
+		height: 240px !important;
+	}
+	
+	.content-container{
+    	padding-left: 0px;
+		padding-right: 0px;
+	}
+	
     .course{
         flex-direction: column;
         width: 100%;
@@ -157,15 +178,15 @@ button{
         margin-top: 10px;
     }    
 
-    .info h2{
+    div.info h2{
         margin-top: 20px;
     }
 
-    .info p{
+    div.info p{
         margin-bottom: 50px;
     }
 
-    .info span{
+    div.info span{
         margin-bottom: 50px;
     }
 
